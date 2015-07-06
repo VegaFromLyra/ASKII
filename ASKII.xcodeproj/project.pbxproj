@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E1B0A831B4AFFFA00DD5576 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1B0A821B4AFFFA00DD5576 /* MapKit.framework */; };
+		4E1B0A851B4B018900DD5576 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1B0A841B4B018900DD5576 /* CoreLocation.framework */; };
 		4E3CE5171B44826800743BCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3CE5161B44826800743BCD /* AppDelegate.swift */; };
 		4E3CE5191B44826800743BCD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3CE5181B44826800743BCD /* ViewController.swift */; };
 		4E3CE51C1B44826800743BCD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E3CE51A1B44826800743BCD /* Main.storyboard */; };
@@ -26,6 +28,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4E1B0A821B4AFFFA00DD5576 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		4E1B0A841B4B018900DD5576 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4E3CE5111B44826800743BCD /* ASKII.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ASKII.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E3CE5151B44826800743BCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E3CE5161B44826800743BCD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +47,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E1B0A851B4B018900DD5576 /* CoreLocation.framework in Frameworks */,
+				4E1B0A831B4AFFFA00DD5576 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +65,8 @@
 		4E3CE5081B44826800743BCD = {
 			isa = PBXGroup;
 			children = (
+				4E1B0A841B4B018900DD5576 /* CoreLocation.framework */,
+				4E1B0A821B4AFFFA00DD5576 /* MapKit.framework */,
 				4E3CE5131B44826800743BCD /* ASKII */,
 				4E3CE5291B44826800743BCD /* ASKIITests */,
 				4E3CE5121B44826800743BCD /* Products */,
@@ -161,6 +169,11 @@
 					4E3CE5101B44826800743BCD = {
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = VRYW4TD62Q;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					4E3CE5251B44826800743BCD = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -417,6 +430,7 @@
 				4E3CE5321B44826800743BCD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4E3CE5331B44826800743BCD /* Build configuration list for PBXNativeTarget "ASKIITests" */ = {
 			isa = XCConfigurationList;
@@ -425,6 +439,7 @@
 				4E3CE5351B44826800743BCD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
