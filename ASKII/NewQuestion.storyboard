@@ -41,7 +41,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.38823529411764707" green="0.91764705882352937" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="dtx-qF-Xns" secondAttribute="trailing" constant="100" id="IYt-6g-MyF"/>
                             <constraint firstAttribute="trailing" secondItem="cmv-4d-pgM" secondAttribute="trailing" constant="42" id="JFt-JD-qhG"/>
@@ -99,7 +99,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.38823529411764707" green="0.91764705882352937" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="J98-HK-Kra" firstAttribute="top" secondItem="5Hu-3C-wPu" secondAttribute="bottom" constant="50" id="0mt-bY-dpR"/>
                             <constraint firstItem="J98-HK-Kra" firstAttribute="centerX" secondItem="5Hu-3C-wPu" secondAttribute="centerX" constant="1.5" id="1zI-IB-mHn"/>
@@ -161,7 +161,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.38823529411764707" green="0.91764705882352937" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Mfl-Q2-I4x" firstAttribute="top" secondItem="Tpp-BZ-9rb" secondAttribute="bottom" constant="88" id="gmG-cD-1xd"/>
                             <constraint firstAttribute="trailing" secondItem="Tpp-BZ-9rb" secondAttribute="trailing" constant="120" id="kRb-e0-XTW"/>
