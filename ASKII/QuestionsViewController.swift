@@ -12,36 +12,43 @@ import CoreLocation
 
 class QuestionsViewController: UIViewController {
 
-  @IBOutlet weak var mapView: MKMapView!
-  var locationManager: CLLocationManager!
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    if (CLLocationManager.locationServicesEnabled())
-    {
-      locationManager = CLLocationManager()
-      locationManager.delegate = self
-      locationManager.desiredAccuracy = kCLLocationAccuracyBest
-      locationManager.requestAlwaysAuthorization()
-      locationManager.startUpdatingLocation()
+    @IBAction func onAskAnywherePressed(sender: AnyObject) {
+        var storyboard = UIStoryboard(name: "NewQuestion", bundle: nil)
+        var controller = storyboard.instantiateViewControllerWithIdentifier("InitialController") as! UIViewController
+        
+        self.presentViewController(controller, animated: true, completion: nil)
     }
-  }
-  
-  override func didReceiveMemoryWarning() {
+    @IBOutlet weak var mapView: MKMapView!
+    
+    var locationManager: CLLocationManager!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        if (CLLocationManager.locationServicesEnabled())
+        {
+          locationManager = CLLocationManager()
+          locationManager.delegate = self
+          locationManager.desiredAccuracy = kCLLocationAccuracyBest
+          locationManager.requestAlwaysAuthorization()
+          locationManager.startUpdatingLocation()
+        }
+    }
+
+    override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
-  }
-  
-  /*
-  // MARK: - Navigation
-  
-  // In a storyboard-based application, you will often want to do a little preparation before navigation
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-  // Get the new view controller using segue.destinationViewController.
-  // Pass the selected object to the new view controller.
-  }
-  */
+    }
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
+    }
+    */
 
 }
 
