@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--New Question View Controller-->
         <scene sceneID="vd4-ul-Ixs">
             <objects>
-                <viewController storyboardIdentifier="InitialController" id="LWn-xm-WlR" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InitialController" id="LWn-xm-WlR" customClass="NewQuestionViewController" customModule="ASKII" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Mwv-dB-fVy"/>
                         <viewControllerLayoutGuide type="bottom" id="Snq-5v-cWn"/>
@@ -56,10 +56,10 @@
             </objects>
             <point key="canvasLocation" x="219" y="164"/>
         </scene>
-        <!--View Controller-->
+        <!--New Question View Controller-->
         <scene sceneID="HMt-WF-xrl">
             <objects>
-                <viewController id="af2-JZ-HIZ" sceneMemberID="viewController">
+                <viewController id="af2-JZ-HIZ" customClass="NewQuestionViewController" customModule="ASKII" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tKp-1z-SiW"/>
                         <viewControllerLayoutGuide type="bottom" id="ZkK-h9-yzZ"/>
