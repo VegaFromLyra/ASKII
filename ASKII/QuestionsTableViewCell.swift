@@ -46,13 +46,13 @@ class QuestionsTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
-    }
+    }   
     
     func configureCell() {
-        self.questionLabel.text = "This is a sample question"
-        self.timeLabel.text = "5 mins ago"
-        self.numOfAnswersLabel.text = "1 answer"
-        self.voteNumberLabel.text = "6"
+        self.questionLabel?.text = "This is a sample question"
+        self.timeLabel?.text = "5 mins ago"
+        self.numOfAnswersLabel?.text = "1 answer"
+        self.voteNumberLabel?.text = "6"
     }
 
 }
