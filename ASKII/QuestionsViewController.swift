@@ -36,39 +36,29 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
           locationManager.startUpdatingLocation()
         }
         
-        self.tableView.registerClass(QuestionsTableViewCell.self, forCellReuseIdentifier: "QuestionCell")
+//        self.tableView.registerClass(TableViewCell.self, forCellReuseIdentifier: "QuestionCell")
         
         // Auto row height for each cell
         self.tableView.estimatedRowHeight = 300
         self.tableView.rowHeight = UITableViewAutomaticDimension
     }
 
-//    override func didReceiveMemoryWarning() {
-//    super.didReceiveMemoryWarning()
-//    // Dispose of any resources that can be recreated.
-//    }
+    override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 6
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        //var cell:QuestionsTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("QuestionCell") as! QuestionsTableViewCell
         
-        let cell: QuestionsTableViewCell = tableView.dequeueReusableCellWithIdentifier("QuestionCell") as! QuestionsTableViewCell
+        let cell: TableViewCell = self.tableView.dequeueReusableCellWithIdentifier("QuestionCell", forIndexPath: indexPath) as! TableViewCell
         
-        //cell.delegate = self
-        
-        //cell.textLabel?.text = self.items[indexPath.row]
-        cell.configureCell()
-//        cell.timeLabel?.text = "1 week ago"
-//        cell.numOfAnswersLabel?.text = "1 answer"
-//        cell.voteNumberLabel?.text = "6"
-        //cell.textLabel?.text = "hello"
-        println(cell.questionLabel)
+        cell.config()
         
         return cell
-        //return UITableViewCell()
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
