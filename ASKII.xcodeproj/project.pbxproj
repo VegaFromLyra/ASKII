@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		4E1B0A831B4AFFFA00DD5576 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1B0A821B4AFFFA00DD5576 /* MapKit.framework */; };
 		4E1B0A851B4B018900DD5576 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1B0A841B4B018900DD5576 /* CoreLocation.framework */; };
-		4E1B0A8C1B4B10E200DD5576 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1B0A871B4B10E200DD5576 /* Bolts.framework */; };
 		4E1B0A8D1B4B10E200DD5576 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1B0A881B4B10E200DD5576 /* Parse.framework */; };
 		4E1B0A8E1B4B10E200DD5576 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1B0A891B4B10E200DD5576 /* ParseCrashReporting.framework */; };
 		4E1B0A8F1B4B10E200DD5576 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1B0A8A1B4B10E200DD5576 /* ParseFacebookUtils.framework */; };
@@ -27,12 +26,13 @@
 		4E3CE52D1B44826800743BCD /* ASKIITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3CE52C1B44826800743BCD /* ASKIITests.swift */; };
 		4E465A2F1B5045C600A0336B /* Questions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E465A2E1B5045C600A0336B /* Questions.swift */; };
 		4E465A301B5045C600A0336B /* Questions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E465A2E1B5045C600A0336B /* Questions.swift */; };
-		8378A307890D29F5096BDB7F /* Pods_ASKII.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF85861258DCAB1D0FAA4688 /* Pods_ASKII.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		CE4C4EC21B5C3AD9003B5B43 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1B0A871B4B10E200DD5576 /* Bolts.framework */; };
 		CEADC43A1B59955A00A2EF3E /* NewQuestion.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEADC4391B59955A00A2EF3E /* NewQuestion.storyboard */; };
 		CEADC43C1B59A69700A2EF3E /* NewQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEADC43B1B59A69700A2EF3E /* NewQuestionViewController.swift */; };
 		CEB2B63B1B5AF626001F83F4 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2B63A1B5AF626001F83F4 /* TableViewCell.swift */; };
 		CEB2B63E1B5B129B001F83F4 /* SingleQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2B63D1B5B129B001F83F4 /* SingleQuestionViewController.swift */; };
 		CEB2B6401B5B1F08001F83F4 /* SingleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2B63F1B5B1F08001F83F4 /* SingleTableViewCell.swift */; };
+		CEB2B6421B5C36C3001F83F4 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB2B6411B5C36C3001F83F4 /* GoogleMaps.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +77,7 @@
 		CEB2B63A1B5AF626001F83F4 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		CEB2B63D1B5B129B001F83F4 /* SingleQuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleQuestionViewController.swift; sourceTree = "<group>"; };
 		CEB2B63F1B5B1F08001F83F4 /* SingleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleTableViewCell.swift; sourceTree = "<group>"; };
+		CEB2B6411B5C36C3001F83F4 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = Pods/GoogleMaps/Frameworks/GoogleMaps.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,18 +85,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE4C4EC21B5C3AD9003B5B43 /* Bolts.framework in Frameworks */,
+				CEB2B6421B5C36C3001F83F4 /* GoogleMaps.framework in Frameworks */,
 				4E1B0A981B4B14C200DD5576 /* libsqlite3.dylib in Frameworks */,
 				4E1B0A961B4B14AB00DD5576 /* AudioToolbox.framework in Frameworks */,
 				4E1B0A941B4B149D00DD5576 /* libstdc++.6.dylib in Frameworks */,
 				4E1B0A921B4B147700DD5576 /* SystemConfiguration.framework in Frameworks */,
-				4E1B0A8C1B4B10E200DD5576 /* Bolts.framework in Frameworks */,
 				4E1B0A8E1B4B10E200DD5576 /* ParseCrashReporting.framework in Frameworks */,
 				4E1B0A901B4B10E200DD5576 /* ParseUI.framework in Frameworks */,
 				4E1B0A8F1B4B10E200DD5576 /* ParseFacebookUtils.framework in Frameworks */,
 				4E1B0A851B4B018900DD5576 /* CoreLocation.framework in Frameworks */,
 				4E1B0A8D1B4B10E200DD5576 /* Parse.framework in Frameworks */,
 				4E1B0A831B4AFFFA00DD5576 /* MapKit.framework in Frameworks */,
-				8378A307890D29F5096BDB7F /* Pods_ASKII.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +122,7 @@
 		4E1B0A861B4B10AB00DD5576 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CEB2B6411B5C36C3001F83F4 /* GoogleMaps.framework */,
 				4E1B0A991B4B14F600DD5576 /* SystemFrameworks */,
 				4E1B0A871B4B10E200DD5576 /* Bolts.framework */,
 				4E1B0A881B4B10E200DD5576 /* Parse.framework */,
@@ -524,13 +526,15 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/GoogleMaps/Frameworks",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = ASKII/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "armv7 armv7s armv6 armv64";
 			};
 			name = Debug;
 		};
@@ -542,13 +546,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/GoogleMaps/Frameworks",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = ASKII/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "armv7 armv7s armv6 armv64";
 			};
 			name = Release;
 		};
