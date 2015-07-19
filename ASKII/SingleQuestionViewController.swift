@@ -8,7 +8,9 @@
 
 import UIKit
 
-class SingleQuestionViewController: UIViewController {
+class SingleQuestionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    @IBOutlet weak var AnswersTableView: UITableView!
     
     @IBAction func onNewQuestionPressed(sender: AnyObject) {
         var storyboard = UIStoryboard(name: "NewQuestion", bundle: nil)
@@ -19,6 +21,9 @@ class SingleQuestionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.AnswersTableView.estimatedRowHeight = 100
+        self.AnswersTableView.rowHeight = UITableViewAutomaticDimension
 
         // Do any additional setup after loading the view.
     }
@@ -26,6 +31,23 @@ class SingleQuestionViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 6
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell: SingleTableViewCell = self.AnswersTableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! SingleTableViewCell
+        
+        cell.answerConfig()
+        
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
     }
     
 

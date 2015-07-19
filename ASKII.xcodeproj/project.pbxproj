@@ -31,6 +31,7 @@
 		CEADC43C1B59A69700A2EF3E /* NewQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEADC43B1B59A69700A2EF3E /* NewQuestionViewController.swift */; };
 		CEB2B63B1B5AF626001F83F4 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2B63A1B5AF626001F83F4 /* TableViewCell.swift */; };
 		CEB2B63E1B5B129B001F83F4 /* SingleQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2B63D1B5B129B001F83F4 /* SingleQuestionViewController.swift */; };
+		CEB2B6401B5B1F08001F83F4 /* SingleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2B63F1B5B1F08001F83F4 /* SingleTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		CEADC43B1B59A69700A2EF3E /* NewQuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewQuestionViewController.swift; sourceTree = "<group>"; };
 		CEB2B63A1B5AF626001F83F4 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		CEB2B63D1B5B129B001F83F4 /* SingleQuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleQuestionViewController.swift; sourceTree = "<group>"; };
+		CEB2B63F1B5B1F08001F83F4 /* SingleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 				4E3CE5161B44826800743BCD /* AppDelegate.swift */,
 				4E3CE51A1B44826800743BCD /* Main.storyboard */,
 				CEB2B63A1B5AF626001F83F4 /* TableViewCell.swift */,
+				CEB2B63F1B5B1F08001F83F4 /* SingleTableViewCell.swift */,
 				CEADC4391B59955A00A2EF3E /* NewQuestion.storyboard */,
 				4E3CE51D1B44826800743BCD /* Images.xcassets */,
 				4E3CE51F1B44826800743BCD /* LaunchScreen.xib */,
@@ -314,6 +317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E3CE5191B44826800743BCD /* ViewController.swift in Sources */,
+				CEB2B6401B5B1F08001F83F4 /* SingleTableViewCell.swift in Sources */,
 				4E465A2F1B5045C600A0336B /* Questions.swift in Sources */,
 				CEB2B63E1B5B129B001F83F4 /* SingleQuestionViewController.swift in Sources */,
 				4E3CE5171B44826800743BCD /* AppDelegate.swift in Sources */,
