@@ -27,6 +27,7 @@
 		4E3CE52D1B44826800743BCD /* ASKIITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3CE52C1B44826800743BCD /* ASKIITests.swift */; };
 		4E465A2F1B5045C600A0336B /* Questions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E465A2E1B5045C600A0336B /* Questions.swift */; };
 		4E465A301B5045C600A0336B /* Questions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E465A2E1B5045C600A0336B /* Questions.swift */; };
+		4E89F6871B5B516D002EAE7D /* NewQLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E89F6861B5B516D002EAE7D /* NewQLocationViewController.swift */; };
 		8378A307890D29F5096BDB7F /* Pods_ASKII.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF85861258DCAB1D0FAA4688 /* Pods_ASKII.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		CEADC43A1B59955A00A2EF3E /* NewQuestion.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEADC4391B59955A00A2EF3E /* NewQuestion.storyboard */; };
 		CEADC43C1B59A69700A2EF3E /* NewQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEADC43B1B59A69700A2EF3E /* NewQuestionViewController.swift */; };
@@ -69,6 +70,7 @@
 		4E3CE52B1B44826800743BCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E3CE52C1B44826800743BCD /* ASKIITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASKIITests.swift; sourceTree = "<group>"; };
 		4E465A2E1B5045C600A0336B /* Questions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Questions.swift; sourceTree = "<group>"; };
+		4E89F6861B5B516D002EAE7D /* NewQLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewQLocationViewController.swift; sourceTree = "<group>"; };
 		6AA53E53F04E31FB05347BC8 /* Pods-ASKII.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ASKII.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ASKII/Pods-ASKII.debug.xcconfig"; sourceTree = "<group>"; };
 		6ECC465071218FABC8109585 /* Pods-ASKII.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ASKII.release.xcconfig"; path = "Pods/Target Support Files/Pods-ASKII/Pods-ASKII.release.xcconfig"; sourceTree = "<group>"; };
 		AF85861258DCAB1D0FAA4688 /* Pods_ASKII.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ASKII.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +154,7 @@
 				4E1B0A9D1B4B19CE00DD5576 /* QuestionsViewController.swift */,
 				CEB2B63D1B5B129B001F83F4 /* SingleQuestionViewController.swift */,
 				CEADC43B1B59A69700A2EF3E /* NewQuestionViewController.swift */,
+				4E89F6861B5B516D002EAE7D /* NewQLocationViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -389,6 +392,7 @@
 				CEB2B63E1B5B129B001F83F4 /* SingleQuestionViewController.swift in Sources */,
 				4E3CE5171B44826800743BCD /* AppDelegate.swift in Sources */,
 				CEADC43C1B59A69700A2EF3E /* NewQuestionViewController.swift in Sources */,
+				4E89F6871B5B516D002EAE7D /* NewQLocationViewController.swift in Sources */,
 				4E1B0A9E1B4B19CE00DD5576 /* QuestionsViewController.swift in Sources */,
 				CEB2B63B1B5AF626001F83F4 /* TableViewCell.swift in Sources */,
 			);
