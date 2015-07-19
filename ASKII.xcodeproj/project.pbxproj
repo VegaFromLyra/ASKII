@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		4E1B0A831B4AFFFA00DD5576 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1B0A821B4AFFFA00DD5576 /* MapKit.framework */; };
 		4E1B0A851B4B018900DD5576 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1B0A841B4B018900DD5576 /* CoreLocation.framework */; };
+		4E1B0A8C1B4B10E200DD5576 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1B0A871B4B10E200DD5576 /* Bolts.framework */; };
 		4E1B0A8D1B4B10E200DD5576 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1B0A881B4B10E200DD5576 /* Parse.framework */; };
 		4E1B0A8E1B4B10E200DD5576 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1B0A891B4B10E200DD5576 /* ParseCrashReporting.framework */; };
-		4E1B0A8F1B4B10E200DD5576 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1B0A8A1B4B10E200DD5576 /* ParseFacebookUtils.framework */; };
 		4E1B0A901B4B10E200DD5576 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1B0A8B1B4B10E200DD5576 /* ParseUI.framework */; };
 		4E1B0A921B4B147700DD5576 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1B0A911B4B147700DD5576 /* SystemConfiguration.framework */; };
 		4E1B0A941B4B149D00DD5576 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1B0A931B4B149D00DD5576 /* libstdc++.6.dylib */; };
@@ -26,13 +26,15 @@
 		4E3CE52D1B44826800743BCD /* ASKIITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3CE52C1B44826800743BCD /* ASKIITests.swift */; };
 		4E465A2F1B5045C600A0336B /* Questions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E465A2E1B5045C600A0336B /* Questions.swift */; };
 		4E465A301B5045C600A0336B /* Questions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E465A2E1B5045C600A0336B /* Questions.swift */; };
-		CE4C4EC21B5C3AD9003B5B43 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1B0A871B4B10E200DD5576 /* Bolts.framework */; };
+		4E89F6871B5B516D002EAE7D /* NewQLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E89F6861B5B516D002EAE7D /* NewQLocationViewController.swift */; };
+		4E89F68D1B5C005C002EAE7D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E89F68C1B5C005C002EAE7D /* Accounts.framework */; };
+		4E89F68F1B5C0081002EAE7D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E89F68E1B5C0081002EAE7D /* Social.framework */; };
+		8378A307890D29F5096BDB7F /* Pods_ASKII.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF85861258DCAB1D0FAA4688 /* Pods_ASKII.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		CEADC43A1B59955A00A2EF3E /* NewQuestion.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEADC4391B59955A00A2EF3E /* NewQuestion.storyboard */; };
 		CEADC43C1B59A69700A2EF3E /* NewQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEADC43B1B59A69700A2EF3E /* NewQuestionViewController.swift */; };
 		CEB2B63B1B5AF626001F83F4 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2B63A1B5AF626001F83F4 /* TableViewCell.swift */; };
 		CEB2B63E1B5B129B001F83F4 /* SingleQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2B63D1B5B129B001F83F4 /* SingleQuestionViewController.swift */; };
 		CEB2B6401B5B1F08001F83F4 /* SingleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2B63F1B5B1F08001F83F4 /* SingleTableViewCell.swift */; };
-		CEB2B6421B5C36C3001F83F4 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB2B6411B5C36C3001F83F4 /* GoogleMaps.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +53,6 @@
 		4E1B0A871B4B10E200DD5576 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		4E1B0A881B4B10E200DD5576 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		4E1B0A891B4B10E200DD5576 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
-		4E1B0A8A1B4B10E200DD5576 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		4E1B0A8B1B4B10E200DD5576 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		4E1B0A911B4B147700DD5576 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4E1B0A931B4B149D00DD5576 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
@@ -69,6 +70,9 @@
 		4E3CE52B1B44826800743BCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E3CE52C1B44826800743BCD /* ASKIITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASKIITests.swift; sourceTree = "<group>"; };
 		4E465A2E1B5045C600A0336B /* Questions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Questions.swift; sourceTree = "<group>"; };
+		4E89F6861B5B516D002EAE7D /* NewQLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewQLocationViewController.swift; sourceTree = "<group>"; };
+		4E89F68C1B5C005C002EAE7D /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		4E89F68E1B5C0081002EAE7D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		6AA53E53F04E31FB05347BC8 /* Pods-ASKII.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ASKII.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ASKII/Pods-ASKII.debug.xcconfig"; sourceTree = "<group>"; };
 		6ECC465071218FABC8109585 /* Pods-ASKII.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ASKII.release.xcconfig"; path = "Pods/Target Support Files/Pods-ASKII/Pods-ASKII.release.xcconfig"; sourceTree = "<group>"; };
 		AF85861258DCAB1D0FAA4688 /* Pods_ASKII.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ASKII.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,7 +81,6 @@
 		CEB2B63A1B5AF626001F83F4 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		CEB2B63D1B5B129B001F83F4 /* SingleQuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleQuestionViewController.swift; sourceTree = "<group>"; };
 		CEB2B63F1B5B1F08001F83F4 /* SingleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleTableViewCell.swift; sourceTree = "<group>"; };
-		CEB2B6411B5C36C3001F83F4 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = Pods/GoogleMaps/Frameworks/GoogleMaps.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,18 +88,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE4C4EC21B5C3AD9003B5B43 /* Bolts.framework in Frameworks */,
-				CEB2B6421B5C36C3001F83F4 /* GoogleMaps.framework in Frameworks */,
+				4E89F68F1B5C0081002EAE7D /* Social.framework in Frameworks */,
+				4E89F68D1B5C005C002EAE7D /* Accounts.framework in Frameworks */,
 				4E1B0A981B4B14C200DD5576 /* libsqlite3.dylib in Frameworks */,
 				4E1B0A961B4B14AB00DD5576 /* AudioToolbox.framework in Frameworks */,
 				4E1B0A941B4B149D00DD5576 /* libstdc++.6.dylib in Frameworks */,
 				4E1B0A921B4B147700DD5576 /* SystemConfiguration.framework in Frameworks */,
+				4E1B0A8C1B4B10E200DD5576 /* Bolts.framework in Frameworks */,
 				4E1B0A8E1B4B10E200DD5576 /* ParseCrashReporting.framework in Frameworks */,
 				4E1B0A901B4B10E200DD5576 /* ParseUI.framework in Frameworks */,
-				4E1B0A8F1B4B10E200DD5576 /* ParseFacebookUtils.framework in Frameworks */,
 				4E1B0A851B4B018900DD5576 /* CoreLocation.framework in Frameworks */,
 				4E1B0A8D1B4B10E200DD5576 /* Parse.framework in Frameworks */,
 				4E1B0A831B4AFFFA00DD5576 /* MapKit.framework in Frameworks */,
+				8378A307890D29F5096BDB7F /* Pods_ASKII.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,12 +126,12 @@
 		4E1B0A861B4B10AB00DD5576 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CEB2B6411B5C36C3001F83F4 /* GoogleMaps.framework */,
+				4E89F68E1B5C0081002EAE7D /* Social.framework */,
+				4E89F68C1B5C005C002EAE7D /* Accounts.framework */,
 				4E1B0A991B4B14F600DD5576 /* SystemFrameworks */,
 				4E1B0A871B4B10E200DD5576 /* Bolts.framework */,
 				4E1B0A881B4B10E200DD5576 /* Parse.framework */,
 				4E1B0A891B4B10E200DD5576 /* ParseCrashReporting.framework */,
-				4E1B0A8A1B4B10E200DD5576 /* ParseFacebookUtils.framework */,
 				4E1B0A8B1B4B10E200DD5576 /* ParseUI.framework */,
 				4E1B0A841B4B018900DD5576 /* CoreLocation.framework */,
 				4E1B0A821B4AFFFA00DD5576 /* MapKit.framework */,
@@ -154,6 +158,7 @@
 				4E1B0A9D1B4B19CE00DD5576 /* QuestionsViewController.swift */,
 				CEB2B63D1B5B129B001F83F4 /* SingleQuestionViewController.swift */,
 				CEADC43B1B59A69700A2EF3E /* NewQuestionViewController.swift */,
+				4E89F6861B5B516D002EAE7D /* NewQLocationViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -391,6 +396,7 @@
 				CEB2B63E1B5B129B001F83F4 /* SingleQuestionViewController.swift in Sources */,
 				4E3CE5171B44826800743BCD /* AppDelegate.swift in Sources */,
 				CEADC43C1B59A69700A2EF3E /* NewQuestionViewController.swift in Sources */,
+				4E89F6871B5B516D002EAE7D /* NewQLocationViewController.swift in Sources */,
 				4E1B0A9E1B4B19CE00DD5576 /* QuestionsViewController.swift in Sources */,
 				CEB2B63B1B5AF626001F83F4 /* TableViewCell.swift in Sources */,
 			);
@@ -474,6 +480,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -526,15 +533,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/Pods/GoogleMaps/Frameworks",
+					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = ASKII/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				VALID_ARCHS = "armv7 armv7s armv6 armv64";
 			};
 			name = Debug;
 		};
@@ -546,14 +551,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/Pods/GoogleMaps/Frameworks",
+					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = ASKII/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				VALID_ARCHS = "armv7 armv7s armv6 armv64";
 			};
 			name = Release;
 		};

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -56,10 +56,10 @@
             </objects>
             <point key="canvasLocation" x="219" y="164"/>
         </scene>
-        <!--New Question View Controller-->
+        <!--NewQ Location View Controller-->
         <scene sceneID="HMt-WF-xrl">
             <objects>
-                <viewController id="af2-JZ-HIZ" customClass="NewQuestionViewController" customModule="ASKII" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="af2-JZ-HIZ" customClass="NewQLocationViewController" customModule="ASKII" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tKp-1z-SiW"/>
                         <viewControllerLayoutGuide type="bottom" id="ZkK-h9-yzZ"/>
@@ -77,17 +77,12 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="5Hu-3C-wPu">
-                                <rect key="frame" x="0.0" y="175" width="600" height="274"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="274" id="djf-3K-MwP"/>
-                                </constraints>
-                            </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J98-HK-Kra">
-                                <rect key="frame" x="120" y="499" width="363" height="33"/>
+                                <rect key="frame" x="80" y="499" width="200" height="33"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="33" id="FlY-wp-1Ri"/>
+                                    <constraint firstAttribute="width" constant="200" id="JeY-yr-yyU"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="DONE">
@@ -98,19 +93,23 @@
                                     <segue destination="jb6-Dl-NXg" kind="show" id="8z3-Fd-BhF"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mc0-Wv-ngF" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="157" width="600" height="300"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.38823529411764707" green="0.91764705882352937" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="J98-HK-Kra" firstAttribute="top" secondItem="5Hu-3C-wPu" secondAttribute="bottom" constant="50" id="0mt-bY-dpR"/>
-                            <constraint firstItem="J98-HK-Kra" firstAttribute="centerX" secondItem="5Hu-3C-wPu" secondAttribute="centerX" constant="1.5" id="1zI-IB-mHn"/>
-                            <constraint firstItem="5Hu-3C-wPu" firstAttribute="leading" secondItem="Vf1-bk-zuH" secondAttribute="leading" id="F8p-9z-9B4"/>
-                            <constraint firstItem="J98-HK-Kra" firstAttribute="leading" secondItem="Vf1-bk-zuH" secondAttribute="leading" constant="120" id="JCM-2V-UUr"/>
+                            <constraint firstItem="mc0-Wv-ngF" firstAttribute="top" secondItem="Rkf-d6-ndC" secondAttribute="bottom" id="GwA-9M-nEZ"/>
+                            <constraint firstItem="mc0-Wv-ngF" firstAttribute="leading" secondItem="Vf1-bk-zuH" secondAttribute="leading" id="Ij3-qh-4XK"/>
+                            <constraint firstItem="J98-HK-Kra" firstAttribute="leading" secondItem="Vf1-bk-zuH" secondAttribute="leading" constant="80" id="JCM-2V-UUr"/>
                             <constraint firstItem="Rkf-d6-ndC" firstAttribute="leading" secondItem="Vf1-bk-zuH" secondAttribute="leading" constant="40" id="NPx-VG-21K"/>
                             <constraint firstAttribute="trailing" secondItem="Rkf-d6-ndC" secondAttribute="trailing" constant="107" id="PS8-8t-PNC"/>
                             <constraint firstItem="Rkf-d6-ndC" firstAttribute="top" secondItem="Vf1-bk-zuH" secondAttribute="top" constant="100" id="QCM-6Z-Yab"/>
-                            <constraint firstAttribute="trailing" secondItem="5Hu-3C-wPu" secondAttribute="trailing" id="kSC-VP-lDY"/>
-                            <constraint firstItem="Rkf-d6-ndC" firstAttribute="centerX" secondItem="5Hu-3C-wPu" secondAttribute="centerX" id="sgC-KS-PLr"/>
-                            <constraint firstItem="5Hu-3C-wPu" firstAttribute="top" secondItem="Rkf-d6-ndC" secondAttribute="bottom" constant="18" id="yqs-CW-gNv"/>
+                            <constraint firstItem="ZkK-h9-yzZ" firstAttribute="top" secondItem="J98-HK-Kra" secondAttribute="bottom" constant="68" id="U43-kR-fpS"/>
+                            <constraint firstItem="J98-HK-Kra" firstAttribute="top" secondItem="mc0-Wv-ngF" secondAttribute="bottom" constant="42" id="dcI-n9-K1h"/>
+                            <constraint firstAttribute="trailing" secondItem="mc0-Wv-ngF" secondAttribute="trailing" id="fnn-Jb-Kof"/>
+                            <constraint firstItem="mc0-Wv-ngF" firstAttribute="centerX" secondItem="Rkf-d6-ndC" secondAttribute="centerX" id="jrE-5o-suy"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -118,6 +117,9 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="mc0-Wv-ngF" id="ESC-xg-Fa1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qrW-JP-sa6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

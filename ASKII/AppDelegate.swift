@@ -31,6 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let defaultACL = PFACL();
         PFACL.setDefaultACL(defaultACL, withAccessForCurrentUser:true)
+      
+        GMSServices.provideAPIKey("AIzaSyAJVPgK5pP7NeMHEaStJvL-RQQm49ybADY")
         
         return true
     }
