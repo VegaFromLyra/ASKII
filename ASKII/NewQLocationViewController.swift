@@ -24,6 +24,13 @@ class NewQLocationViewController: UIViewController {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
     }
+  
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+      
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -48,9 +55,9 @@ extension NewQLocationViewController: CLLocationManagerDelegate {
     
     let location = locations.first as! CLLocation
     let camera = GMSCameraPosition.cameraWithLatitude(location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: 15)
-//    mainMapView.camera = camera
-//    mainMapView.myLocationEnabled = true
-//    mainMapView.settings.myLocationButton = true
+    mapView.camera = camera
+    mapView.myLocationEnabled = true
+    mapView.settings.myLocationButton = true
     locationManager.stopUpdatingLocation()
     println("Latitude: \(location.coordinate.latitude). Longitude: \(location.coordinate.longitude).")
   }
