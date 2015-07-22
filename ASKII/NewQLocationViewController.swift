@@ -23,6 +23,7 @@ class NewQLocationViewController: UIViewController {
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
+        mapView.delegate = self
     }
   
     override func viewDidAppear(animated: Bool) {
@@ -50,18 +51,37 @@ class NewQLocationViewController: UIViewController {
 
 }
 
+// MARK: CLLocationManagerDelegate
 extension NewQLocationViewController: CLLocationManagerDelegate {
   func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
     
     let location = locations.first as! CLLocation
     let camera = GMSCameraPosition.cameraWithLatitude(location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: 15)
+    
     mapView.camera = camera
     mapView.myLocationEnabled = true
     mapView.settings.myLocationButton = true
     locationManager.stopUpdatingLocation()
-    println("Latitude: \(location.coordinate.latitude). Longitude: \(location.coordinate.longitude).")
+    
   }
   
   func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+  }
+}
+
+// MARK: GMSMapViewDelegate
+extension NewQLocationViewController: GMSMapViewDelegate {
+  
+  func placeMarker(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+    var position = CLLocationCoordinate2DMake(latitude, longitude)
+    var marker = GMSMarker(position: position)
+    marker.snippet = "Ask about here!"
+    marker.appearAnimation = kGMSMarkerAnimationPop
+    marker.map = mapView
+  }
+  
+  func mapView(mapView: GMSMapView!, didTapAtCoordinate coordinate: CLLocationCoordinate2D) {
+    NSLog("You tapped at %f,%f", coordinate.latitude, coordinate.longitude)
+    placeMarker(coordinate.latitude, longitude: coordinate.longitude)
   }
 }
