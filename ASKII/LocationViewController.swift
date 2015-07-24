@@ -1,5 +1,5 @@
 //
-//  NewQLocationViewController.swift
+//  LocationViewController.swift
 //  ASKII
 //
 //  Created by Asha Balasubramaniam on 7/18/15.
@@ -10,34 +10,43 @@ import UIKit
 import CoreLocation
 import GoogleMaps
 
-class NewQLocationViewController: UIViewController {
-
+class LocationViewController: UIViewController {
+  
     @IBOutlet weak var mapView: GMSMapView!
   
-    var locationManager: CLLocationManager!
+    @IBAction func askQuestion(sender: UIButton) {
+        // TODO: Get question from NewQuestionViewController
+        let questionModel = Question(content: "foo", location: lastTappedLocation!)
+        questionModel.ask()
+    }
   
+    var lastTappedLocation: CLLocationCoordinate2D?
+  
+    var locationManager: CLLocationManager!
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Initialize all the location stuff
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        mapView.delegate = self
+        if (mapView != nil) {
+            locationManager = CLLocationManager()
+            locationManager.delegate = self
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+            mapView.delegate = self
+        }
     }
   
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-      
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.startUpdatingLocation()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
 
     /*
     // MARK: - Navigation
@@ -52,7 +61,7 @@ class NewQLocationViewController: UIViewController {
 }
 
 // MARK: CLLocationManagerDelegate
-extension NewQLocationViewController: CLLocationManagerDelegate {
+extension LocationViewController: CLLocationManagerDelegate {
   func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
     
     let location = locations.first as! CLLocation
@@ -64,13 +73,10 @@ extension NewQLocationViewController: CLLocationManagerDelegate {
     locationManager.stopUpdatingLocation()
     
   }
-  
-  func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-  }
 }
 
 // MARK: GMSMapViewDelegate
-extension NewQLocationViewController: GMSMapViewDelegate {
+extension LocationViewController: GMSMapViewDelegate {
   
   func placeMarker(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
     var position = CLLocationCoordinate2DMake(latitude, longitude)
@@ -81,7 +87,7 @@ extension NewQLocationViewController: GMSMapViewDelegate {
   }
   
   func mapView(mapView: GMSMapView!, didTapAtCoordinate coordinate: CLLocationCoordinate2D) {
-    NSLog("You tapped at %f,%f", coordinate.latitude, coordinate.longitude)
+    lastTappedLocation = coordinate
     placeMarker(coordinate.latitude, longitude: coordinate.longitude)
   }
 }
