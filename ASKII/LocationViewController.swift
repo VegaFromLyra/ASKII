@@ -15,14 +15,24 @@ class LocationViewController: UIViewController {
     @IBOutlet weak var mapView: GMSMapView!
   
     @IBAction func askQuestion(sender: UIButton) {
-        // TODO: Get question from NewQuestionViewController
-        let questionModel = Question(content: "foo", location: lastTappedLocation!)
-        questionModel.ask()
+      
+        if (lastTappedLocation == nil) {
+          // TODO - Implement error view
+          println("Please enter a location before asking a question")
+        } else {
+          if let question = delegate?.question {
+            let questionModel = Questions(content: question, location: lastTappedLocation!)
+            questionModel.save()
+          } else {
+            println("ERROR! Question is nil")
+          }
+        }
     }
+
   
     var lastTappedLocation: CLLocationCoordinate2D?
-  
     var locationManager: CLLocationManager!
+    var delegate: NewQuestion?
  
     override func viewDidLoad() {
         super.viewDidLoad()
