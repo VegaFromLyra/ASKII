@@ -29,7 +29,6 @@
 		4E89F6871B5B516D002EAE7D /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E89F6861B5B516D002EAE7D /* LocationViewController.swift */; };
 		4E89F68D1B5C005C002EAE7D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E89F68C1B5C005C002EAE7D /* Accounts.framework */; };
 		4E89F68F1B5C0081002EAE7D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E89F68E1B5C0081002EAE7D /* Social.framework */; };
-		8378A307890D29F5096BDB7F /* Pods_ASKII.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF85861258DCAB1D0FAA4688 /* Pods_ASKII.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		CEADC43A1B59955A00A2EF3E /* NewQuestion.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEADC4391B59955A00A2EF3E /* NewQuestion.storyboard */; };
 		CEADC43C1B59A69700A2EF3E /* NewQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEADC43B1B59A69700A2EF3E /* NewQuestionViewController.swift */; };
 		CEB2B63B1B5AF626001F83F4 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2B63A1B5AF626001F83F4 /* TableViewCell.swift */; };
@@ -76,6 +75,26 @@
 		6AA53E53F04E31FB05347BC8 /* Pods-ASKII.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ASKII.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ASKII/Pods-ASKII.debug.xcconfig"; sourceTree = "<group>"; };
 		6ECC465071218FABC8109585 /* Pods-ASKII.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ASKII.release.xcconfig"; path = "Pods/Target Support Files/Pods-ASKII/Pods-ASKII.release.xcconfig"; sourceTree = "<group>"; };
 		AF85861258DCAB1D0FAA4688 /* Pods_ASKII.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ASKII.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE07E7971B62C77500BF6427 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE07E7981B62C77500BF6427 /* Pods-ASKII-acknowledgements.markdown */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Pods-ASKII-acknowledgements.markdown"; sourceTree = "<group>"; };
+		CE07E7991B62C77500BF6427 /* Pods-ASKII-acknowledgements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Pods-ASKII-acknowledgements.plist"; sourceTree = "<group>"; };
+		CE07E79A1B62C77500BF6427 /* Pods-ASKII-dummy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Pods-ASKII-dummy.m"; sourceTree = "<group>"; };
+		CE07E79B1B62C77500BF6427 /* Pods-ASKII-frameworks.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "Pods-ASKII-frameworks.sh"; sourceTree = "<group>"; };
+		CE07E79C1B62C77500BF6427 /* Pods-ASKII-resources.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "Pods-ASKII-resources.sh"; sourceTree = "<group>"; };
+		CE07E79D1B62C77500BF6427 /* Pods-ASKII-umbrella.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pods-ASKII-umbrella.h"; sourceTree = "<group>"; };
+		CE07E79E1B62C77500BF6427 /* Pods-ASKII.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pods-ASKII.debug.xcconfig"; sourceTree = "<group>"; };
+		CE07E79F1B62C77500BF6427 /* Pods-ASKII.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = "Pods-ASKII.modulemap"; sourceTree = "<group>"; };
+		CE07E7A01B62C77500BF6427 /* Pods-ASKII.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pods-ASKII.release.xcconfig"; sourceTree = "<group>"; };
+		CE07E7A21B62C7A000BF6427 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE07E7A31B62C7A000BF6427 /* Pods-ASKII-acknowledgements.markdown */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Pods-ASKII-acknowledgements.markdown"; sourceTree = "<group>"; };
+		CE07E7A41B62C7A000BF6427 /* Pods-ASKII-acknowledgements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Pods-ASKII-acknowledgements.plist"; sourceTree = "<group>"; };
+		CE07E7A51B62C7A000BF6427 /* Pods-ASKII-dummy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Pods-ASKII-dummy.m"; sourceTree = "<group>"; };
+		CE07E7A61B62C7A000BF6427 /* Pods-ASKII-frameworks.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "Pods-ASKII-frameworks.sh"; sourceTree = "<group>"; };
+		CE07E7A71B62C7A000BF6427 /* Pods-ASKII-resources.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "Pods-ASKII-resources.sh"; sourceTree = "<group>"; };
+		CE07E7A81B62C7A000BF6427 /* Pods-ASKII-umbrella.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pods-ASKII-umbrella.h"; sourceTree = "<group>"; };
+		CE07E7A91B62C7A000BF6427 /* Pods-ASKII.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pods-ASKII.debug.xcconfig"; sourceTree = "<group>"; };
+		CE07E7AA1B62C7A000BF6427 /* Pods-ASKII.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = "Pods-ASKII.modulemap"; sourceTree = "<group>"; };
+		CE07E7AB1B62C7A000BF6427 /* Pods-ASKII.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pods-ASKII.release.xcconfig"; sourceTree = "<group>"; };
 		CEADC4391B59955A00A2EF3E /* NewQuestion.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NewQuestion.storyboard; sourceTree = "<group>"; };
 		CEADC43B1B59A69700A2EF3E /* NewQuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewQuestionViewController.swift; sourceTree = "<group>"; };
 		CEB2B63A1B5AF626001F83F4 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
@@ -100,7 +119,6 @@
 				4E1B0A851B4B018900DD5576 /* CoreLocation.framework in Frameworks */,
 				4E1B0A8D1B4B10E200DD5576 /* Parse.framework in Frameworks */,
 				4E1B0A831B4AFFFA00DD5576 /* MapKit.framework in Frameworks */,
-				8378A307890D29F5096BDB7F /* Pods_ASKII.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +144,8 @@
 		4E1B0A861B4B10AB00DD5576 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE07E7A11B62C7A000BF6427 /* Pods-ASKII */,
+				CE07E7961B62C77500BF6427 /* Pods-ASKII */,
 				4E89F68E1B5C0081002EAE7D /* Social.framework */,
 				4E89F68C1B5C005C002EAE7D /* Accounts.framework */,
 				4E1B0A991B4B14F600DD5576 /* SystemFrameworks */,
@@ -231,6 +251,42 @@
 				4E465A2E1B5045C600A0336B /* Questions.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		CE07E7961B62C77500BF6427 /* Pods-ASKII */ = {
+			isa = PBXGroup;
+			children = (
+				CE07E7971B62C77500BF6427 /* Info.plist */,
+				CE07E7981B62C77500BF6427 /* Pods-ASKII-acknowledgements.markdown */,
+				CE07E7991B62C77500BF6427 /* Pods-ASKII-acknowledgements.plist */,
+				CE07E79A1B62C77500BF6427 /* Pods-ASKII-dummy.m */,
+				CE07E79B1B62C77500BF6427 /* Pods-ASKII-frameworks.sh */,
+				CE07E79C1B62C77500BF6427 /* Pods-ASKII-resources.sh */,
+				CE07E79D1B62C77500BF6427 /* Pods-ASKII-umbrella.h */,
+				CE07E79E1B62C77500BF6427 /* Pods-ASKII.debug.xcconfig */,
+				CE07E79F1B62C77500BF6427 /* Pods-ASKII.modulemap */,
+				CE07E7A01B62C77500BF6427 /* Pods-ASKII.release.xcconfig */,
+			);
+			name = "Pods-ASKII";
+			path = "Pods/Target Support Files/Pods-ASKII";
+			sourceTree = "<group>";
+		};
+		CE07E7A11B62C7A000BF6427 /* Pods-ASKII */ = {
+			isa = PBXGroup;
+			children = (
+				CE07E7A21B62C7A000BF6427 /* Info.plist */,
+				CE07E7A31B62C7A000BF6427 /* Pods-ASKII-acknowledgements.markdown */,
+				CE07E7A41B62C7A000BF6427 /* Pods-ASKII-acknowledgements.plist */,
+				CE07E7A51B62C7A000BF6427 /* Pods-ASKII-dummy.m */,
+				CE07E7A61B62C7A000BF6427 /* Pods-ASKII-frameworks.sh */,
+				CE07E7A71B62C7A000BF6427 /* Pods-ASKII-resources.sh */,
+				CE07E7A81B62C7A000BF6427 /* Pods-ASKII-umbrella.h */,
+				CE07E7A91B62C7A000BF6427 /* Pods-ASKII.debug.xcconfig */,
+				CE07E7AA1B62C7A000BF6427 /* Pods-ASKII.modulemap */,
+				CE07E7AB1B62C7A000BF6427 /* Pods-ASKII.release.xcconfig */,
+			);
+			name = "Pods-ASKII";
+			path = "Pods/Target Support Files/Pods-ASKII";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
