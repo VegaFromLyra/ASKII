@@ -50,6 +50,9 @@
                             <constraint firstItem="cmv-4d-pgM" firstAttribute="leading" secondItem="EaU-Ru-k2r" secondAttribute="leading" constant="42" id="rd8-k9-6mI"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="questionText" destination="cmv-4d-pgM" id="8KJ-mu-fgA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="txN-Ve-8DH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

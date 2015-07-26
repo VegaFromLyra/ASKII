@@ -8,7 +8,12 @@
 
 import UIKit
 
-class NewQuestionViewController: UIViewController {
+class NewQuestionViewController: UIViewController, NewQuestion {
+  
+    // MARK: Properties
+  
+    @IBOutlet weak var questionText: UITextView!
+    var question: String?
 
     @IBAction func onAskButtonPressed(sender: UIButton) {
         var storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -28,14 +33,18 @@ class NewQuestionViewController: UIViewController {
     }
     
 
-    /*
+  
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+      
+        question = questionText.text
+        var locationViewController =  segue.destinationViewController as! LocationViewController
+        locationViewController.delegate = self
     }
-    */
+    
 
 }
