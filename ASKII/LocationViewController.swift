@@ -28,7 +28,6 @@ class LocationViewController: UIViewController {
           }
         }
     }
-
   
     var lastTappedLocation: CLLocationCoordinate2D?
     var locationManager: CLLocationManager!
