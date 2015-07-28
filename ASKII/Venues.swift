@@ -14,8 +14,6 @@ import MapKit
 import QuadratTouch
 
 // TODO - Make this singleton
-// Input: Lat/Long, Output; List of venues
-
 
 class VenueService {
   
@@ -28,7 +26,7 @@ class VenueService {
     self.location = location
   }
   
-  func loadVenues() {
+  func loadVenues(completion: ([[String: AnyObject]]?) -> Void) {
     var parameters = self.location.parameters()
     let task = session.venues.explore(parameters) {
       (result) -> Void in
@@ -41,7 +39,8 @@ class VenueService {
             }
           }
           
-          self.venueItems = venues
+          completion(venues)
+          
         }
       } else if result.error != nil && !result.isCancelled() {
           println(result.error!)

@@ -13,15 +13,17 @@ class Questions {
   
   // MARK: Initialization
   
-  init(content: String, location: CLLocationCoordinate2D) {
+  init(content: String, location: CLLocationCoordinate2D, locationName: String) {
     self.content = content
     self.location = location
+    self.locationName = locationName
   }
   
   // MARK: Properties
   
   var content: String
   var location: CLLocationCoordinate2D
+  var locationName: String
   
   // MARK: Methods
   
@@ -30,6 +32,7 @@ class Questions {
     var locationModel = PFObject(className:"Location")
     locationModel["latitude"] = location.latitude
     locationModel["longitude"] = location.longitude
+    locationModel["name"] = locationName
     locationModel.saveInBackgroundWithBlock {
       (success: Bool, error: NSError?) -> Void in
       if (success) {
