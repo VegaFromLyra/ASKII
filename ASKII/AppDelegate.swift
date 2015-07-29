@@ -14,6 +14,8 @@ import Bolts // For PFInstallation
 import Parse
 import ParseCrashReporting
 
+import QuadratTouch
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -21,22 +23,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
-        ParseCrashReporting.enable()
-        
-        Parse.setApplicationId("KGxHRY1i2W1plkO5rWORg8YQLaKjcwTvs9BIpjyj",
-            clientKey: "An2KVEeYLvxGB1IPyVWsiqaFK9rTEc6ZlaVsDc2J")
-        
-        PFUser.enableAutomaticUser()
-        
-        let defaultACL = PFACL();
-        PFACL.setDefaultACL(defaultACL, withAccessForCurrentUser:true)
+      // Override point for customization after application launch.
+      ParseCrashReporting.enable()
       
-        GMSServices.provideAPIKey("AIzaSyAJVPgK5pP7NeMHEaStJvL-RQQm49ybADY")
-        
-        return true
-    }
+      Parse.setApplicationId("KGxHRY1i2W1plkO5rWORg8YQLaKjcwTvs9BIpjyj",
+          clientKey: "An2KVEeYLvxGB1IPyVWsiqaFK9rTEc6ZlaVsDc2J")
+      
+      PFUser.enableAutomaticUser()
+      
+      let defaultACL = PFACL();
+      PFACL.setDefaultACL(defaultACL, withAccessForCurrentUser:true)
     
+      GMSServices.provideAPIKey("AIzaSyAJVPgK5pP7NeMHEaStJvL-RQQm49ybADY")
+      
+      setUpFoursquare()
+        
+      return true
+    }
+  
+    func setUpFoursquare() {
+      let client = Client(clientID: "AND2OI2AELMCOW1P2GCF4S1IEGYYEYXV5KIWKSVX3IY5EEAU",
+        clientSecret: "Y5NM3VGKVYQRZ1YBNAIXWBBOMHGCNADD2RPN1PD3D30RL4KA",
+        redirectURL: "askii://foursquare")
+      var configuration = Configuration(client:client)
+      configuration.mode = "foursquare"
+      configuration.shouldControllNetworkActivityIndicator = true
+      Session.setupSharedSessionWithConfiguration(configuration)
+    }
+  
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation:  AnyObject?) -> Bool {
+      return Session.sharedSession().handleURL(url)
+    }
+  
     //--------------------------------------
     // MARK: Push Notifications
     //--------------------------------------
