@@ -13,21 +13,17 @@ import MapKit
 
 import QuadratTouch
 
-// TODO - Make this singleton
-
 class VenueService {
   
   var session: Session!
-  var location: CLLocation
   var venueItems : [[String: AnyObject]]?
   
-  init(location: CLLocation) {
+  init() {
     session = Session.sharedSession()
-    self.location = location
   }
   
-  func loadVenues(completion: ([[String: AnyObject]]?) -> Void) {
-    var parameters = self.location.parameters()
+  func loadVenues(location: CLLocation, completion: ([[String: AnyObject]]?) -> ()) {
+    var parameters = location.parameters()
     let task = session.venues.explore(parameters) {
       (result) -> Void in
       if result.response != nil {

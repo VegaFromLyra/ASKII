@@ -24,13 +24,12 @@
 		4E3CE51E1B44826800743BCD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E3CE51D1B44826800743BCD /* Images.xcassets */; };
 		4E3CE5211B44826800743BCD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3CE51F1B44826800743BCD /* LaunchScreen.xib */; };
 		4E3CE52D1B44826800743BCD /* ASKIITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3CE52C1B44826800743BCD /* ASKIITests.swift */; };
+		4E868C661B6883F70077AB67 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E868C651B6883F70077AB67 /* Location.swift */; };
 		4E89F6871B5B516D002EAE7D /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E89F6861B5B516D002EAE7D /* LocationViewController.swift */; };
 		4E89F68D1B5C005C002EAE7D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E89F68C1B5C005C002EAE7D /* Accounts.framework */; };
 		4E89F68F1B5C0081002EAE7D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E89F68E1B5C0081002EAE7D /* Social.framework */; };
 		4EACBAAA1B67EFCA005F6664 /* QuadratTouch.framework in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = 4EACBAA81B67EFA1005F6664 /* QuadratTouch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4EACBAAD1B67F118005F6664 /* Venues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EACBAAC1B67F118005F6664 /* Venues.swift */; };
-		4EACBAB11B683DD0005F6664 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EACBAB01B683DD0005F6664 /* Location.swift */; };
-		4EACBAB21B683DD0005F6664 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EACBAB01B683DD0005F6664 /* Location.swift */; };
 		4EF64CFB1B62B34100D979EB /* NewQuestionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF64CFA1B62B34100D979EB /* NewQuestionProtocol.swift */; };
 		4EF64CFD1B62F34D00D979EB /* Questions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF64CFC1B62F34D00D979EB /* Questions.swift */; };
 		CEADC43A1B59955A00A2EF3E /* NewQuestion.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEADC4391B59955A00A2EF3E /* NewQuestion.storyboard */; };
@@ -100,12 +99,12 @@
 		4E3CE5261B44826800743BCD /* ASKIITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ASKIITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E3CE52B1B44826800743BCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E3CE52C1B44826800743BCD /* ASKIITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASKIITests.swift; sourceTree = "<group>"; };
+		4E868C651B6883F70077AB67 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Location.swift; path = ASKII/Location.swift; sourceTree = "<group>"; };
 		4E89F6861B5B516D002EAE7D /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		4E89F68C1B5C005C002EAE7D /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		4E89F68E1B5C0081002EAE7D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		4EACBAA01B67EFA1005F6664 /* Quadrat.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quadrat.xcodeproj; path = "das-quadrat/Source/Quadrat.xcodeproj"; sourceTree = "<group>"; };
 		4EACBAAC1B67F118005F6664 /* Venues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Venues.swift; sourceTree = "<group>"; };
-		4EACBAB01B683DD0005F6664 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		4EF64CFA1B62B34100D979EB /* NewQuestionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewQuestionProtocol.swift; sourceTree = "<group>"; };
 		4EF64CFC1B62F34D00D979EB /* Questions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Questions.swift; path = ASKII/Questions.swift; sourceTree = "<group>"; };
 		6AA53E53F04E31FB05347BC8 /* Pods-ASKII.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ASKII.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ASKII/Pods-ASKII.debug.xcconfig"; sourceTree = "<group>"; };
@@ -287,8 +286,8 @@
 		4E465A2D1B5045B200A0336B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4E868C651B6883F70077AB67 /* Location.swift */,
 				4EF64CFC1B62F34D00D979EB /* Questions.swift */,
-				4EACBAB01B683DD0005F6664 /* Location.swift */,
 			);
 			name = Models;
 			path = ..;
@@ -546,7 +545,7 @@
 				4EACBAAD1B67F118005F6664 /* Venues.swift in Sources */,
 				4E89F6871B5B516D002EAE7D /* LocationViewController.swift in Sources */,
 				4E1B0A9E1B4B19CE00DD5576 /* QuestionsViewController.swift in Sources */,
-				4EACBAB11B683DD0005F6664 /* Location.swift in Sources */,
+				4E868C661B6883F70077AB67 /* Location.swift in Sources */,
 				CEB2B63B1B5AF626001F83F4 /* TableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -555,7 +554,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4EACBAB21B683DD0005F6664 /* Location.swift in Sources */,
 				4E3CE52D1B44826800743BCD /* ASKIITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
