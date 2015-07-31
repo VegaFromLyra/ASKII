@@ -18,17 +18,23 @@ class LocationViewController: UIViewController {
   
   
     @IBAction func askQuestion(sender: UIButton) {
-      if let question = delegate?.question {
-        let questionModel = Questions(content: question, location: locationModel!)
-        questionModel.save()
+      if selectedMarker != nil {
+        if let question = delegate?.question {
+          let questionModel = Questions(content: question, location: locationModel!)
+          questionModel.save()
+        } else {
+          println("ERROR! Question is nil")
+        }
       } else {
-        println("ERROR! Question is nil")
+        println("TODO: Show error view that a location must be selected ")
       }
+
     }
   
     // TODO: Should I instantiate here or in init?
     let venueService = VenueService()
     var locationModel: Location?
+    var selectedMarker: GMSMarker?
 
   
     var locationManager: CLLocationManager!
@@ -60,7 +66,7 @@ class LocationViewController: UIViewController {
     func placeVenueMarker(latitude: CLLocationDegrees, longitude: CLLocationDegrees, name: String) {
       var position = CLLocationCoordinate2DMake(latitude, longitude)
       var marker = GMSMarker(position: position)
-      marker.snippet = name
+      marker.title = name
       marker.appearAnimation = kGMSMarkerAnimationPop
       marker.map = mapView
       marker.icon = UIImage(named: "Venue_Icon")
@@ -98,14 +104,20 @@ extension LocationViewController: GMSMapViewDelegate {
   
   func placeMarker(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
     var position = CLLocationCoordinate2DMake(latitude, longitude)
+    
+    if selectedMarker != nil {
+      selectedMarker!.map = nil
+    }
+    
     var marker = GMSMarker(position: position)
-    marker.snippet = "Ask about here!"
+    marker.title = "Ask about here!"
     marker.appearAnimation = kGMSMarkerAnimationPop
     marker.map = mapView
+    selectedMarker = marker
   }
 
   func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {
-    locationModel = Location(latitude: marker.position.latitude, longitude: marker.position.longitude, name: marker.snippet)
+    locationModel = Location(latitude: marker.position.latitude, longitude: marker.position.longitude, name: marker.title)
     placeMarker(marker.position.latitude, longitude: marker.position.longitude)
     return false
   }
