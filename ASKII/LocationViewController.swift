@@ -52,8 +52,11 @@ class LocationViewController: UIViewController {
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
             mapView.delegate = self
-            mapView.bringSubviewToFront(searchTextField)
           
+            // So that the UITextField is visible and can 
+            // be interacted with
+            mapView.bringSubviewToFront(searchTextField)
+            styleSearchField()
             if let recognizers = mapView.gestureRecognizers {
               for recognizer in recognizers {
                 mapView.removeGestureRecognizer(recognizer as! UIGestureRecognizer)
@@ -80,6 +83,19 @@ class LocationViewController: UIViewController {
       marker.icon = UIImage(named: "Venue_Icon")
     }
 
+    func styleSearchField() {
+      let border = CALayer()
+      let width = CGFloat(2.0)
+      border.borderColor = UIColor.darkGrayColor().CGColor
+      border.frame = CGRect(x: 0,
+        y: searchTextField.frame.size.height - width,
+        width:  searchTextField.frame.size.width,
+        height: searchTextField.frame.size.height)
+      
+      border.borderWidth = width
+      searchTextField.layer.addSublayer(border)
+      searchTextField.layer.masksToBounds = true
+    }
 
     /*
     // MARK: - Navigation
