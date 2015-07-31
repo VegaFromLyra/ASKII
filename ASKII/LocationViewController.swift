@@ -16,6 +16,7 @@ class LocationViewController: UIViewController {
   
     @IBOutlet weak var mapView: GMSMapView!
   
+    @IBOutlet weak var searchTextField: UITextField!
   
     @IBAction func askQuestion(sender: UIButton) {
       if selectedMarker != nil {
@@ -51,6 +52,13 @@ class LocationViewController: UIViewController {
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
             mapView.delegate = self
+            mapView.bringSubviewToFront(searchTextField)
+          
+            if let recognizers = mapView.gestureRecognizers {
+              for recognizer in recognizers {
+                mapView.removeGestureRecognizer(recognizer as! UIGestureRecognizer)
+              }
+            }
         }
     }
   
@@ -108,7 +116,7 @@ extension LocationViewController: GMSMapViewDelegate {
     if selectedMarker != nil {
       selectedMarker!.map = nil
     }
-    
+  
     var marker = GMSMarker(position: position)
     marker.title = "Ask about here!"
     marker.appearAnimation = kGMSMarkerAnimationPop

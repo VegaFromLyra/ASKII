@@ -70,15 +70,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drag the map to where you want to ask the question" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rkf-d6-ndC">
-                                <rect key="frame" x="40" y="100" width="520" height="57"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="57" id="aZy-F3-ee6"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J98-HK-Kra">
                                 <rect key="frame" x="80" y="499" width="200" height="33"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -97,31 +88,35 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mc0-Wv-ngF" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="157" width="600" height="300"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="457"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="TYPE LOCATION" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f48-yI-IMO">
+                                        <rect key="frame" x="77" y="51" width="441" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardAppearance="alert"/>
+                                    </textField>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="f48-yI-IMO" firstAttribute="leading" secondItem="mc0-Wv-ngF" secondAttribute="leading" constant="77" id="4ma-fW-XO2"/>
+                                    <constraint firstItem="f48-yI-IMO" firstAttribute="top" secondItem="mc0-Wv-ngF" secondAttribute="top" constant="51" id="Ey5-sP-im2"/>
+                                    <constraint firstAttribute="trailing" secondItem="f48-yI-IMO" secondAttribute="trailing" constant="82" id="YXw-PU-Syj"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.38823529411764707" green="0.91764705882352937" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="mc0-Wv-ngF" firstAttribute="top" secondItem="Rkf-d6-ndC" secondAttribute="bottom" id="GwA-9M-nEZ"/>
                             <constraint firstItem="mc0-Wv-ngF" firstAttribute="leading" secondItem="Vf1-bk-zuH" secondAttribute="leading" id="Ij3-qh-4XK"/>
                             <constraint firstItem="J98-HK-Kra" firstAttribute="leading" secondItem="Vf1-bk-zuH" secondAttribute="leading" constant="80" id="JCM-2V-UUr"/>
-                            <constraint firstItem="Rkf-d6-ndC" firstAttribute="leading" secondItem="Vf1-bk-zuH" secondAttribute="leading" constant="40" id="NPx-VG-21K"/>
-                            <constraint firstAttribute="trailing" secondItem="Rkf-d6-ndC" secondAttribute="trailing" constant="107" id="PS8-8t-PNC"/>
-                            <constraint firstItem="Rkf-d6-ndC" firstAttribute="top" secondItem="Vf1-bk-zuH" secondAttribute="top" constant="100" id="QCM-6Z-Yab"/>
                             <constraint firstItem="ZkK-h9-yzZ" firstAttribute="top" secondItem="J98-HK-Kra" secondAttribute="bottom" constant="68" id="U43-kR-fpS"/>
                             <constraint firstItem="J98-HK-Kra" firstAttribute="top" secondItem="mc0-Wv-ngF" secondAttribute="bottom" constant="42" id="dcI-n9-K1h"/>
                             <constraint firstAttribute="trailing" secondItem="mc0-Wv-ngF" secondAttribute="trailing" id="fnn-Jb-Kof"/>
-                            <constraint firstItem="mc0-Wv-ngF" firstAttribute="centerX" secondItem="Rkf-d6-ndC" secondAttribute="centerX" id="jrE-5o-suy"/>
+                            <constraint firstItem="mc0-Wv-ngF" firstAttribute="top" secondItem="Vf1-bk-zuH" secondAttribute="top" id="t2Y-sX-Nzv"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="PS8-8t-PNC"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="mc0-Wv-ngF" id="ESC-xg-Fa1"/>
+                        <outlet property="searchTextField" destination="f48-yI-IMO" id="d8E-eL-dbh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qrW-JP-sa6" userLabel="First Responder" sceneMemberID="firstResponder"/>
