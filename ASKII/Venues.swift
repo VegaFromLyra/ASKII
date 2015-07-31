@@ -45,6 +45,19 @@ class VenueService {
     task.start()
   }
   
+  func search(location: CLLocation, query: String, completion: ([[String: AnyObject]]?) -> ()) {
+    var parameters = [Parameter.query:query]
+    parameters += location.parameters()
+    let searchTask = session.venues.search(parameters) {
+      (result) -> Void in
+      if let response = result.response {
+        var results = response["venues"] as? [JSONParameters]
+        completion(results)
+      }
+    }
+    searchTask.start()
+  }
+  
 }
 
 extension CLLocation {

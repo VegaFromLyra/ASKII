@@ -36,13 +36,14 @@ class LocationViewController: UIViewController {
     let venueService = VenueService()
     var locationModel: Location?
     var selectedMarker: GMSMarker?
-
+    var userLocation: CLLocation?
   
     var locationManager: CLLocationManager!
     var delegate: NewQuestion?
  
     override func viewDidLoad() {
         super.viewDidLoad()
+      
     
         // Initialize all the location stuff
         if (mapView != nil) {
@@ -62,6 +63,7 @@ class LocationViewController: UIViewController {
                 mapView.removeGestureRecognizer(recognizer as! UIGestureRecognizer)
               }
             }
+            searchTextField.delegate = self
         }
     }
   
@@ -113,9 +115,11 @@ class LocationViewController: UIViewController {
 extension LocationViewController: CLLocationManagerDelegate {
   func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
     
-    let location = locations.first as! CLLocation
+    userLocation = locations.first as? CLLocation
     
-    let camera = GMSCameraPosition.cameraWithLatitude(location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: 17)
+    let camera = GMSCameraPosition.cameraWithLatitude(userLocation!.coordinate.latitude,
+      longitude: userLocation!.coordinate.longitude,
+      zoom: 17)
     mapView.camera = camera
     mapView.myLocationEnabled = true
     mapView.settings.myLocationButton = true
@@ -154,17 +158,42 @@ extension LocationViewController: GMSMapViewDelegate {
     venueService.loadVenues(selectedLocation, completion: {
       venues -> Void in
         if let venueInfoList = venues {
-          for venueInfo in venueInfoList {
-            let venueItem = venueInfo["venue"] as! JSONParameters
-
-            let venueName = venueItem["name"]! as! String
-            let venueLocation = venueItem["location"] as! JSONParameters
-            let venueLatitude = venueLocation["lat"] as! CLLocationDegrees
-            let venueLongitude = venueLocation["lng"] as! CLLocationDegrees
-
-            self.placeVenueMarker(venueLatitude, longitude: venueLongitude, name: venueName)
-        }
+          self.placeVenueMarkers(venueInfoList)
       }
     })
+  }
+  
+  // TODO: Where should this func be?
+  func placeVenueMarkers(venueInfoList: [[String: AnyObject]]) {
+    for venueInfo in venueInfoList {
+      let venueItem = venueInfo["venue"] as! JSONParameters
+      
+      let venueName = venueItem["name"]! as! String
+      let venueLocation = venueItem["location"] as! JSONParameters
+      let venueLatitude = venueLocation["lat"] as! CLLocationDegrees
+      let venueLongitude = venueLocation["lng"] as! CLLocationDegrees
+      
+      self.placeVenueMarker(venueLatitude, longitude: venueLongitude, name: venueName)
+    }
+  }
+}
+
+// MARK: UITextFieldDelegate
+
+extension LocationViewController: UITextFieldDelegate {
+  
+  // TODO - Should we use 'UserLocation' here or 'SelectedLocation'?
+  func textFieldShouldReturn(textField: UITextField) -> Bool {
+    print(textField.text)
+    venueService.search(userLocation!,
+      query: textField.text, completion: {
+        searchResults -> Void in
+        println(searchResults)
+//        self.mapView.clear()
+//        if let results = searchResults {
+//          self.placeVenueMarkers(results)
+//        }
+    })
+    return true
   }
 }
