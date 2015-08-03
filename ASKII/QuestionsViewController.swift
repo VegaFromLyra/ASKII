@@ -13,6 +13,7 @@ import CoreLocation
 class QuestionsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var headerView: UIView!
     
     @IBAction func onAskAnywherePressed(sender: AnyObject) {
         var storyboard = UIStoryboard(name: "NewQuestion", bundle: nil)
@@ -23,10 +24,18 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var mapView: MKMapView!
     
     var locationManager: CLLocationManager!
+    
+    var mapLayer: CALayer {
+        return mapView.layer
+    }
+    
+    var headerLayer: CALayer {
+        return headerView.layer
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         if (CLLocationManager.locationServicesEnabled())
         {
           locationManager = CLLocationManager()
@@ -35,13 +44,40 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
           locationManager.requestAlwaysAuthorization()
           locationManager.startUpdatingLocation()
         }
-        
+        setUpLayer()
 //        self.tableView.registerClass(TableViewCell.self, forCellReuseIdentifier: "QuestionCell")
         
         // Auto row height for each cell
         self.tableView.estimatedRowHeight = 300
         self.tableView.rowHeight = UITableViewAutomaticDimension
     }
+    
+    func setUpLayer() {
+        mapLayer.backgroundColor = UIColor.blueColor().CGColor
+        //mapLayer.borderWidth = 10.0
+        //mapLayer.borderColor = UIColor.redColor().CGColor
+        
+        //headerLayer.borderWidth = 10.0
+        //headerLayer.borderColor = UIColor.redColor().CGColor
+        
+    }
+    
+//    let gradientLayer = CAGradientLayer()
+//    gradientLayer.frame = mapView.bounds
+//    gradientLayer.colors = [cgColorForRed(209.0, green: 0.0, blue: 0.0),
+//    cgColorForRed(255.0, green: 102.0, blue: 34.0),
+//    cgColorForRed(255.0, green: 218.0, blue: 33.0),
+//    cgColorForRed(51.0, green: 221.0, blue: 0.0),
+//    cgColorForRed(17.0, green: 51.0, blue: 204.0),
+//    cgColorForRed(34.0, green: 0.0, blue: 102.0),
+//    cgColorForRed(51.0, green: 0.0, blue: 68.0)]
+//    gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+//    gradientLayer.endPoint = CGPoint(x: 0, y: 1)
+//    mapView.layer.addSublayer(gradientLayer)
+//    
+//    func cgColorForRed(red: CGFloat, green: CGFloat, blue: CGFloat) -> AnyObject {
+//        return UIColor(red: red/255.0, green: green/255.0, blue: blue/255.0, alpha: 1.0).CGColor as AnyObject
+//    }
 
     override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
