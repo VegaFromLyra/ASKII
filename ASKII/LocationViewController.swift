@@ -158,23 +158,18 @@ extension LocationViewController: GMSMapViewDelegate {
     venueService.loadVenues(selectedLocation, completion: {
       venues -> Void in
         if let venueInfoList = venues {
-          self.placeVenueMarkers(venueInfoList)
+          for venueInfo in venueInfoList {
+            let venueItem = venueInfo["venue"] as! JSONParameters
+            
+            let venueName = venueItem["name"]! as! String
+            let venueLocation = venueItem["location"] as! JSONParameters
+            let venueLatitude = venueLocation["lat"] as! CLLocationDegrees
+            let venueLongitude = venueLocation["lng"] as! CLLocationDegrees
+            
+            self.placeVenueMarker(venueLatitude, longitude: venueLongitude, name: venueName)
+          }
       }
     })
-  }
-  
-  // TODO: Where should this func be?
-  func placeVenueMarkers(venueInfoList: [[String: AnyObject]]) {
-    for venueInfo in venueInfoList {
-      let venueItem = venueInfo["venue"] as! JSONParameters
-      
-      let venueName = venueItem["name"]! as! String
-      let venueLocation = venueItem["location"] as! JSONParameters
-      let venueLatitude = venueLocation["lat"] as! CLLocationDegrees
-      let venueLongitude = venueLocation["lng"] as! CLLocationDegrees
-      
-      self.placeVenueMarker(venueLatitude, longitude: venueLongitude, name: venueName)
-    }
   }
 }
 
@@ -189,10 +184,17 @@ extension LocationViewController: UITextFieldDelegate {
       query: textField.text, completion: {
         searchResults -> Void in
         println(searchResults)
-//        self.mapView.clear()
-//        if let results = searchResults {
-//          self.placeVenueMarkers(results)
-//        }
+        self.mapView.clear()
+        if let results = searchResults {
+          for result in results {
+            let itemName = result["name"]! as! String
+            let itemLocation = result["location"] as! JSONParameters
+            let itemLatitude = itemLocation["lat"] as! CLLocationDegrees
+            let itemLongitude = itemLocation["lng"] as! CLLocationDegrees
+            
+            self.placeVenueMarker(itemLatitude, longitude: itemLongitude, name: itemName)
+          }
+        }
     })
     return true
   }
