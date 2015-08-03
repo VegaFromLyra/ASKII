@@ -13,7 +13,12 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var numOfAnswersLabel: UILabel!
-    @IBOutlet weak var voteNumLabel: UILabel!
+    
+    @IBAction func yesPressed(sender: UIButton) {
+    }
+    @IBAction func noPressed(sender: UIButton) {
+    }
+    //@IBOutlet weak var voteNumLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -29,7 +34,7 @@ class TableViewCell: UITableViewCell {
        titleLabel.text = "This is sample question"
         timeLabel.text = "1 week ago"
         numOfAnswersLabel.text = "1 answer"
-        voteNumLabel.text = "6"
+        //voteNumLabel.text = "6"
        
     }
 }
