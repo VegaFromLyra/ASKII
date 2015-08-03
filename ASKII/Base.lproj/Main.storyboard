@@ -89,7 +89,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.38823529411764707" green="0.91764705882352937" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.098039215686274508" green="0.85882352941176465" blue="0.72941176470588232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="Gm2-25-WOz" secondAttribute="centerX" id="MLA-8d-O4R"/>
                                     <constraint firstAttribute="centerY" secondItem="Gm2-25-WOz" secondAttribute="centerY" constant="-0.5" id="dZY-IL-5nU"/>
@@ -132,7 +132,6 @@
                                         <rect key="frame" x="562" y="20" width="23" height="23"/>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.38823529410000002" green="0.91764705879999997" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="6Bc-IL-692" firstAttribute="top" secondItem="2bh-uP-t2W" secondAttribute="top" constant="20" id="3d8-bt-5la"/>
                                     <constraint firstItem="z38-tv-JmD" firstAttribute="leading" secondItem="6Bc-IL-692" secondAttribute="trailing" constant="15" id="FdJ-n3-bQX"/>

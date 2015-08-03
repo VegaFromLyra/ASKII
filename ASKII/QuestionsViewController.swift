@@ -10,10 +10,25 @@ import UIKit
 import MapKit
 import CoreLocation
 
+extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int) {
+        assert(red >= 0 && red <= 255, "Invalid red component")
+        assert(green >= 0 && green <= 255, "Invalid green component")
+        assert(blue >= 0 && blue <= 255, "Invalid blue component")
+        
+        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+    }
+    
+    convenience init(netHex:Int) {
+        self.init(red:(netHex >> 16) & 0xff, green:(netHex >> 8) & 0xff, blue:netHex & 0xff)
+    }
+}
+
 class QuestionsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var headerView: UIView!
+    let gradientLayer = CAGradientLayer()
     
     @IBAction func onAskAnywherePressed(sender: AnyObject) {
         var storyboard = UIStoryboard(name: "NewQuestion", bundle: nil)
@@ -59,11 +74,22 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
         
         //headerLayer.borderWidth = 10.0
         //headerLayer.borderColor = UIColor.redColor().CGColor
+        gradientLayer.frame = mapLayer.bounds
+        // 3
+        let color1 = UIColor(netHex:0x19dbba).CGColor as CGColorRef
+        let color2 = UIColor(red: 0x19, green: 0xdb, blue: 0xba, alpha: 0.0).CGColor as CGColorRef
+        gradientLayer.colors = [color1, color2]
+        
+        // 4
+        gradientLayer.locations = [0.0, 0.7]
+        
+        // 5
+        mapView.layer.addSublayer(gradientLayer)
         
     }
     
 //    let gradientLayer = CAGradientLayer()
-//    gradientLayer.frame = mapView.bounds
+//    gradientLayer.frame = headerLayer.bounds
 //    gradientLayer.colors = [cgColorForRed(209.0, green: 0.0, blue: 0.0),
 //    cgColorForRed(255.0, green: 102.0, blue: 34.0),
 //    cgColorForRed(255.0, green: 218.0, blue: 33.0),
