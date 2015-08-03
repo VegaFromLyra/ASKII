@@ -60,6 +60,10 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
           locationManager.startUpdatingLocation()
         }
         setUpLayer()
+        
+        self.tableView.backgroundColor = UIColor.clearColor();
+        self.tableView.delegate = self;
+        self.tableView.dataSource = self;
 //        self.tableView.registerClass(TableViewCell.self, forCellReuseIdentifier: "QuestionCell")
         
         // Auto row height for each cell
@@ -67,47 +71,34 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
         self.tableView.rowHeight = UITableViewAutomaticDimension
     }
     
+    // gradient over map
     func setUpLayer() {
-        mapLayer.backgroundColor = UIColor.blueColor().CGColor
-        //mapLayer.borderWidth = 10.0
-        //mapLayer.borderColor = UIColor.redColor().CGColor
+        self.mapLayer.backgroundColor = UIColor.blueColor().CGColor
         
-        //headerLayer.borderWidth = 10.0
-        //headerLayer.borderColor = UIColor.redColor().CGColor
-        gradientLayer.frame = mapLayer.bounds
-        // 3
+        gradientLayer.frame = self.mapLayer.bounds
         let color1 = UIColor(netHex:0x19dbba).CGColor as CGColorRef
         let color2 = UIColor(red: 0x19, green: 0xdb, blue: 0xba, alpha: 0.0).CGColor as CGColorRef
         gradientLayer.colors = [color1, color2]
-        
-        // 4
         gradientLayer.locations = [0.0, 0.7]
-        
-        // 5
-        mapView.layer.addSublayer(gradientLayer)
+        self.mapView.layer.addSublayer(gradientLayer)
         
     }
-    
-//    let gradientLayer = CAGradientLayer()
-//    gradientLayer.frame = headerLayer.bounds
-//    gradientLayer.colors = [cgColorForRed(209.0, green: 0.0, blue: 0.0),
-//    cgColorForRed(255.0, green: 102.0, blue: 34.0),
-//    cgColorForRed(255.0, green: 218.0, blue: 33.0),
-//    cgColorForRed(51.0, green: 221.0, blue: 0.0),
-//    cgColorForRed(17.0, green: 51.0, blue: 204.0),
-//    cgColorForRed(34.0, green: 0.0, blue: 102.0),
-//    cgColorForRed(51.0, green: 0.0, blue: 68.0)]
-//    gradientLayer.startPoint = CGPoint(x: 0, y: 0)
-//    gradientLayer.endPoint = CGPoint(x: 0, y: 1)
-//    mapView.layer.addSublayer(gradientLayer)
-//    
-//    func cgColorForRed(red: CGFloat, green: CGFloat, blue: CGFloat) -> AnyObject {
-//        return UIColor(red: red/255.0, green: green/255.0, blue: blue/255.0, alpha: 1.0).CGColor as AnyObject
-//    }
 
     override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height-40, 0, 0, 0);
+    }
+    
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if (scrollView.contentOffset.y < self.mapView.frame.size.height * -1 ) {
+            scrollView.setContentOffset(CGPointMake(scrollView.contentOffset.x, self.mapView.frame.size.height * -1), animated: true)
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
