@@ -28,10 +28,11 @@
 		4E89F6871B5B516D002EAE7D /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E89F6861B5B516D002EAE7D /* LocationViewController.swift */; };
 		4E89F68D1B5C005C002EAE7D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E89F68C1B5C005C002EAE7D /* Accounts.framework */; };
 		4E89F68F1B5C0081002EAE7D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E89F68E1B5C0081002EAE7D /* Social.framework */; };
-		4EACBAAA1B67EFCA005F6664 /* QuadratTouch.framework in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = 4EACBAA81B67EFA1005F6664 /* QuadratTouch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4EACBAAD1B67F118005F6664 /* Venues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EACBAAC1B67F118005F6664 /* Venues.swift */; };
 		4EF64CFB1B62B34100D979EB /* NewQuestionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF64CFA1B62B34100D979EB /* NewQuestionProtocol.swift */; };
 		4EF64CFD1B62F34D00D979EB /* Questions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF64CFC1B62F34D00D979EB /* Questions.swift */; };
+		CE2B63AC1B70718C00B08FC0 /* QuadratTouch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EACBAA81B67EFA1005F6664 /* QuadratTouch.framework */; };
+		CE2B63AD1B70718C00B08FC0 /* QuadratTouch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4EACBAA81B67EFA1005F6664 /* QuadratTouch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CEADC43A1B59955A00A2EF3E /* NewQuestion.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEADC4391B59955A00A2EF3E /* NewQuestion.storyboard */; };
 		CEADC43C1B59A69700A2EF3E /* NewQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEADC43B1B59A69700A2EF3E /* NewQuestionViewController.swift */; };
 		CEB2B63B1B5AF626001F83F4 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2B63A1B5AF626001F83F4 /* TableViewCell.swift */; };
@@ -61,18 +62,25 @@
 			remoteGlobalIDString = 476B70DA1A0EBBA500AFAC33;
 			remoteInfo = QuadratTouch;
 		};
+		CE2B63AE1B70718C00B08FC0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4EACBAA01B67EFA1005F6664 /* Quadrat.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 476B70D91A0EBBA500AFAC33;
+			remoteInfo = QuadratTouch;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		4EACBAA91B67EFB9005F6664 /* Copy Files (1 item) */ = {
+		CE2B63B01B70718C00B08FC0 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4EACBAAA1B67EFCA005F6664 /* QuadratTouch.framework in Copy Files (1 item) */,
+				CE2B63AD1B70718C00B08FC0 /* QuadratTouch.framework in Embed Frameworks */,
 			);
-			name = "Copy Files (1 item)";
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -148,6 +156,7 @@
 				4E1B0A961B4B14AB00DD5576 /* AudioToolbox.framework in Frameworks */,
 				4E1B0A941B4B149D00DD5576 /* libstdc++.6.dylib in Frameworks */,
 				4E1B0A921B4B147700DD5576 /* SystemConfiguration.framework in Frameworks */,
+				CE2B63AC1B70718C00B08FC0 /* QuadratTouch.framework in Frameworks */,
 				4E1B0A8C1B4B10E200DD5576 /* Bolts.framework in Frameworks */,
 				4E1B0A8E1B4B10E200DD5576 /* ParseCrashReporting.framework in Frameworks */,
 				4E1B0A901B4B10E200DD5576 /* ParseUI.framework in Frameworks */,
@@ -367,11 +376,12 @@
 				4E3CE50F1B44826800743BCD /* Resources */,
 				287F52854DC268AD554FF2B4 /* Copy Pods Resources */,
 				733FF1BC7BA941EE79505435 /* Embed Pods Frameworks */,
-				4EACBAA91B67EFB9005F6664 /* Copy Files (1 item) */,
+				CE2B63B01B70718C00B08FC0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				CE2B63AF1B70718C00B08FC0 /* PBXTargetDependency */,
 			);
 			name = ASKII;
 			productName = ASKII;
@@ -406,7 +416,7 @@
 				TargetAttributes = {
 					4E3CE5101B44826800743BCD = {
 						CreatedOnToolsVersion = 6.3.2;
-						DevelopmentTeam = VRYW4TD62Q;
+						DevelopmentTeam = RJ2UMUAV3A;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
 								enabled = 1;
@@ -565,6 +575,11 @@
 			isa = PBXTargetDependency;
 			target = 4E3CE5101B44826800743BCD /* ASKII */;
 			targetProxy = 4E3CE5271B44826800743BCD /* PBXContainerItemProxy */;
+		};
+		CE2B63AF1B70718C00B08FC0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = QuadratTouch;
+			targetProxy = CE2B63AE1B70718C00B08FC0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
