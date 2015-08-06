@@ -15,8 +15,7 @@ typealias JSONParameters = [String: AnyObject]
 class LocationViewController: UIViewController {
   
     @IBOutlet weak var mapView: GMSMapView!
-  
-    @IBOutlet weak var searchTextField: UITextField!
+    @IBOutlet weak var searchButton: UIButton!
   
     @IBAction func askQuestion(sender: UIButton) {
       if selectedMarker != nil {
@@ -30,6 +29,9 @@ class LocationViewController: UIViewController {
         println("TODO: Show error view that a location must be selected ")
       }
 
+    }
+  
+    @IBAction func showSearchView(sender: AnyObject) {
     }
   
     // TODO: Should I instantiate here or in init?
@@ -54,16 +56,15 @@ class LocationViewController: UIViewController {
             locationManager.startUpdatingLocation()
             mapView.delegate = self
           
-            // So that the UITextField is visible and can 
+            // So that the current location is visible and can
             // be interacted with
-            mapView.bringSubviewToFront(searchTextField)
-            styleSearchField()
+            mapView.bringSubviewToFront(searchButton)
+          
             if let recognizers = mapView.gestureRecognizers {
               for recognizer in recognizers {
                 mapView.removeGestureRecognizer(recognizer as! UIGestureRecognizer)
               }
             }
-            searchTextField.delegate = self
         }
     }
   
@@ -83,20 +84,6 @@ class LocationViewController: UIViewController {
       marker.appearAnimation = kGMSMarkerAnimationPop
       marker.map = mapView
       marker.icon = UIImage(named: "Venue_Icon")
-    }
-
-    func styleSearchField() {
-      let border = CALayer()
-      let width = CGFloat(2.0)
-      border.borderColor = UIColor.darkGrayColor().CGColor
-      border.frame = CGRect(x: 0,
-        y: searchTextField.frame.size.height - width,
-        width:  searchTextField.frame.size.width,
-        height: searchTextField.frame.size.height)
-      
-      border.borderWidth = width
-      searchTextField.layer.addSublayer(border)
-      searchTextField.layer.masksToBounds = true
     }
 
     /*
@@ -170,32 +157,5 @@ extension LocationViewController: GMSMapViewDelegate {
           }
       }
     })
-  }
-}
-
-// MARK: UITextFieldDelegate
-
-extension LocationViewController: UITextFieldDelegate {
-  
-  // TODO - Should we use 'UserLocation' here or 'SelectedLocation'?
-  func textFieldShouldReturn(textField: UITextField) -> Bool {
-    print(textField.text)
-    venueService.search(userLocation!,
-      query: textField.text, completion: {
-        searchResults -> Void in
-        println(searchResults)
-        self.mapView.clear()
-        if let results = searchResults {
-          for result in results {
-            let itemName = result["name"]! as! String
-            let itemLocation = result["location"] as! JSONParameters
-            let itemLatitude = itemLocation["lat"] as! CLLocationDegrees
-            let itemLongitude = itemLocation["lng"] as! CLLocationDegrees
-            
-            self.placeVenueMarker(itemLatitude, longitude: itemLongitude, name: itemName)
-          }
-        }
-    })
-    return true
   }
 }

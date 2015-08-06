@@ -24,6 +24,7 @@
 		4E3CE51E1B44826800743BCD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E3CE51D1B44826800743BCD /* Images.xcassets */; };
 		4E3CE5211B44826800743BCD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3CE51F1B44826800743BCD /* LaunchScreen.xib */; };
 		4E3CE52D1B44826800743BCD /* ASKIITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3CE52C1B44826800743BCD /* ASKIITests.swift */; };
+		4E4F053D1B73B9A6000F6FB4 /* SearchLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4F053C1B73B9A6000F6FB4 /* SearchLocationViewController.swift */; };
 		4E868C661B6883F70077AB67 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E868C651B6883F70077AB67 /* Location.swift */; };
 		4E89F6871B5B516D002EAE7D /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E89F6861B5B516D002EAE7D /* LocationViewController.swift */; };
 		4E89F68D1B5C005C002EAE7D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E89F68C1B5C005C002EAE7D /* Accounts.framework */; };
@@ -99,6 +100,7 @@
 		4E3CE5261B44826800743BCD /* ASKIITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ASKIITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E3CE52B1B44826800743BCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E3CE52C1B44826800743BCD /* ASKIITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASKIITests.swift; sourceTree = "<group>"; };
+		4E4F053C1B73B9A6000F6FB4 /* SearchLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchLocationViewController.swift; sourceTree = "<group>"; };
 		4E868C651B6883F70077AB67 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Location.swift; path = ASKII/Location.swift; sourceTree = "<group>"; };
 		4E89F6861B5B516D002EAE7D /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		4E89F68C1B5C005C002EAE7D /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -214,6 +216,7 @@
 				CEB2B63D1B5B129B001F83F4 /* SingleQuestionViewController.swift */,
 				CEADC43B1B59A69700A2EF3E /* NewQuestionViewController.swift */,
 				4E89F6861B5B516D002EAE7D /* LocationViewController.swift */,
+				4E4F053C1B73B9A6000F6FB4 /* SearchLocationViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -547,6 +550,7 @@
 				4E1B0A9E1B4B19CE00DD5576 /* QuestionsViewController.swift in Sources */,
 				4E868C661B6883F70077AB67 /* Location.swift in Sources */,
 				CEB2B63B1B5AF626001F83F4 /* TableViewCell.swift in Sources */,
+				4E4F053D1B73B9A6000F6FB4 /* SearchLocationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
