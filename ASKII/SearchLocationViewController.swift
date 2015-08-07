@@ -7,13 +7,23 @@
 //
 
 import UIKit
+import CoreLocation
 
 class SearchLocationViewController: UIViewController {
-
+  
+    let venueService = VenueService()
+    var delegate: LocationProtocol?
+    @IBOutlet weak var searchTextField: UITextField!
+    @IBOutlet weak var searchResultsTableView: UITableView!
+  
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+      
+        // TODO: Do I need this?
+        searchResultsTableView.delegate = self
+        searchResultsTableView.dataSource = self
+        searchResultsTableView.scrollEnabled = true
+        searchResultsTableView.hidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,29 +44,55 @@ class SearchLocationViewController: UIViewController {
 
 }
 
+// MARK: UITableViewDelegate
+
+extension SearchLocationViewController: UITableViewDelegate {
+  
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+
+    }
+}
+// MARK: UITableViewDataSource
+
+extension SearchLocationViewController: UITableViewDataSource {
+  
+  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    let cell = searchResultsTableView.dequeueReusableCellWithIdentifier("SearchResult") as! UITableViewCell
+    
+    // cell.textLabel!.text = venues[indexPath.row].name
+    // detailTextLabel!.text = venues[indexPath.row].Location
+    
+    
+    return cell
+  }
+  
+  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return 0;
+  }
+  
+}
+
 // MARK: UITextFieldDelegate
 
 extension SearchLocationViewController: UITextFieldDelegate {
   
-  // TODO - Should we use 'UserLocation' here or 'SelectedLocation'?
-//  func textFieldShouldReturn(textField: UITextField) -> Bool {
-//    print(textField.text)
-//    venueService.search(userLocation!,
-//      query: textField.text, completion: {
-//        searchResults -> Void in
-//        println(searchResults)
-//        self.mapView.clear()
-//        if let results = searchResults {
-//          for result in results {
-//            let itemName = result["name"]! as! String
-//            let itemLocation = result["location"] as! JSONParameters
-//            let itemLatitude = itemLocation["lat"] as! CLLocationDegrees
-//            let itemLongitude = itemLocation["lng"] as! CLLocationDegrees
-//            
-//            self.placeVenueMarker(itemLatitude, longitude: itemLongitude, name: itemName)
-//          }
-//        }
-//    })
-//    return true
-//  }
+  func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    return true
+  }
+  
+  func textFieldShouldReturn(textField: UITextField) -> Bool {
+    
+    if let location = delegate?.currentLocation {
+
+      venueService.search(location,
+        query: searchTextField.text, completion: {
+          searchResults -> Void in
+          println(searchResults)
+
+      })
+ 
+    }
+    
+    return true
+  }
 }

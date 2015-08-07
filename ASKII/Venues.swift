@@ -17,6 +17,7 @@ class VenueService {
   
   var session: Session!
   var venueItems : [[String: AnyObject]]?
+  var searchResults: [(name: String, location: String)] = []
   
   init() {
     session = Session.sharedSession()
@@ -45,14 +46,18 @@ class VenueService {
     task.start()
   }
   
-  func search(location: CLLocation, query: String, completion: ([[String: AnyObject]]?) -> ()) {
+  func search(location: CLLocation, query: String, completion: ([(name: String, location: String)]) -> ()) {
     var parameters = [Parameter.query:query]
     parameters += location.parameters()
     let searchTask = session.venues.search(parameters) {
       (result) -> Void in
       if let response = result.response {
         var results = response["venues"] as? [JSONParameters]
-        completion(results)
+   
+        
+        // TODO: Fill up the array
+        
+        completion(self.searchResults)
       }
     }
     searchTask.start()

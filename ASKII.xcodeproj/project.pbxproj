@@ -25,6 +25,7 @@
 		4E3CE5211B44826800743BCD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3CE51F1B44826800743BCD /* LaunchScreen.xib */; };
 		4E3CE52D1B44826800743BCD /* ASKIITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3CE52C1B44826800743BCD /* ASKIITests.swift */; };
 		4E4F053D1B73B9A6000F6FB4 /* SearchLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4F053C1B73B9A6000F6FB4 /* SearchLocationViewController.swift */; };
+		4E4F05411B7407CC000F6FB4 /* LocationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4F05401B7407CC000F6FB4 /* LocationProtocol.swift */; };
 		4E868C661B6883F70077AB67 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E868C651B6883F70077AB67 /* Location.swift */; };
 		4E89F6871B5B516D002EAE7D /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E89F6861B5B516D002EAE7D /* LocationViewController.swift */; };
 		4E89F68D1B5C005C002EAE7D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E89F68C1B5C005C002EAE7D /* Accounts.framework */; };
@@ -101,6 +102,7 @@
 		4E3CE52B1B44826800743BCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E3CE52C1B44826800743BCD /* ASKIITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASKIITests.swift; sourceTree = "<group>"; };
 		4E4F053C1B73B9A6000F6FB4 /* SearchLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchLocationViewController.swift; sourceTree = "<group>"; };
+		4E4F05401B7407CC000F6FB4 /* LocationProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationProtocol.swift; sourceTree = "<group>"; };
 		4E868C651B6883F70077AB67 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Location.swift; path = ASKII/Location.swift; sourceTree = "<group>"; };
 		4E89F6861B5B516D002EAE7D /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		4E89F68C1B5C005C002EAE7D /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -317,6 +319,7 @@
 			isa = PBXGroup;
 			children = (
 				4EF64CFA1B62B34100D979EB /* NewQuestionProtocol.swift */,
+				4E4F05401B7407CC000F6FB4 /* LocationProtocol.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -540,6 +543,7 @@
 			files = (
 				4EF64CFB1B62B34100D979EB /* NewQuestionProtocol.swift in Sources */,
 				4E3CE5191B44826800743BCD /* ViewController.swift in Sources */,
+				4E4F05411B7407CC000F6FB4 /* LocationProtocol.swift in Sources */,
 				CEB2B6401B5B1F08001F83F4 /* SingleTableViewCell.swift in Sources */,
 				4EF64CFD1B62F34D00D979EB /* Questions.swift in Sources */,
 				CEB2B63E1B5B129B001F83F4 /* SingleQuestionViewController.swift in Sources */,

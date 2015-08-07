@@ -12,7 +12,7 @@ import GoogleMaps
 
 typealias JSONParameters = [String: AnyObject]
 
-class LocationViewController: UIViewController {
+class LocationViewController: UIViewController, LocationProtocol {
   
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var searchButton: UIButton!
@@ -31,14 +31,11 @@ class LocationViewController: UIViewController {
 
     }
   
-    @IBAction func showSearchView(sender: AnyObject) {
-    }
-  
     // TODO: Should I instantiate here or in init?
     let venueService = VenueService()
     var locationModel: Location?
     var selectedMarker: GMSMarker?
-    var userLocation: CLLocation?
+    var currentLocation: CLLocation?
   
     var locationManager: CLLocationManager!
     var delegate: NewQuestion?
@@ -86,15 +83,17 @@ class LocationViewController: UIViewController {
       marker.icon = UIImage(named: "Venue_Icon")
     }
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+      if segue.destinationViewController is SearchLocationViewController {
+          var searchLocationViewController = segue.destinationViewController as! SearchLocationViewController
+          searchLocationViewController.delegate = self
+      }
     }
-    */
 
 }
 
@@ -102,10 +101,10 @@ class LocationViewController: UIViewController {
 extension LocationViewController: CLLocationManagerDelegate {
   func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
     
-    userLocation = locations.first as? CLLocation
-    
-    let camera = GMSCameraPosition.cameraWithLatitude(userLocation!.coordinate.latitude,
-      longitude: userLocation!.coordinate.longitude,
+    currentLocation = locations.first as? CLLocation
+  
+    let camera = GMSCameraPosition.cameraWithLatitude(currentLocation!.coordinate.latitude,
+      longitude: currentLocation!.coordinate.longitude,
       zoom: 17)
     mapView.camera = camera
     mapView.myLocationEnabled = true
