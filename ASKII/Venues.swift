@@ -48,7 +48,12 @@ class VenueService {
   
   func search(location: CLLocation, query: String,
     completion: ([(name: String, area: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees)]) -> ()) {
-    var parameters = [Parameter.query:query]
+      
+    if searchResults.count > 0 {
+      searchResults.removeAll(keepCapacity: false)
+    }
+      
+    var parameters = [Parameter.query:query, Parameter.intent:"browse", Parameter.radius:"800", Parameter.limit:"10"]
     parameters += location.parameters()
     let searchTask = session.venues.search(parameters) {
       (result) -> Void in
