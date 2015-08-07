@@ -15,6 +15,7 @@ class SearchLocationViewController: UIViewController {
     var delegate: LocationProtocol?
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var searchResultsTableView: UITableView!
+    var locations: [(name: String, area: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees)] = []
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,7 @@ class SearchLocationViewController: UIViewController {
         searchResultsTableView.dataSource = self
         searchResultsTableView.scrollEnabled = true
         searchResultsTableView.hidden = true
+        searchTextField.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,15 +61,14 @@ extension SearchLocationViewController: UITableViewDataSource {
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = searchResultsTableView.dequeueReusableCellWithIdentifier("SearchResult") as! UITableViewCell
     
-    // cell.textLabel!.text = venues[indexPath.row].name
-    // detailTextLabel!.text = venues[indexPath.row].Location
-    
+    cell.textLabel!.text = locations[indexPath.row].name
+    cell.detailTextLabel!.text = locations[indexPath.row].area
     
     return cell
   }
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 0;
+    return self.locations.count;
   }
   
 }
@@ -77,20 +78,28 @@ extension SearchLocationViewController: UITableViewDataSource {
 extension SearchLocationViewController: UITextFieldDelegate {
   
   func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-    return true
-  }
-  
-  func textFieldShouldReturn(textField: UITextField) -> Bool {
+    if locations.count > 0 {
+        locations.removeAll(keepCapacity: false)
+        searchResultsTableView.reloadData()
+    }
     
     if let location = delegate?.currentLocation {
-
-      venueService.search(location,
-        query: searchTextField.text, completion: {
+      
+      var txtAfterUpdate:NSString = self.searchTextField.text as NSString
+      txtAfterUpdate = txtAfterUpdate.stringByReplacingCharactersInRange(range, withString: string)
+      
+      var searchQuery = txtAfterUpdate as! String
+      
+      if !(searchQuery.isEmpty) {
+        
+        println(searchQuery)
+        venueService.search(location, query: searchQuery, completion: {
           searchResults -> Void in
-          println(searchResults)
-
-      })
- 
+          self.locations = searchResults
+          self.searchResultsTableView.hidden = false
+          self.searchResultsTableView.reloadData()
+        })
+      }
     }
     
     return true

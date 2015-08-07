@@ -17,7 +17,7 @@ class VenueService {
   
   var session: Session!
   var venueItems : [[String: AnyObject]]?
-  var searchResults: [(name: String, location: String)] = []
+  var searchResults: [(name: String, area: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees)] = []
   
   init() {
     session = Session.sharedSession()
@@ -46,7 +46,8 @@ class VenueService {
     task.start()
   }
   
-  func search(location: CLLocation, query: String, completion: ([(name: String, location: String)]) -> ()) {
+  func search(location: CLLocation, query: String,
+    completion: ([(name: String, area: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees)]) -> ()) {
     var parameters = [Parameter.query:query]
     parameters += location.parameters()
     let searchTask = session.venues.search(parameters) {
@@ -54,9 +55,27 @@ class VenueService {
       if let response = result.response {
         var results = response["venues"] as? [JSONParameters]
    
-        
-        // TODO: Fill up the array
-        
+        if let venues = results {
+          for venue in venues {
+            var location = venue["location"] as! JSONParameters
+            let name = venue["name"] as! String
+            let city = location["city"] as! String?
+            let state = location["state"] as! String?
+            let latitude = location["lat"] as! CLLocationDegrees
+            let longitude = location["lng"] as! CLLocationDegrees
+            let area = ""
+
+//            var area:String
+//            if city != nil && state != nil {
+//              area = city! + ", " + state!
+//            } else {
+//              area = ""
+//            }
+            
+            self.searchResults.append(name: name, area: area, latitude:latitude, longitude: longitude)
+          }
+        }
+      
         completion(self.searchResults)
       }
     }

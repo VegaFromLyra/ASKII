@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 import GoogleMaps
 
+// TODO: Define it a common place
 typealias JSONParameters = [String: AnyObject]
 
 class LocationViewController: UIViewController, LocationProtocol {
