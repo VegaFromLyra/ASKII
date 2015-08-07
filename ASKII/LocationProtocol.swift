@@ -12,4 +12,5 @@ import CoreLocation
 
 protocol LocationProtocol {
   var currentLocation: CLLocation? { get set }
+  var name: String? { get set }
 }

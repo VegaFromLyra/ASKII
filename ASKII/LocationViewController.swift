@@ -37,21 +37,23 @@ class LocationViewController: UIViewController, LocationProtocol {
     var locationModel: Location?
     var selectedMarker: GMSMarker?
     var currentLocation: CLLocation?
+    var name: String?
+    var camera: GMSCameraPosition?
   
     var locationManager: CLLocationManager!
     var delegate: NewQuestion?
+    var locationDelegate: LocationProtocol?
+    var inSearchMode: Bool = false
  
     override func viewDidLoad() {
         super.viewDidLoad()
       
-    
         // Initialize all the location stuff
         if (mapView != nil) {
             locationManager = CLLocationManager()
             locationManager.delegate = self
             locationManager.requestWhenInUseAuthorization()
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.startUpdatingLocation()
             mapView.delegate = self
           
             // So that the current location is visible and can
@@ -63,11 +65,31 @@ class LocationViewController: UIViewController, LocationProtocol {
                 mapView.removeGestureRecognizer(recognizer as! UIGestureRecognizer)
               }
             }
+        
         }
     }
   
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+      
+        if let loc = locationDelegate {
+          inSearchMode = true
+          currentLocation = loc.currentLocation
+          
+          camera = GMSCameraPosition.cameraWithLatitude(currentLocation!.coordinate.latitude,
+            longitude: currentLocation!.coordinate.longitude,
+            zoom: 17)
+          mapView.animateToCameraPosition(camera)
+          
+          if let currentLoc = currentLocation, name = loc.name {
+            placeVenueMarker(currentLoc.coordinate.latitude,
+              longitude: currentLoc.coordinate.longitude,
+              name: name)
+          }
+        } else {
+          locationManager.startUpdatingLocation()
+        }
+      
     }
 
     override func didReceiveMemoryWarning() {
@@ -95,7 +117,6 @@ class LocationViewController: UIViewController, LocationProtocol {
           searchLocationViewController.delegate = self
       }
     }
-
 }
 
 // MARK: CLLocationManagerDelegate
@@ -103,8 +124,9 @@ extension LocationViewController: CLLocationManagerDelegate {
   func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
     
     currentLocation = locations.first as? CLLocation
+    name = ""
   
-    let camera = GMSCameraPosition.cameraWithLatitude(currentLocation!.coordinate.latitude,
+    camera = GMSCameraPosition.cameraWithLatitude(currentLocation!.coordinate.latitude,
       longitude: currentLocation!.coordinate.longitude,
       zoom: 17)
     mapView.camera = camera
@@ -138,12 +160,14 @@ extension LocationViewController: GMSMapViewDelegate {
   }
 
   func mapView(mapView: GMSMapView!, idleAtCameraPosition position: GMSCameraPosition!) {
-    NSLog("You are at at %f,%f", position.target.latitude, position.target.longitude)
     
-    var selectedLocation = CLLocation(latitude: position.target.latitude, longitude: position.target.longitude)
-
-    venueService.loadVenues(selectedLocation, completion: {
-      venues -> Void in
+    if !inSearchMode {
+      NSLog("You are at at %f,%f", position.target.latitude, position.target.longitude)
+      
+      var selectedLocation = CLLocation(latitude: position.target.latitude, longitude: position.target.longitude)
+      
+      venueService.loadVenues(selectedLocation, completion: {
+        venues -> Void in
         if let venueInfoList = venues {
           for venueInfo in venueInfoList {
             let venueItem = venueInfo["venue"] as! JSONParameters
@@ -155,7 +179,8 @@ extension LocationViewController: GMSMapViewDelegate {
             
             self.placeVenueMarker(venueLatitude, longitude: venueLongitude, name: venueName)
           }
-      }
-    })
+        }
+      })
+    }
   }
 }
