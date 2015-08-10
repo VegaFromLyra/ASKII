@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 
 
-protocol LocationProtocol {
-  var currentLocation: CLLocation? { get set }
+protocol QuestionLocationProtocol {
+  var location: CLLocation? { get set }
   var name: String? { get set }
 }

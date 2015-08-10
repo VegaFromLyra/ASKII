@@ -32,7 +32,7 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBAction func onAskAnywherePressed(sender: AnyObject) {
         var storyboard = UIStoryboard(name: "NewQuestion", bundle: nil)
-        var controller = storyboard.instantiateViewControllerWithIdentifier("InitialController") as! UIViewController
+        var controller = storyboard.instantiateViewControllerWithIdentifier("LocationViewController") as! UIViewController
         
         self.presentViewController(controller, animated: true, completion: nil)
     }
