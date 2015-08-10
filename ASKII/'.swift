@@ -36,6 +36,11 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
         
         self.presentViewController(controller, animated: true, completion: nil)
     }
+    
+    @IBAction func unwindToViewController (sender: UIStoryboardSegue){
+        
+    }
+    
     @IBOutlet weak var mapView: MKMapView!
     
     var locationManager: CLLocationManager!
@@ -47,6 +52,8 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
     var headerLayer: CALayer {
         return headerView.layer
     }
+    
+    let transitionManager = TransitionManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +69,7 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
         setUpLayer()
         
         self.tableView.backgroundColor = UIColor.clearColor();
+        self.tableView.opaque = false;
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
 //        self.tableView.registerClass(TableViewCell.self, forCellReuseIdentifier: "QuestionCell")
@@ -76,10 +84,11 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
         self.mapLayer.backgroundColor = UIColor.blueColor().CGColor
         
         gradientLayer.frame = self.mapLayer.bounds
-        let color1 = UIColor(netHex:0x19dbba).CGColor as CGColorRef
+        //let color1 = UIColor(netHex:0xefefef).CGColor as CGColorRef
+        let color1 = UIColor(red: 0x19, green: 0xdb, blue: 0xba, alpha: 0.6).CGColor as CGColorRef
         let color2 = UIColor(red: 0x19, green: 0xdb, blue: 0xba, alpha: 0.0).CGColor as CGColorRef
         gradientLayer.colors = [color1, color2]
-        gradientLayer.locations = [0.0, 0.7]
+        gradientLayer.locations = [0.0, 1.0]
         self.mapView.layer.addSublayer(gradientLayer)
         
     }
@@ -89,7 +98,12 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidLayoutSubviews() {
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//        self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height-40, 0, 0, 0);
+//    }
+    
+    func layoutSubviews() {
         super.viewDidLayoutSubviews()
         self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height-40, 0, 0, 0);
     }
@@ -101,13 +115,41 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // #warning Potentially incomplete method implementation.
+        // Return the number of sections.
         return 6
+    }
+    
+    func tableView(tableView: UITableView,
+        heightForHeaderInSection section: Int) -> CGFloat {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView,
+        viewForHeaderInSection section: Int) -> UIView? {
+            //UIView *headerView = [[UIView alloc] init];
+            let headerView = UIView()
+            headerView.backgroundColor = UIColor(red: 0xff, green: 0xff, blue: 0xff, alpha: 0.0)
+
+            return headerView;
+    }
+    
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell: TableViewCell = self.tableView.dequeueReusableCellWithIdentifier("QuestionCell", forIndexPath: indexPath) as! TableViewCell
+        
+        //cell.textLabel!.backgroundColor = UIColor.clearColor()
+        //cell.detailTextLabel!.backgroundColor = UIColor.clearColor()
+        
+        cell.backgroundColor =  UIColor(red: 0xff, green: 0xff, blue: 0xff, alpha: 0.9)
+        
+        cell.selectionStyle = .None
         
         cell.config()
         
@@ -115,6 +157,17 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        // this gets a reference to the screen that we're about to transition to
+        let toViewController = segue.destinationViewController as! SingleQuestionViewController
+        
+        // instead of using the default transition animation, we'll ask
+        // the segue to use our custom TransitionManager object to manage the transition animation
+        toViewController.transitioningDelegate = self.transitionManager
         
     }
 

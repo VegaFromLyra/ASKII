@@ -12,7 +12,6 @@ class SingleTableViewCell: UITableViewCell {
 
     @IBOutlet weak var AnswerLabel: UILabel!
     @IBOutlet weak var AnswerTimeLabel: UILabel!
-    @IBOutlet weak var AnswerVoteNumLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -27,7 +26,6 @@ class SingleTableViewCell: UITableViewCell {
     func answerConfig() {
         AnswerLabel.text = "This is a sample answer."
         AnswerTimeLabel.text = "5 mins ago"
-        AnswerVoteNumLabel.text = "6"
     }
 
 }
