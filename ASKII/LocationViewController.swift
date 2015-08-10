@@ -10,12 +10,13 @@ import UIKit
 import CoreLocation
 import GoogleMaps
 
+// TODO: Define it a common place
 typealias JSONParameters = [String: AnyObject]
 
-class LocationViewController: UIViewController {
+class LocationViewController: UIViewController, LocationProtocol {
   
     @IBOutlet weak var mapView: GMSMapView!
-  
+    @IBOutlet weak var searchButton: UIButton!
   
     @IBAction func askQuestion(sender: UIButton) {
       if selectedMarker != nil {
@@ -35,27 +36,60 @@ class LocationViewController: UIViewController {
     let venueService = VenueService()
     var locationModel: Location?
     var selectedMarker: GMSMarker?
-
+    var currentLocation: CLLocation?
+    var name: String?
+    var camera: GMSCameraPosition?
   
     var locationManager: CLLocationManager!
     var delegate: NewQuestion?
+    var locationDelegate: LocationProtocol?
+    var inSearchMode: Bool = false
  
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+      
         // Initialize all the location stuff
         if (mapView != nil) {
             locationManager = CLLocationManager()
             locationManager.delegate = self
             locationManager.requestWhenInUseAuthorization()
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.startUpdatingLocation()
             mapView.delegate = self
+          
+            // So that the current location is visible and can
+            // be interacted with
+            mapView.bringSubviewToFront(searchButton)
+          
+            if let recognizers = mapView.gestureRecognizers {
+              for recognizer in recognizers {
+                mapView.removeGestureRecognizer(recognizer as! UIGestureRecognizer)
+              }
+            }
+        
         }
     }
   
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+      
+        if let loc = locationDelegate {
+          inSearchMode = true
+          currentLocation = loc.currentLocation
+          
+          camera = GMSCameraPosition.cameraWithLatitude(currentLocation!.coordinate.latitude,
+            longitude: currentLocation!.coordinate.longitude,
+            zoom: 17)
+          mapView.animateToCameraPosition(camera)
+          
+          if let currentLoc = currentLocation, name = loc.name {
+            placeVenueMarker(currentLoc.coordinate.latitude,
+              longitude: currentLoc.coordinate.longitude,
+              name: name)
+          }
+        } else {
+          locationManager.startUpdatingLocation()
+        }
+      
     }
 
     override func didReceiveMemoryWarning() {
@@ -72,26 +106,29 @@ class LocationViewController: UIViewController {
       marker.icon = UIImage(named: "Venue_Icon")
     }
 
-
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+      if segue.destinationViewController is SearchLocationViewController {
+          var searchLocationViewController = segue.destinationViewController as! SearchLocationViewController
+          searchLocationViewController.delegate = self
+      }
     }
-    */
-
 }
 
 // MARK: CLLocationManagerDelegate
 extension LocationViewController: CLLocationManagerDelegate {
   func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
     
-    let location = locations.first as! CLLocation
-    
-    let camera = GMSCameraPosition.cameraWithLatitude(location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: 17)
+    currentLocation = locations.first as? CLLocation
+    name = ""
+  
+    camera = GMSCameraPosition.cameraWithLatitude(currentLocation!.coordinate.latitude,
+      longitude: currentLocation!.coordinate.longitude,
+      zoom: 17)
     mapView.camera = camera
     mapView.myLocationEnabled = true
     mapView.settings.myLocationButton = true
@@ -108,7 +145,7 @@ extension LocationViewController: GMSMapViewDelegate {
     if selectedMarker != nil {
       selectedMarker!.map = nil
     }
-    
+  
     var marker = GMSMarker(position: position)
     marker.title = "Ask about here!"
     marker.appearAnimation = kGMSMarkerAnimationPop
@@ -123,24 +160,27 @@ extension LocationViewController: GMSMapViewDelegate {
   }
 
   func mapView(mapView: GMSMapView!, idleAtCameraPosition position: GMSCameraPosition!) {
-    NSLog("You are at at %f,%f", position.target.latitude, position.target.longitude)
     
-    var selectedLocation = CLLocation(latitude: position.target.latitude, longitude: position.target.longitude)
-
-    venueService.loadVenues(selectedLocation, completion: {
-      venues -> Void in
+    if !inSearchMode {
+      NSLog("You are at at %f,%f", position.target.latitude, position.target.longitude)
+      
+      var selectedLocation = CLLocation(latitude: position.target.latitude, longitude: position.target.longitude)
+      
+      venueService.loadVenues(selectedLocation, completion: {
+        venues -> Void in
         if let venueInfoList = venues {
           for venueInfo in venueInfoList {
             let venueItem = venueInfo["venue"] as! JSONParameters
-
+            
             let venueName = venueItem["name"]! as! String
             let venueLocation = venueItem["location"] as! JSONParameters
             let venueLatitude = venueLocation["lat"] as! CLLocationDegrees
             let venueLongitude = venueLocation["lng"] as! CLLocationDegrees
-
+            
             self.placeVenueMarker(venueLatitude, longitude: venueLongitude, name: venueName)
+          }
         }
-      }
-    })
+      })
+    }
   }
 }

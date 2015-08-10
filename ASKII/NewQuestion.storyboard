@@ -61,7 +61,7 @@
         <!--Location View Controller-->
         <scene sceneID="HMt-WF-xrl">
             <objects>
-                <viewController id="af2-JZ-HIZ" customClass="LocationViewController" customModule="ASKII" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LocationViewController" id="af2-JZ-HIZ" customClass="LocationViewController" customModule="ASKII" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tKp-1z-SiW"/>
                         <viewControllerLayoutGuide type="bottom" id="ZkK-h9-yzZ"/>
@@ -70,15 +70,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drag the map to where you want to ask the question" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rkf-d6-ndC">
-                                <rect key="frame" x="40" y="100" width="520" height="57"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="57" id="aZy-F3-ee6"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J98-HK-Kra">
                                 <rect key="frame" x="80" y="499" width="200" height="33"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -97,31 +88,43 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mc0-Wv-ngF" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="157" width="600" height="300"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="457"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QgA-Un-SKs">
+                                        <rect key="frame" x="30" y="30" width="540" height="39"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="39" id="AlF-GD-Pnu"/>
+                                        </constraints>
+                                        <state key="normal" title="   Search for a location">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="s1W-b4-rjm" kind="show" id="tIR-HD-6PF"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="QgA-Un-SKs" secondAttribute="trailing" constant="30" id="Jnh-CN-1Ym"/>
+                                    <constraint firstItem="QgA-Un-SKs" firstAttribute="top" secondItem="mc0-Wv-ngF" secondAttribute="top" constant="30" id="SL1-cQ-rrZ"/>
+                                    <constraint firstItem="QgA-Un-SKs" firstAttribute="leading" secondItem="mc0-Wv-ngF" secondAttribute="leading" constant="30" id="jjv-xX-kGR"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.38823529411764707" green="0.91764705882352937" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="mc0-Wv-ngF" firstAttribute="top" secondItem="Rkf-d6-ndC" secondAttribute="bottom" id="GwA-9M-nEZ"/>
                             <constraint firstItem="mc0-Wv-ngF" firstAttribute="leading" secondItem="Vf1-bk-zuH" secondAttribute="leading" id="Ij3-qh-4XK"/>
                             <constraint firstItem="J98-HK-Kra" firstAttribute="leading" secondItem="Vf1-bk-zuH" secondAttribute="leading" constant="80" id="JCM-2V-UUr"/>
-                            <constraint firstItem="Rkf-d6-ndC" firstAttribute="leading" secondItem="Vf1-bk-zuH" secondAttribute="leading" constant="40" id="NPx-VG-21K"/>
-                            <constraint firstAttribute="trailing" secondItem="Rkf-d6-ndC" secondAttribute="trailing" constant="107" id="PS8-8t-PNC"/>
-                            <constraint firstItem="Rkf-d6-ndC" firstAttribute="top" secondItem="Vf1-bk-zuH" secondAttribute="top" constant="100" id="QCM-6Z-Yab"/>
                             <constraint firstItem="ZkK-h9-yzZ" firstAttribute="top" secondItem="J98-HK-Kra" secondAttribute="bottom" constant="68" id="U43-kR-fpS"/>
                             <constraint firstItem="J98-HK-Kra" firstAttribute="top" secondItem="mc0-Wv-ngF" secondAttribute="bottom" constant="42" id="dcI-n9-K1h"/>
                             <constraint firstAttribute="trailing" secondItem="mc0-Wv-ngF" secondAttribute="trailing" id="fnn-Jb-Kof"/>
-                            <constraint firstItem="mc0-Wv-ngF" firstAttribute="centerX" secondItem="Rkf-d6-ndC" secondAttribute="centerX" id="jrE-5o-suy"/>
+                            <constraint firstItem="mc0-Wv-ngF" firstAttribute="top" secondItem="Vf1-bk-zuH" secondAttribute="top" id="t2Y-sX-Nzv"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="PS8-8t-PNC"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="mc0-Wv-ngF" id="ESC-xg-Fa1"/>
+                        <outlet property="searchButton" destination="QgA-Un-SKs" id="g4A-RH-Sum"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qrW-JP-sa6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -179,6 +182,74 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NX4-yh-BrE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1539" y="164"/>
+        </scene>
+        <!--Search Location View Controller-->
+        <scene sceneID="ABb-th-d4e">
+            <objects>
+                <viewController id="s1W-b4-rjm" customClass="SearchLocationViewController" customModule="ASKII" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vfK-5x-uIX"/>
+                        <viewControllerLayoutGuide type="bottom" id="hAt-Qn-Is5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="042-BP-3Lz">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TYPE LOCATION" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gIG-eE-iWI">
+                                <rect key="frame" x="95" y="46" width="437" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="tdK-GO-aN8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="57" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="dsS-Vy-pbz">
+                                <rect key="frame" x="0.0" y="100" width="600" height="500"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationLevel="1" indentationWidth="10" reuseIdentifier="SearchResult" textLabel="gbN-EV-tCo" detailTextLabel="6jN-Nn-Ja0" rowHeight="57" style="IBUITableViewCellStyleSubtitle" id="Uxm-zG-d8C">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Uxm-zG-d8C" id="sMB-HS-K2P">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gbN-EV-tCo">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6jN-Nn-Ja0">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="dsS-Vy-pbz" secondAttribute="bottom" id="0V6-ke-OmU"/>
+                            <constraint firstItem="gIG-eE-iWI" firstAttribute="top" secondItem="042-BP-3Lz" secondAttribute="top" constant="46" id="4Ba-ai-8su"/>
+                            <constraint firstItem="gIG-eE-iWI" firstAttribute="leading" secondItem="042-BP-3Lz" secondAttribute="leading" constant="95" id="8wk-XZ-Fk5"/>
+                            <constraint firstItem="dsS-Vy-pbz" firstAttribute="top" secondItem="gIG-eE-iWI" secondAttribute="bottom" constant="24" id="JbW-Ld-u86"/>
+                            <constraint firstAttribute="trailing" secondItem="gIG-eE-iWI" secondAttribute="trailing" constant="68" id="Qzg-cl-kX2"/>
+                            <constraint firstAttribute="trailing" secondItem="dsS-Vy-pbz" secondAttribute="trailing" id="euI-F0-AJ8"/>
+                            <constraint firstItem="dsS-Vy-pbz" firstAttribute="leading" secondItem="042-BP-3Lz" secondAttribute="leading" id="tmn-xW-D1i"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="searchResultsTableView" destination="dsS-Vy-pbz" id="m4I-LU-Uql"/>
+                        <outlet property="searchTextField" destination="gIG-eE-iWI" id="TOk-As-sqT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2VE-ae-d75" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2177" y="164"/>
         </scene>
     </scenes>
 </document>
