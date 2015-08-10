@@ -12,12 +12,12 @@ class SingleQuestionViewController: UIViewController, UITableViewDataSource, UIT
     
     @IBOutlet weak var AnswersTableView: UITableView!
     
-    @IBAction func onNewQuestionPressed(sender: AnyObject) {
-        var storyboard = UIStoryboard(name: "NewQuestion", bundle: nil)
-        var controller = storyboard.instantiateViewControllerWithIdentifier("InitialController") as! UIViewController
-        
-        self.presentViewController(controller, animated: true, completion: nil)
-    }
+//    @IBAction func onNewQuestionPressed(sender: AnyObject) {
+//        var storyboard = UIStoryboard(name: "NewQuestion", bundle: nil)
+//        var controller = storyboard.instantiateViewControllerWithIdentifier("InitialController") as! UIViewController
+//        
+//        self.presentViewController(controller, animated: true, completion: nil)
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

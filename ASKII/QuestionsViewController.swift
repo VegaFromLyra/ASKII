@@ -10,9 +10,25 @@ import UIKit
 import MapKit
 import CoreLocation
 
+extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int) {
+        assert(red >= 0 && red <= 255, "Invalid red component")
+        assert(green >= 0 && green <= 255, "Invalid green component")
+        assert(blue >= 0 && blue <= 255, "Invalid blue component")
+        
+        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+    }
+    
+    convenience init(netHex:Int) {
+        self.init(red:(netHex >> 16) & 0xff, green:(netHex >> 8) & 0xff, blue:netHex & 0xff)
+    }
+}
+
 class QuestionsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var headerView: UIView!
+    let gradientLayer = CAGradientLayer()
     
     @IBAction func onAskAnywherePressed(sender: AnyObject) {
         var storyboard = UIStoryboard(name: "NewQuestion", bundle: nil)
@@ -23,10 +39,18 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var mapView: MKMapView!
     
     var locationManager: CLLocationManager!
+    
+    var mapLayer: CALayer {
+        return mapView.layer
+    }
+    
+    var headerLayer: CALayer {
+        return headerView.layer
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         if (CLLocationManager.locationServicesEnabled())
         {
           locationManager = CLLocationManager()
@@ -35,17 +59,46 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
           locationManager.requestAlwaysAuthorization()
           locationManager.startUpdatingLocation()
         }
+        setUpLayer()
         
+        self.tableView.backgroundColor = UIColor.clearColor();
+        self.tableView.delegate = self;
+        self.tableView.dataSource = self;
 //        self.tableView.registerClass(TableViewCell.self, forCellReuseIdentifier: "QuestionCell")
         
         // Auto row height for each cell
         self.tableView.estimatedRowHeight = 300
         self.tableView.rowHeight = UITableViewAutomaticDimension
     }
+    
+    // gradient over map
+    func setUpLayer() {
+        self.mapLayer.backgroundColor = UIColor.blueColor().CGColor
+        
+        gradientLayer.frame = self.mapLayer.bounds
+        let color1 = UIColor(netHex:0x19dbba).CGColor as CGColorRef
+        let color2 = UIColor(red: 0x19, green: 0xdb, blue: 0xba, alpha: 0.0).CGColor as CGColorRef
+        gradientLayer.colors = [color1, color2]
+        gradientLayer.locations = [0.0, 0.7]
+        self.mapView.layer.addSublayer(gradientLayer)
+        
+    }
 
     override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height-40, 0, 0, 0);
+    }
+    
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if (scrollView.contentOffset.y < self.mapView.frame.size.height * -1 ) {
+            scrollView.setContentOffset(CGPointMake(scrollView.contentOffset.x, self.mapView.frame.size.height * -1), animated: true)
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
