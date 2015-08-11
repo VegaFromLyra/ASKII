@@ -14,6 +14,13 @@ class QnADetailTableViewCell: UITableViewCell {
   @IBOutlet weak var noVoteCountLabel: UILabel!
   @IBOutlet weak var wrapperLabel: UILabel!
   
+  @IBOutlet weak var questionLabel: UILabel!
+  
+  
+  @IBAction func askAgain(sender: AnyObject) {
+  }
+  
+  
   override func awakeFromNib() {
     super.awakeFromNib()
     // Initialization code

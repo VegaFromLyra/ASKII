@@ -33,8 +33,8 @@ class Location {
   func save(completion: (savedLocation: PFObject) -> ()) {
     
     var locationModel = PFObject(className:"Location")
-    locationModel["latitude"] = latitude
-    locationModel["longitude"] = longitude
+    locationModel["latitude"] = String(format: "%.3f", latitude)
+    locationModel["longitude"] = String(format: "%.3f", longitude)
     locationModel["name"] = name
     
     locationModel.saveInBackgroundWithBlock {
@@ -46,4 +46,5 @@ class Location {
       }
     }
   }
+
 }

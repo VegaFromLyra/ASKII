@@ -30,8 +30,8 @@ class NewQuestionViewController: UIViewController, NewQuestion {
         let locationModel = Location(latitude: location.coordinate.latitude,
           longitude: location.coordinate.longitude,
           name: name)
-        let questionModel = Questions(content: questionText.text, location: locationModel)
-        questionModel.save()
+        let questionModel = Question()
+        questionModel.save(questionText.text, questionLocation: locationModel)
       } else {
         println("ERROR! Location info is nil")
       }

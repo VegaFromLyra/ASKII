@@ -17,7 +17,7 @@ class LocationViewController: UIViewController, QuestionLocationProtocol {
   
   @IBOutlet weak var mapView: GMSMapView!
   @IBOutlet weak var searchButton: UIButton!
-  
+  @IBOutlet weak var qnaDetailsTableView: UITableView!
   
   // TODO: Should I instantiate here or in init?
   let venueService = VenueService()
@@ -30,10 +30,16 @@ class LocationViewController: UIViewController, QuestionLocationProtocol {
   var delegate: NewQuestion?
   var locationDelegate: QuestionLocationProtocol?
   var inSearchMode: Bool = false
+  let questionModel:Question = Question()
+  var allQuestions:[Question] = []
   
   override func viewDidLoad() {
     super.viewDidLoad()
-        
+    
+    qnaDetailsTableView.delegate = self
+    qnaDetailsTableView.dataSource = self
+    
+    
     // Initialize all the location stuff
     if (mapView != nil) {
       locationManager = CLLocationManager()
@@ -64,6 +70,10 @@ class LocationViewController: UIViewController, QuestionLocationProtocol {
         location = loc
         name = locName
         
+        fetchQuestionsForLocation(Location(latitude: location!.coordinate.latitude,
+            longitude: location!.coordinate.longitude,
+            name: name!))
+        
         camera = GMSCameraPosition.cameraWithLatitude(location!.coordinate.latitude,
           longitude: location!.coordinate.longitude,
           zoom: 17)
@@ -81,6 +91,16 @@ class LocationViewController: UIViewController, QuestionLocationProtocol {
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
+  }
+  
+  func fetchQuestionsForLocation(location: Location) {
+    questionModel.getAllQuestions(location, completion: {
+      allQuestions -> () in
+        self.allQuestions = allQuestions
+        if self.allQuestions.count > 0 {
+          self.qnaDetailsTableView.reloadData()
+        }
+    })
   }
   
   func placeVenueMarker(latitude: CLLocationDegrees, longitude: CLLocationDegrees, name: String) {
@@ -145,6 +165,11 @@ extension LocationViewController: GMSMapViewDelegate {
   func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {
     location = CLLocation(latitude: marker.position.latitude, longitude: marker.position.longitude)
     name = marker.title
+    
+    fetchQuestionsForLocation(Location(latitude: location!.coordinate.latitude,
+      longitude: location!.coordinate.longitude,
+      name: name!))
+    
     placeMarker(marker.position.latitude, longitude: marker.position.longitude)
     return false
   }
@@ -174,3 +199,37 @@ extension LocationViewController: GMSMapViewDelegate {
     }
   }
 }
+
+
+// MARK: UITableViewDelegate
+
+extension LocationViewController: UITableViewDelegate, QuestionLocationProtocol {
+  
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+
+  }
+}
+
+
+// MARK: UITableViewDataSource
+extension LocationViewController: UITableViewDataSource {
+  
+  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    let cell = qnaDetailsTableView.dequeueReusableCellWithIdentifier("qnaDetail") as! QnADetailTableViewCell
+    cell.questionLabel.text = allQuestions[indexPath.row].content
+    
+    let yesVoteCount = allQuestions[indexPath.row].yesVotes
+    cell.yesVoteCountLabel.text = String(stringInterpolationSegment: yesVoteCount)
+    
+    let noVoteCount = allQuestions[indexPath.row].noVotes
+    cell.noVoteCountLabel.text = String(stringInterpolationSegment: noVoteCount)
+    
+    return cell
+  }
+  
+  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+      return self.allQuestions.count
+  }
+  
+}
+

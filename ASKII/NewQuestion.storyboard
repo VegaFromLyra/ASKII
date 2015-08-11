@@ -102,7 +102,7 @@
                                     <constraint firstAttribute="height" constant="159" id="xUf-gm-Bhr"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="83" id="xid-0h-cTD" customClass="QnADetailTableViewCell" customModule="ASKII" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="qnaDetail" rowHeight="83" id="xid-0h-cTD" customClass="QnADetailTableViewCell" customModule="ASKII" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xid-0h-cTD" id="pUz-7l-gsG">
@@ -122,10 +122,12 @@
                                                     <state key="normal" title="Ask Again">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="askAgain:" destination="xid-0h-cTD" eventType="touchUpInside" id="afb-hR-lRS"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ilj-Eb-i9X" userLabel="Wrapper">
                                                     <rect key="frame" x="197" y="42" width="244" height="29"/>
-                                                    <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -193,6 +195,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="noVoteCountLabel" destination="ObD-gx-UGg" id="6U4-Rd-wga"/>
+                                            <outlet property="questionLabel" destination="Zz9-ld-Qdd" id="aCJ-ty-uqR"/>
                                             <outlet property="wrapperLabel" destination="Ilj-Eb-i9X" id="Fq8-2H-Cbh"/>
                                             <outlet property="yesVoteCountLabel" destination="GfR-oR-rYS" id="Dfp-uL-PeI"/>
                                         </connections>
@@ -242,6 +245,7 @@
                     </view>
                     <connections>
                         <outlet property="mapView" destination="mc0-Wv-ngF" id="ESC-xg-Fa1"/>
+                        <outlet property="qnaDetailsTableView" destination="l3y-un-uUv" id="tM0-q9-KuB"/>
                         <outlet property="searchButton" destination="QgA-Un-SKs" id="g4A-RH-Sum"/>
                     </connections>
                 </viewController>
