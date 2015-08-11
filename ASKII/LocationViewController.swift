@@ -15,97 +15,97 @@ typealias JSONParameters = [String: AnyObject]
 
 class LocationViewController: UIViewController, QuestionLocationProtocol {
   
-    @IBOutlet weak var mapView: GMSMapView!
-    @IBOutlet weak var searchButton: UIButton!
+  @IBOutlet weak var mapView: GMSMapView!
+  @IBOutlet weak var searchButton: UIButton!
   
   
-    // TODO: Should I instantiate here or in init?
-    let venueService = VenueService()
-    var selectedMarker: GMSMarker?
-    var location: CLLocation?
-    var name: String?
-    var camera: GMSCameraPosition?
+  // TODO: Should I instantiate here or in init?
+  let venueService = VenueService()
+  var selectedMarker: GMSMarker?
+  var location: CLLocation?
+  var name: String?
+  var camera: GMSCameraPosition?
   
-    var locationManager: CLLocationManager!
-    var delegate: NewQuestion?
-    var locationDelegate: QuestionLocationProtocol?
-    var inSearchMode: Bool = false
- 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-      
-        // Initialize all the location stuff
-        if (mapView != nil) {
-            locationManager = CLLocationManager()
-            locationManager.delegate = self
-            locationManager.requestWhenInUseAuthorization()
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            mapView.delegate = self
-          
-            // So that the current location is visible and can
-            // be interacted with
-            mapView.bringSubviewToFront(searchButton)
-          
-            if let recognizers = mapView.gestureRecognizers {
-              for recognizer in recognizers {
-                mapView.removeGestureRecognizer(recognizer as! UIGestureRecognizer)
-              }
-            }
+  var locationManager: CLLocationManager!
+  var delegate: NewQuestion?
+  var locationDelegate: QuestionLocationProtocol?
+  var inSearchMode: Bool = false
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
         
-        }
-    }
-  
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    // Initialize all the location stuff
+    if (mapView != nil) {
+      locationManager = CLLocationManager()
+      locationManager.delegate = self
+      locationManager.requestWhenInUseAuthorization()
+      locationManager.desiredAccuracy = kCLLocationAccuracyBest
+      mapView.delegate = self
       
-        if let locDelegate = locationDelegate {
-          if let loc = locDelegate.location, locName = locDelegate.name {
-            inSearchMode = true
-            location = loc
-            name = locName
-            
-            camera = GMSCameraPosition.cameraWithLatitude(location!.coordinate.latitude,
-              longitude: location!.coordinate.longitude,
-              zoom: 17)
-            mapView.animateToCameraPosition(camera)
-            
-            placeVenueMarker(location!.coordinate.latitude,
-              longitude: location!.coordinate.longitude,
-              name: name!)
-          }
-        } else {
-          locationManager.startUpdatingLocation()
+      // So that the current location is visible and can
+      // be interacted with
+      mapView.bringSubviewToFront(searchButton)
+      
+      if let recognizers = mapView.gestureRecognizers {
+        for recognizer in recognizers {
+          mapView.removeGestureRecognizer(recognizer as! UIGestureRecognizer)
         }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-  
-    func placeVenueMarker(latitude: CLLocationDegrees, longitude: CLLocationDegrees, name: String) {
-      var position = CLLocationCoordinate2DMake(latitude, longitude)
-      var marker = GMSMarker(position: position)
-      marker.title = name
-      marker.appearAnimation = kGMSMarkerAnimationPop
-      marker.map = mapView
-      marker.icon = UIImage(named: "Venue_Icon")
-    }
-
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-      if segue.destinationViewController is SearchLocationViewController {
-          var searchLocationViewController = segue.destinationViewController as! SearchLocationViewController
-          searchLocationViewController.delegate = self
-      } else if segue.destinationViewController is NewQuestionViewController {
-          var newQuestionViewController = segue.destinationViewController as! NewQuestionViewController
-          newQuestionViewController.delegate = self
       }
+      
     }
+  }
+  
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+    
+    if let locDelegate = locationDelegate {
+      if let loc = locDelegate.location, locName = locDelegate.name {
+        inSearchMode = true
+        location = loc
+        name = locName
+        
+        camera = GMSCameraPosition.cameraWithLatitude(location!.coordinate.latitude,
+          longitude: location!.coordinate.longitude,
+          zoom: 17)
+        mapView.animateToCameraPosition(camera)
+        
+        placeVenueMarker(location!.coordinate.latitude,
+          longitude: location!.coordinate.longitude,
+          name: name!)
+      }
+    } else {
+      locationManager.startUpdatingLocation()
+    }
+  }
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
+  
+  func placeVenueMarker(latitude: CLLocationDegrees, longitude: CLLocationDegrees, name: String) {
+    var position = CLLocationCoordinate2DMake(latitude, longitude)
+    var marker = GMSMarker(position: position)
+    marker.title = name
+    marker.appearAnimation = kGMSMarkerAnimationPop
+    marker.map = mapView
+    marker.icon = UIImage(named: "Venue_Icon")
+  }
+  
+  // MARK: - Navigation
+  
+  // In a storyboard-based application, you will often want to do a little preparation before navigation
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
+    if segue.destinationViewController is SearchLocationViewController {
+      var searchLocationViewController = segue.destinationViewController as! SearchLocationViewController
+      searchLocationViewController.delegate = self
+    } else if segue.destinationViewController is NewQuestionViewController {
+      var newQuestionViewController = segue.destinationViewController as! NewQuestionViewController
+      newQuestionViewController.delegate = self
+    }
+  }
 }
 
 // MARK: CLLocationManagerDelegate
@@ -114,7 +114,7 @@ extension LocationViewController: CLLocationManagerDelegate {
     
     location = locations.first as? CLLocation
     name = ""
-  
+    
     camera = GMSCameraPosition.cameraWithLatitude(location!.coordinate.latitude,
       longitude: location!.coordinate.longitude,
       zoom: 17)
@@ -134,21 +134,21 @@ extension LocationViewController: GMSMapViewDelegate {
     if selectedMarker != nil {
       selectedMarker!.map = nil
     }
-  
+    
     var marker = GMSMarker(position: position)
     marker.title = "Ask about here!"
     marker.appearAnimation = kGMSMarkerAnimationPop
     marker.map = mapView
     selectedMarker = marker
   }
-
+  
   func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {
     location = CLLocation(latitude: marker.position.latitude, longitude: marker.position.longitude)
     name = marker.title
     placeMarker(marker.position.latitude, longitude: marker.position.longitude)
     return false
   }
-
+  
   func mapView(mapView: GMSMapView!, idleAtCameraPosition position: GMSCameraPosition!) {
     
     if !inSearchMode {
