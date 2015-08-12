@@ -28,13 +28,14 @@
 		4E4F05411B7407CC000F6FB4 /* LocationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4F05401B7407CC000F6FB4 /* LocationProtocol.swift */; };
 		4E52706D1B79489100C1C652 /* Gotham-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E52706B1B79489100C1C652 /* Gotham-Black.ttf */; };
 		4E52706E1B79489100C1C652 /* Gotham-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E52706C1B79489100C1C652 /* Gotham-Book.ttf */; };
+		4E5270751B7A668600C1C652 /* QnADetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5270741B7A668600C1C652 /* QnADetailTableViewCell.swift */; };
 		4E868C661B6883F70077AB67 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E868C651B6883F70077AB67 /* Location.swift */; };
 		4E89F6871B5B516D002EAE7D /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E89F6861B5B516D002EAE7D /* LocationViewController.swift */; };
 		4E89F68D1B5C005C002EAE7D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E89F68C1B5C005C002EAE7D /* Accounts.framework */; };
 		4E89F68F1B5C0081002EAE7D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E89F68E1B5C0081002EAE7D /* Social.framework */; };
+		4EA93DDF1B7AA71200A6392F /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA93DDE1B7AA71200A6392F /* Question.swift */; };
 		4EACBAAD1B67F118005F6664 /* Venues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EACBAAC1B67F118005F6664 /* Venues.swift */; };
 		4EF64CFB1B62B34100D979EB /* NewQuestionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF64CFA1B62B34100D979EB /* NewQuestionProtocol.swift */; };
-		4EF64CFD1B62F34D00D979EB /* Questions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF64CFC1B62F34D00D979EB /* Questions.swift */; };
 		CE2B63AC1B70718C00B08FC0 /* QuadratTouch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EACBAA81B67EFA1005F6664 /* QuadratTouch.framework */; };
 		CE2B63AD1B70718C00B08FC0 /* QuadratTouch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4EACBAA81B67EFA1005F6664 /* QuadratTouch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CE7CE3D31B77AC510067778B /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7CE3D21B77AC510067778B /* TransitionManager.swift */; };
@@ -116,14 +117,15 @@
 		4E4F05401B7407CC000F6FB4 /* LocationProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationProtocol.swift; sourceTree = "<group>"; };
 		4E52706B1B79489100C1C652 /* Gotham-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Black.ttf"; sourceTree = "<group>"; };
 		4E52706C1B79489100C1C652 /* Gotham-Book.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Book.ttf"; sourceTree = "<group>"; };
+		4E5270741B7A668600C1C652 /* QnADetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QnADetailTableViewCell.swift; sourceTree = "<group>"; };
 		4E868C651B6883F70077AB67 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Location.swift; path = ASKII/Location.swift; sourceTree = "<group>"; };
 		4E89F6861B5B516D002EAE7D /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		4E89F68C1B5C005C002EAE7D /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		4E89F68E1B5C0081002EAE7D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		4EA93DDE1B7AA71200A6392F /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Question.swift; path = ASKII/Question.swift; sourceTree = "<group>"; };
 		4EACBAA01B67EFA1005F6664 /* Quadrat.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quadrat.xcodeproj; path = "das-quadrat/Source/Quadrat.xcodeproj"; sourceTree = "<group>"; };
 		4EACBAAC1B67F118005F6664 /* Venues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Venues.swift; sourceTree = "<group>"; };
 		4EF64CFA1B62B34100D979EB /* NewQuestionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewQuestionProtocol.swift; sourceTree = "<group>"; };
-		4EF64CFC1B62F34D00D979EB /* Questions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Questions.swift; path = ASKII/Questions.swift; sourceTree = "<group>"; };
 		6AA53E53F04E31FB05347BC8 /* Pods-ASKII.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ASKII.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ASKII/Pods-ASKII.debug.xcconfig"; sourceTree = "<group>"; };
 		6ECC465071218FABC8109585 /* Pods-ASKII.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ASKII.release.xcconfig"; path = "Pods/Target Support Files/Pods-ASKII/Pods-ASKII.release.xcconfig"; sourceTree = "<group>"; };
 		AF85861258DCAB1D0FAA4688 /* Pods_ASKII.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ASKII.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -262,6 +264,7 @@
 		4E3CE5131B44826800743BCD /* ASKII */ = {
 			isa = PBXGroup;
 			children = (
+				4E5270721B7A663E00C1C652 /* Views */,
 				4E52706B1B79489100C1C652 /* Gotham-Black.ttf */,
 				4E52706C1B79489100C1C652 /* Gotham-Book.ttf */,
 				4EACBAAB1B67F103005F6664 /* Services */,
@@ -309,11 +312,19 @@
 		4E465A2D1B5045B200A0336B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4EA93DDE1B7AA71200A6392F /* Question.swift */,
 				4E868C651B6883F70077AB67 /* Location.swift */,
-				4EF64CFC1B62F34D00D979EB /* Questions.swift */,
 			);
 			name = Models;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		4E5270721B7A663E00C1C652 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4E5270741B7A668600C1C652 /* QnADetailTableViewCell.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		4EACBAA11B67EFA1005F6664 /* Products */ = {
@@ -564,11 +575,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EF64CFB1B62B34100D979EB /* NewQuestionProtocol.swift in Sources */,
+				4EA93DDF1B7AA71200A6392F /* Question.swift in Sources */,
 				4E3CE5191B44826800743BCD /* ViewController.swift in Sources */,
 				4E4F05411B7407CC000F6FB4 /* LocationProtocol.swift in Sources */,
 				CEB2B6401B5B1F08001F83F4 /* SingleTableViewCell.swift in Sources */,
 				CE7CE3D31B77AC510067778B /* TransitionManager.swift in Sources */,
-				4EF64CFD1B62F34D00D979EB /* Questions.swift in Sources */,
 				CEB2B63E1B5B129B001F83F4 /* SingleQuestionViewController.swift in Sources */,
 				4E3CE5171B44826800743BCD /* AppDelegate.swift in Sources */,
 				CEADC43C1B59A69700A2EF3E /* NewQuestionViewController.swift in Sources */,
@@ -576,6 +587,7 @@
 				4E89F6871B5B516D002EAE7D /* LocationViewController.swift in Sources */,
 				4E1B0A9E1B4B19CE00DD5576 /* '.swift in Sources */,
 				4E868C661B6883F70077AB67 /* Location.swift in Sources */,
+				4E5270751B7A668600C1C652 /* QnADetailTableViewCell.swift in Sources */,
 				CEB2B63B1B5AF626001F83F4 /* TableViewCell.swift in Sources */,
 				4E4F053D1B73B9A6000F6FB4 /* SearchLocationViewController.swift in Sources */,
 			);

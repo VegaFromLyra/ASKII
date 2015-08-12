@@ -12,13 +12,14 @@ import CoreLocation
 class SearchLocationViewController: UIViewController {
   
   let venueService = VenueService()
-  var delegate: LocationProtocol?
+  var delegate: QuestionLocationProtocol?
   @IBOutlet weak var searchTextField: UITextField!
   @IBOutlet weak var searchResultsTableView: UITableView!
-  var locations: [(name: String, area: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees)] = []
+  var locations: [(name: String, area: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees, venueId: String)] = []
   
-  var currentLocation: CLLocation?
+  var location: CLLocation?
   var name: String?
+  var venueId: String?
   var locationVC: LocationViewController!
   
   override func viewDidLoad() {
@@ -54,12 +55,14 @@ class SearchLocationViewController: UIViewController {
 
 // MARK: UITableViewDelegate
 
-extension SearchLocationViewController: UITableViewDelegate, LocationProtocol {
+extension SearchLocationViewController: UITableViewDelegate, QuestionLocationProtocol {
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     var selectedLocation = locations[indexPath.row]
-    currentLocation = CLLocation(latitude: selectedLocation.latitude, longitude: selectedLocation.longitude)
+    location = CLLocation(latitude: selectedLocation.latitude, longitude: selectedLocation.longitude)
     name = selectedLocation.name
+    venueId = selectedLocation.venueId
+    locationVC.locationDelegate = self
     self.showViewController(locationVC as UIViewController, sender: locationVC)
   }
 }
@@ -94,7 +97,7 @@ extension SearchLocationViewController: UITextFieldDelegate {
       searchResultsTableView.reloadData()
     }
     
-    if let location = delegate?.currentLocation {
+    if let location = delegate?.location {
       
       var txtAfterUpdate:NSString = self.searchTextField.text as NSString
       txtAfterUpdate = txtAfterUpdate.stringByReplacingCharactersInRange(range, withString: string)
