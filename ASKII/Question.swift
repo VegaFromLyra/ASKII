@@ -21,28 +21,47 @@ class Question {
   // MARK: Methods
   
   func save(questionContent: String, questionLocation: Location) {
-    var locationModel = Location(latitude: questionLocation.latitude,
-      longitude: questionLocation.longitude,
-      name: questionLocation.name,
-      externalId: questionLocation.externalId)
+    var locQuery = PFQuery(className: "Location")
+    locQuery.whereKey("externalId", equalTo:questionLocation.externalId)
     
-    locationModel.save {
-      (savedLocation) -> () in
-      
-      var question = PFObject(className:"Question")
-      question["content"] = questionContent
-      question["yesVoteCount"] = 0
-      question["noVoteCount"] = 0
-      question["location"] = PFObject(withoutDataWithClassName: "Location", objectId: savedLocation.objectId)
-    
-      question.saveInBackgroundWithBlock {
-        (success: Bool, error: NSError?) -> Void in
-        if (success) {
-          // TODO: Notify view this was a success
-        } else {
-          // TODO: Notify view this was an error
-          println(error?.description)
+    locQuery.findObjectsInBackgroundWithBlock {
+      (objects: [AnyObject]?, locError: NSError?) -> Void in
+      if locError == nil {
+        if let objects = objects as? [PFObject] {
+          if objects.count == 0 {
+            var locationModel = Location(latitude: questionLocation.latitude,
+              longitude: questionLocation.longitude,
+              name: questionLocation.name,
+              externalId: questionLocation.externalId)
+            
+            locationModel.save {
+              (savedLocation) -> () in
+              self.saveQuestion(questionContent, yesVoteCount: 0, noVoteCount: 0, parseLocation: savedLocation)
+            }
+          } else {
+              self.saveQuestion(questionContent, yesVoteCount: 0, noVoteCount: 0, parseLocation: objects[0])
+          }
         }
+      } else {
+        println(locError)
+      }
+    }
+  }
+  
+  func saveQuestion(content: String, yesVoteCount: Int, noVoteCount: Int, parseLocation: PFObject) {
+    var question = PFObject(className:"Question")
+    question["content"] = content
+    question["yesVoteCount"] = yesVoteCount
+    question["noVoteCount"] = noVoteCount
+    question["location"] = PFObject(withoutDataWithClassName: "Location", objectId: parseLocation.objectId)
+    
+    question.saveInBackgroundWithBlock {
+      (success: Bool, error: NSError?) -> Void in
+      if (success) {
+        // TODO: Notify view this was a success
+      } else {
+        // TODO: Notify view this was an error
+        println(error?.description)
       }
     }
   }
