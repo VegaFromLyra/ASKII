@@ -136,7 +136,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mc0-Wv-ngF" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="396"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="435"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QgA-Un-SKs">
                                         <rect key="frame" x="30" y="30" width="540" height="39"/>
@@ -160,10 +160,10 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="83" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="l3y-un-uUv">
-                                <rect key="frame" x="0.0" y="395" width="600" height="159"/>
+                                <rect key="frame" x="0.0" y="434" width="600" height="120"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="159" id="xUf-gm-Bhr"/>
+                                    <constraint firstAttribute="height" constant="120" id="xUf-gm-Bhr"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="qnaDetail" rowHeight="83" id="xid-0h-cTD" customClass="QnADetailTableViewCell" customModule="ASKII" customModuleProvider="target">
@@ -253,7 +253,9 @@
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B3J-Va-bcY">
                                 <rect key="frame" x="16" y="562" width="273.5" height="30"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Cancel">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="cancel">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -263,7 +265,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tVb-KK-hqJ">
                                 <rect key="frame" x="310.5" y="562" width="273.5" height="30"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Next">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="next">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -271,7 +275,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.38823529411764707" green="0.91764705882352937" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.86758207070000004" green="0.86758207070000004" blue="0.86758207070000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="tVb-KK-hqJ" firstAttribute="leading" secondItem="B3J-Va-bcY" secondAttribute="trailing" constant="21" id="3Q5-lr-GX9"/>
                             <constraint firstItem="B3J-Va-bcY" firstAttribute="leading" secondItem="Vf1-bk-zuH" secondAttribute="leadingMargin" id="77h-2V-SaS"/>
