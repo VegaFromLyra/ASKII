@@ -61,6 +61,8 @@ extension SearchLocationViewController: UITableViewDelegate, QuestionLocationPro
     var selectedLocation = locations[indexPath.row]
     location = CLLocation(latitude: selectedLocation.latitude, longitude: selectedLocation.longitude)
     name = selectedLocation.name
+    venueId = selectedLocation.venueId
+    locationVC.locationDelegate = self
     self.showViewController(locationVC as UIViewController, sender: locationVC)
   }
 }

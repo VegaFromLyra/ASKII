@@ -69,17 +69,19 @@ class VenueService {
             let state = location["state"] as! String?
             let latitude = location["lat"] as! CLLocationDegrees
             let longitude = location["lng"] as! CLLocationDegrees
-            let area = ""
-
-//            TODO: Generate area
-//            var area:String
-//            if city != nil && state != nil {
-//              area = city! + ", " + state!
-//            } else {
-//              area = ""
-//            }
+            var area:String = ""
             
-            self.searchResults.append(name: name, area: area, latitude:latitude, longitude: longitude, venueId: venueId)
+            if let city = city, state = state {
+              if !city.isEmpty && !state.isEmpty {
+                area = city + ", " + state
+              } else if !city.isEmpty {
+                area = city
+              } else if !state.isEmpty {
+                area = state
+              }
+            }
+            
+            self.searchResults.append(name: name, area: String(area), latitude:latitude, longitude: longitude, venueId: venueId)
           }
         }
       
