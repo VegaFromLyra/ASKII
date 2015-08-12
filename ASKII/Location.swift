@@ -15,10 +15,11 @@ class Location {
   
   // MARK: Initialization
   
-  init(latitude: CLLocationDegrees, longitude: CLLocationDegrees, name: String) {
+  init(latitude: CLLocationDegrees, longitude: CLLocationDegrees, name: String, externalId: String) {
     self.latitude = latitude
     self.longitude = longitude
     self.name = name
+    self.externalId = externalId
   }
   
   
@@ -27,15 +28,17 @@ class Location {
   var latitude: CLLocationDegrees
   var longitude: CLLocationDegrees
   var name: String
+  var externalId: String
   
   // MARK: Methods
   
   func save(completion: (savedLocation: PFObject) -> ()) {
     
     var locationModel = PFObject(className:"Location")
-    locationModel["latitude"] = String(format: "%.3f", latitude)
-    locationModel["longitude"] = String(format: "%.3f", longitude)
+    locationModel["latitude"] = latitude
+    locationModel["longitude"] = longitude
     locationModel["name"] = name
+    locationModel["externalId"] = externalId
     
     locationModel.saveInBackgroundWithBlock {
       (success: Bool, error: NSError?) -> Void in

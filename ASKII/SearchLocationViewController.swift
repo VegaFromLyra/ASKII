@@ -15,10 +15,11 @@ class SearchLocationViewController: UIViewController {
   var delegate: QuestionLocationProtocol?
   @IBOutlet weak var searchTextField: UITextField!
   @IBOutlet weak var searchResultsTableView: UITableView!
-  var locations: [(name: String, area: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees)] = []
+  var locations: [(name: String, area: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees, venueId: String)] = []
   
   var location: CLLocation?
   var name: String?
+  var venueId: String?
   var locationVC: LocationViewController!
   
   override func viewDidLoad() {

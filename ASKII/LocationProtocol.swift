@@ -13,4 +13,5 @@ import CoreLocation
 protocol QuestionLocationProtocol {
   var location: CLLocation? { get set }
   var name: String? { get set }
+  var venueId: String? { get set }
 }

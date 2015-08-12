@@ -23,7 +23,8 @@ class Question {
   func save(questionContent: String, questionLocation: Location) {
     var locationModel = Location(latitude: questionLocation.latitude,
       longitude: questionLocation.longitude,
-      name: questionLocation.name)
+      name: questionLocation.name,
+      externalId: questionLocation.externalId)
     
     locationModel.save {
       (savedLocation) -> () in
@@ -49,10 +50,7 @@ class Question {
   func getAllQuestions(location: Location, completion: (questions: [Question]) -> ()) {
     var locQuery = PFQuery(className: "Location")
     
-    // locQuery.whereKey("latitude", equalTo:String(format: "%.3f", location.latitude))
-    // locQuery.whereKey("longitude", equalTo:String(format: "%.3f", location.longitude))
-    locQuery.whereKey("name", equalTo:location.name)
-    
+    locQuery.whereKey("externalId", equalTo:location.externalId)
     
     locQuery.findObjectsInBackgroundWithBlock {
       (objects: [AnyObject]?, locError: NSError?) -> Void in
@@ -76,18 +74,19 @@ class Question {
               
               if qnError == nil {
                 var results: [Question] = []
-                if let objects = objects as? [PFObject] {
-                  for object in objects {
-                    var locationModel = Location(latitude: (location["latitude"] as! NSString).doubleValue,
-                      longitude: (location["longitude"] as! NSString).doubleValue,
-                      name: location["name"] as! String)
-                    var question: Question =  Question()
-                    question.content = object["content"] as? String
-                    question.location = locationModel
-                    question.yesVotes = object["yesVoteCount"] as? Int
-                    question.noVotes = object["noVoteCount"] as? Int
+                if let questions = objects as? [PFObject] {
+                  for question in questions {
+                    var locationModel = Location(latitude: location["latitude"] as! CLLocationDegrees,
+                      longitude: location["longitude"] as! CLLocationDegrees,
+                      name: location["name"] as! String,
+                      externalId: location["externalId"] as! String)
+                    var result: Question =  Question()
+                    result.content = question["content"] as? String
+                    result.location = locationModel
+                    result.yesVotes = question["yesVoteCount"] as? Int
+                    result.noVotes = question["noVoteCount"] as? Int
                     
-                    results.append(question)
+                    results.append(result)
                   }
                 }
                 
