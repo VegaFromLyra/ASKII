@@ -11,8 +11,9 @@ import UIKit
 class NewQuestionViewController: UIViewController, NewQuestion {
   
   // MARK: Properties
-  
+
   @IBOutlet weak var questionText: UITextView!
+
   var question: String?
   var delegate: QuestionLocationProtocol?
   
@@ -41,6 +42,7 @@ class NewQuestionViewController: UIViewController, NewQuestion {
     }
     
   }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
