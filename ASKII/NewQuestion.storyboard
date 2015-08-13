@@ -305,10 +305,10 @@
             </objects>
             <point key="canvasLocation" x="248" y="164"/>
         </scene>
-        <!--New Question View Controller-->
+        <!--Question Done View Controller-->
         <scene sceneID="X1k-2K-khl">
             <objects>
-                <viewController id="jb6-Dl-NXg" customClass="NewQuestionViewController" customModule="ASKII" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="jb6-Dl-NXg" customClass="QuestionDoneViewController" customModule="ASKII" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QCX-RT-TzC"/>
                         <viewControllerLayoutGuide type="bottom" id="a9N-F1-RCQ"/>
@@ -339,7 +339,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="onSubmitQuestionDone:" destination="jb6-Dl-NXg" eventType="touchUpInside" id="V6X-xh-oyn"/>
+                                    <action selector="onSubmitQuestionDone:" destination="jb6-Dl-NXg" eventType="touchUpInside" id="TAT-zy-4lG"/>
                                 </connections>
                             </button>
                         </subviews>

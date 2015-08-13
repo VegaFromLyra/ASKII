@@ -48,6 +48,8 @@ class NewQuestionViewController: UIViewController, NewQuestion {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    // self.buttonViewBottomConstraint.constant = 0
+    
     NSNotificationCenter.defaultCenter().addObserver(
       self,
       selector: Selector("keyboardWasShown:"),
