@@ -34,6 +34,7 @@
 		4E89F68D1B5C005C002EAE7D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E89F68C1B5C005C002EAE7D /* Accounts.framework */; };
 		4E89F68F1B5C0081002EAE7D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E89F68E1B5C0081002EAE7D /* Social.framework */; };
 		4EA93DDF1B7AA71200A6392F /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA93DDE1B7AA71200A6392F /* Question.swift */; };
+		4EA93DE61B7CFEC500A6392F /* QuestionDoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA93DE51B7CFEC500A6392F /* QuestionDoneViewController.swift */; };
 		4EACBAAD1B67F118005F6664 /* Venues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EACBAAC1B67F118005F6664 /* Venues.swift */; };
 		4EF64CFB1B62B34100D979EB /* NewQuestionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF64CFA1B62B34100D979EB /* NewQuestionProtocol.swift */; };
 		CE2B63AC1B70718C00B08FC0 /* QuadratTouch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EACBAA81B67EFA1005F6664 /* QuadratTouch.framework */; };
@@ -123,6 +124,7 @@
 		4E89F68C1B5C005C002EAE7D /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		4E89F68E1B5C0081002EAE7D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		4EA93DDE1B7AA71200A6392F /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Question.swift; path = ASKII/Question.swift; sourceTree = "<group>"; };
+		4EA93DE51B7CFEC500A6392F /* QuestionDoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionDoneViewController.swift; sourceTree = "<group>"; };
 		4EACBAA01B67EFA1005F6664 /* Quadrat.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quadrat.xcodeproj; path = "das-quadrat/Source/Quadrat.xcodeproj"; sourceTree = "<group>"; };
 		4EACBAAC1B67F118005F6664 /* Venues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Venues.swift; sourceTree = "<group>"; };
 		4EF64CFA1B62B34100D979EB /* NewQuestionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewQuestionProtocol.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				CEADC43B1B59A69700A2EF3E /* NewQuestionViewController.swift */,
 				4E89F6861B5B516D002EAE7D /* LocationViewController.swift */,
 				4E4F053C1B73B9A6000F6FB4 /* SearchLocationViewController.swift */,
+				4EA93DE51B7CFEC500A6392F /* QuestionDoneViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -584,6 +587,7 @@
 				4E3CE5171B44826800743BCD /* AppDelegate.swift in Sources */,
 				CEADC43C1B59A69700A2EF3E /* NewQuestionViewController.swift in Sources */,
 				4EACBAAD1B67F118005F6664 /* Venues.swift in Sources */,
+				4EA93DE61B7CFEC500A6392F /* QuestionDoneViewController.swift in Sources */,
 				4E89F6871B5B516D002EAE7D /* LocationViewController.swift in Sources */,
 				4E1B0A9E1B4B19CE00DD5576 /* '.swift in Sources */,
 				4E868C661B6883F70077AB67 /* Location.swift in Sources */,
