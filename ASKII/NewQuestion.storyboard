@@ -115,6 +115,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buttonViewBottomConstraint" destination="MD1-9R-XF6" id="Gb0-ec-de5"/>
                         <outlet property="questionText" destination="4cV-Dl-lCq" id="NSF-DO-z1F"/>
                     </connections>
                 </viewController>

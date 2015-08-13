@@ -13,6 +13,8 @@ class NewQuestionViewController: UIViewController, NewQuestion {
   // MARK: Properties
 
   @IBOutlet weak var questionText: UITextView!
+  @IBOutlet weak var buttonViewBottomConstraint: NSLayoutConstraint!
+  
 
   var question: String?
   var delegate: QuestionLocationProtocol?
@@ -46,7 +48,11 @@ class NewQuestionViewController: UIViewController, NewQuestion {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // Do any additional setup after loading the view.
+    NSNotificationCenter.defaultCenter().addObserver(
+      self,
+      selector: Selector("keyboardWasShown:"),
+      name:UIKeyboardDidShowNotification,
+      object: nil)
   }
   
   override func didReceiveMemoryWarning() {
@@ -54,8 +60,15 @@ class NewQuestionViewController: UIViewController, NewQuestion {
     // Dispose of any resources that can be recreated.
   }
   
-  
-  
+  func keyboardWasShown(notification: NSNotification) {
+    var info = notification.userInfo!
+    var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+
+    UIView.animateWithDuration(0.1, animations: { () -> Void in
+      self.buttonViewBottomConstraint.constant = keyboardFrame.size.height + 20
+    })
+  }
+    
   // MARK: - Navigation
   
   // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -64,5 +77,8 @@ class NewQuestionViewController: UIViewController, NewQuestion {
   // Pass the selected object to the new view controller.
   // }
   
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self);
+  }
 
 }
