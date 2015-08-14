@@ -17,6 +17,7 @@ class Question {
   var location: Location?
   var yesVotes: Int?
   var noVotes: Int?
+  var lastUpdatedTime: NSDate?
   
   // MARK: Methods
   
@@ -105,6 +106,7 @@ class Question {
                     result.location = locationModel
                     result.yesVotes = question["yesVoteCount"] as? Int
                     result.noVotes = question["noVoteCount"] as? Int
+                    result.lastUpdatedTime = question.updatedAt
                     
                     results.append(result)
                   }
