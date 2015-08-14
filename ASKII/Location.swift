@@ -15,10 +15,11 @@ class Location {
   
   // MARK: Initialization
   
-  init(latitude: CLLocationDegrees, longitude: CLLocationDegrees, name: String) {
+  init(latitude: CLLocationDegrees, longitude: CLLocationDegrees, name: String, externalId: String) {
     self.latitude = latitude
     self.longitude = longitude
     self.name = name
+    self.externalId = externalId
   }
   
   
@@ -27,6 +28,7 @@ class Location {
   var latitude: CLLocationDegrees
   var longitude: CLLocationDegrees
   var name: String
+  var externalId: String
   
   // MARK: Methods
   
@@ -36,6 +38,7 @@ class Location {
     locationModel["latitude"] = latitude
     locationModel["longitude"] = longitude
     locationModel["name"] = name
+    locationModel["externalId"] = externalId
     
     locationModel.saveInBackgroundWithBlock {
       (success: Bool, error: NSError?) -> Void in
@@ -46,4 +49,5 @@ class Location {
       }
     }
   }
+
 }

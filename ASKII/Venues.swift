@@ -17,7 +17,7 @@ class VenueService {
   
   var session: Session!
   var venueItems : [[String: AnyObject]]?
-  var searchResults: [(name: String, area: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees)] = []
+  var searchResults: [(name: String, area: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees, venueId: String)] = []
   
   init() {
     session = Session.sharedSession()
@@ -47,7 +47,7 @@ class VenueService {
   }
   
   func search(location: CLLocation, query: String,
-    completion: ([(name: String, area: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees)]) -> ()) {
+    completion: ([(name: String, area: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees, venueId: String)]) -> ()) {
       
     if searchResults.count > 0 {
       searchResults.removeAll(keepCapacity: false)
@@ -64,20 +64,24 @@ class VenueService {
           for venue in venues {
             var location = venue["location"] as! JSONParameters
             let name = venue["name"] as! String
+            let venueId = venue["id"] as! String
             let city = location["city"] as! String?
             let state = location["state"] as! String?
             let latitude = location["lat"] as! CLLocationDegrees
             let longitude = location["lng"] as! CLLocationDegrees
-            let area = ""
-
-//            var area:String
-//            if city != nil && state != nil {
-//              area = city! + ", " + state!
-//            } else {
-//              area = ""
-//            }
+            var area:String = ""
             
-            self.searchResults.append(name: name, area: area, latitude:latitude, longitude: longitude)
+            if let city = city, state = state {
+              if !city.isEmpty && !state.isEmpty {
+                area = city + ", " + state
+              } else if !city.isEmpty {
+                area = city
+              } else if !state.isEmpty {
+                area = state
+              }
+            }
+            
+            self.searchResults.append(name: name, area: String(area), latitude:latitude, longitude: longitude, venueId: venueId)
           }
         }
       
