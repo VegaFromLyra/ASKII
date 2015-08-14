@@ -19,6 +19,7 @@ class LocationViewController: UIViewController, QuestionLocationProtocol {
   @IBOutlet weak var searchButton: UIButton!
   @IBOutlet weak var qnaDetailsTableView: UITableView!
   
+  
   @IBAction func goBack(sender: AnyObject) {
     var storyboard = UIStoryboard(name: "Main", bundle: nil)
     var controller = storyboard.instantiateViewControllerWithIdentifier("QuestionViewController") as! UIViewController

@@ -17,6 +17,12 @@ class QnADetailTableViewCell: UITableViewCell {
   @IBOutlet weak var questionLabel: UILabel!
   
   
+  @IBOutlet weak var questionSubmittedTime: UILabel!
+  
+  
+  
+  @IBOutlet weak var popularAnswer: UILabel!
+  
   @IBAction func askAgain(sender: AnyObject) {
   }
   

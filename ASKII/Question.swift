@@ -87,6 +87,7 @@ class Question {
             
             var questionQuery = PFQuery(className:"Question")
             questionQuery.whereKey("location", equalTo:locationPointer)
+            questionQuery.orderByDescending("updatedAt")
             
             questionQuery.findObjectsInBackgroundWithBlock {
               (objects: [AnyObject]?, qnError: NSError?) -> Void in
