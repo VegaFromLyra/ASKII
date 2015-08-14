@@ -137,7 +137,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mc0-Wv-ngF" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="435"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="355"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QgA-Un-SKs">
                                         <rect key="frame" x="30" y="30" width="540" height="39"/>
@@ -161,10 +161,10 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="83" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="l3y-un-uUv">
-                                <rect key="frame" x="0.0" y="434" width="600" height="120"/>
+                                <rect key="frame" x="0.0" y="354" width="600" height="200"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="xUf-gm-Bhr"/>
+                                    <constraint firstAttribute="height" constant="200" id="xUf-gm-Bhr"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="qnaDetail" rowHeight="83" id="xid-0h-cTD" customClass="QnADetailTableViewCell" customModule="ASKII" customModuleProvider="target">
