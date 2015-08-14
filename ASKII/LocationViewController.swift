@@ -18,7 +18,7 @@ class LocationViewController: UIViewController, QuestionLocationProtocol {
   @IBOutlet weak var mapView: GMSMapView!
   @IBOutlet weak var searchButton: UIButton!
   @IBOutlet weak var qnaDetailsTableView: UITableView!
-  
+  @IBOutlet weak var numberOfQuestions: UILabel!
   
   @IBAction func goBack(sender: AnyObject) {
     var storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -62,6 +62,8 @@ class LocationViewController: UIViewController, QuestionLocationProtocol {
       // So that the current location is visible and can
       // be interacted with
       mapView.bringSubviewToFront(searchButton)
+      mapView.bringSubviewToFront(numberOfQuestions)
+      self.numberOfQuestions.hidden = true
       
       if let recognizers = mapView.gestureRecognizers {
         for recognizer in recognizers {
@@ -107,11 +109,18 @@ class LocationViewController: UIViewController, QuestionLocationProtocol {
     // Dispose of any resources that can be recreated.
   }
   
+  // TODO: Move fetchQuestions to utility and separate out the view logic
   func fetchQuestionsForLocation(location: Location) {
     questionModel.getAllQuestions(location, completion: {
       allQuestions -> () in
         self.allQuestions = allQuestions
         self.qnaDetailsTableView.reloadData()
+        if (self.allQuestions.count > 0) {
+          self.numberOfQuestions.hidden = false
+          self.numberOfQuestions.text = String(self.allQuestions.count) + " ASKIIS"
+        } else {
+          self.numberOfQuestions.hidden = true
+      }
     })
   }
   

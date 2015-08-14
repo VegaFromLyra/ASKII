@@ -152,11 +152,19 @@
                                             <segue destination="s1W-b4-rjm" kind="show" id="xxr-IK-VnJ"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 ASKIIS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ig-0s-1F6">
+                                        <rect key="frame" x="20" y="312.5" width="69" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="9ig-0s-1F6" firstAttribute="leading" secondItem="mc0-Wv-ngF" secondAttribute="leading" constant="20" id="0jg-hZ-KNL"/>
                                     <constraint firstAttribute="trailing" secondItem="QgA-Un-SKs" secondAttribute="trailing" constant="30" id="Jnh-CN-1Ym"/>
                                     <constraint firstItem="QgA-Un-SKs" firstAttribute="top" secondItem="mc0-Wv-ngF" secondAttribute="top" constant="30" id="SL1-cQ-rrZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="9ig-0s-1F6" secondAttribute="bottom" constant="22" id="dqV-qp-GGX"/>
                                     <constraint firstItem="QgA-Un-SKs" firstAttribute="leading" secondItem="mc0-Wv-ngF" secondAttribute="leading" constant="30" id="jjv-xX-kGR"/>
                                 </constraints>
                             </view>
@@ -305,7 +313,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tVb-KK-hqJ">
-                                <rect key="frame" x="310.5" y="562" width="273.5" height="30"/>
+                                <rect key="frame" x="310" y="562" width="273.5" height="30"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="next">
@@ -339,6 +347,7 @@
                     </view>
                     <connections>
                         <outlet property="mapView" destination="mc0-Wv-ngF" id="ESC-xg-Fa1"/>
+                        <outlet property="numberOfQuestions" destination="9ig-0s-1F6" id="AjZ-QP-Cq8"/>
                         <outlet property="qnaDetailsTableView" destination="l3y-un-uUv" id="tM0-q9-KuB"/>
                         <outlet property="searchButton" destination="QgA-Un-SKs" id="g4A-RH-Sum"/>
                     </connections>
