@@ -17,6 +17,8 @@ class Question {
   var location: Location?
   var yesVotes: Int?
   var noVotes: Int?
+  var lastUpdatedTime: NSDate?
+  var parseId: String?
   
   // MARK: Methods
   
@@ -48,6 +50,30 @@ class Question {
     }
   }
   
+  func clearVoteCount(completion: (success: Bool) -> ()) {
+    
+    var query = PFQuery(className:"Question")
+    query.getObjectInBackgroundWithId(parseId!) {
+      (question: PFObject?, error: NSError?) -> Void in
+      if error != nil {
+        println(error)
+      } else if let question = question {
+        question["yesVoteCount"] = 0
+        question["noVoteCount"] = 0
+
+        question.saveInBackgroundWithBlock {
+          (success: Bool, error: NSError?) -> Void in
+          if (success) {
+            completion(success: true)
+          } else {
+            println(error?.description)
+            completion(success: false)
+          }
+        }
+      }
+    }
+  }
+  
   func saveQuestion(content: String, yesVoteCount: Int, noVoteCount: Int, parseLocation: PFObject) {
     var question = PFObject(className:"Question")
     question["content"] = content
@@ -59,6 +85,7 @@ class Question {
       (success: Bool, error: NSError?) -> Void in
       if (success) {
         // TODO: Notify view this was a success
+        self.parseId = question.objectId
       } else {
         // TODO: Notify view this was an error
         println(error?.description)
@@ -87,6 +114,7 @@ class Question {
             
             var questionQuery = PFQuery(className:"Question")
             questionQuery.whereKey("location", equalTo:locationPointer)
+            questionQuery.orderByDescending("updatedAt")
             
             questionQuery.findObjectsInBackgroundWithBlock {
               (objects: [AnyObject]?, qnError: NSError?) -> Void in
@@ -104,6 +132,8 @@ class Question {
                     result.location = locationModel
                     result.yesVotes = question["yesVoteCount"] as? Int
                     result.noVotes = question["noVoteCount"] as? Int
+                    result.lastUpdatedTime = question.updatedAt
+                    result.parseId = question.objectId
                     
                     results.append(result)
                   }

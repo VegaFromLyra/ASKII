@@ -18,6 +18,7 @@ class LocationViewController: UIViewController, QuestionLocationProtocol {
   @IBOutlet weak var mapView: GMSMapView!
   @IBOutlet weak var searchButton: UIButton!
   @IBOutlet weak var qnaDetailsTableView: UITableView!
+  @IBOutlet weak var numberOfQuestions: UILabel!
   
   @IBAction func goBack(sender: AnyObject) {
     var storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -61,6 +62,8 @@ class LocationViewController: UIViewController, QuestionLocationProtocol {
       // So that the current location is visible and can
       // be interacted with
       mapView.bringSubviewToFront(searchButton)
+      mapView.bringSubviewToFront(numberOfQuestions)
+      self.numberOfQuestions.hidden = true
       
       if let recognizers = mapView.gestureRecognizers {
         for recognizer in recognizers {
@@ -106,14 +109,21 @@ class LocationViewController: UIViewController, QuestionLocationProtocol {
     // Dispose of any resources that can be recreated.
   }
   
+  // TODO: Move fetchQuestions to utility and separate out the view logic
   func fetchQuestionsForLocation(location: Location) {
     questionModel.getAllQuestions(location, completion: {
       allQuestions -> () in
         self.allQuestions = allQuestions
         self.qnaDetailsTableView.reloadData()
+        if (self.allQuestions.count > 0) {
+          self.numberOfQuestions.hidden = false
+          self.numberOfQuestions.text = String(self.allQuestions.count) + " ASKIIS"
+        } else {
+          self.numberOfQuestions.hidden = true
+      }
     })
   }
-  
+    
   func placeVenueMarker(latitude: CLLocationDegrees,
     longitude: CLLocationDegrees,
     name: String,
@@ -240,14 +250,12 @@ extension LocationViewController: UITableViewDelegate, QuestionLocationProtocol 
 extension LocationViewController: UITableViewDataSource {
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    let currentQuestion = allQuestions[indexPath.row]
+    
     let cell = qnaDetailsTableView.dequeueReusableCellWithIdentifier("qnaDetail") as! QnADetailTableViewCell
-    cell.questionLabel.text = allQuestions[indexPath.row].content
     
-    let yesVoteCount: Int = allQuestions[indexPath.row].yesVotes!
-    cell.yesVoteCountLabel.text = yesVoteCount.description
-    
-    let noVoteCount: Int = allQuestions[indexPath.row].noVotes!
-    cell.noVoteCountLabel.text = noVoteCount.description
+    cell.parentViewController = self
+    cell.configure(currentQuestion)
     
     return cell
   }
