@@ -48,7 +48,7 @@ class NewQuestionViewController: UIViewController, NewQuestion {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // self.buttonViewBottomConstraint.constant = 0
+    questionText.delegate = self
     
     NSNotificationCenter.defaultCenter().addObserver(
       self,
@@ -83,4 +83,15 @@ class NewQuestionViewController: UIViewController, NewQuestion {
     NSNotificationCenter.defaultCenter().removeObserver(self);
   }
 
+}
+
+// MARK: UITextViewDelegate
+
+extension NewQuestionViewController: UITextViewDelegate {
+  
+  // TODO: Figure out how to place question mark at the end
+  func textViewDidBeginEditing(textView: UITextView) {
+    //questionText.selectedTextRange = questionText.textRangeFromPosition(questionText.beginningOfDocument, toPosition: questionText.beginningOfDocument)
+    questionText.text = ""
+  }
 }

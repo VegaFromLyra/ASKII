@@ -70,7 +70,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OyA-bY-OHm" userLabel="textContentView">
                                                 <rect key="frame" x="0.0" y="0.0" width="600" height="520"/>
                                                 <subviews>
-                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Ask away!" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4cV-Dl-lCq">
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="What is your question?" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4cV-Dl-lCq">
                                                         <rect key="frame" x="90" y="125" width="389" height="270"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
