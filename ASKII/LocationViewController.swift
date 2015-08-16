@@ -123,38 +123,7 @@ class LocationViewController: UIViewController, QuestionLocationProtocol {
       }
     })
   }
-  
-  // TODO - Move to utility service
-  func getTimeElapsed(submittedTime: NSDate) -> String {
-    let elapsedTimeInterval = NSDate().timeIntervalSinceDate(submittedTime)
-    let durationInSeconds = Int(elapsedTimeInterval)
-    var output = ""
-    if durationInSeconds <= 60 {
-      output = String(durationInSeconds) + " s:"
-    } else if durationInSeconds <= 3600 {
-      output = String(durationInSeconds / 60) + " m:"
-    } else if durationInSeconds <= 86400 {
-      output = String(durationInSeconds / 3600) + " h:"
-    } else if durationInSeconds <= 604800 {
-      output = String(durationInSeconds / 86400) + " d:"
-    } else {
-      output = String(durationInSeconds / 604800) + " w:"
-    }
     
-    return output
-  }
-  
-  func getPopulateVote(yesVoteCount: Int, noVoteCount: Int) -> String {
-    var output = ""
-    if yesVoteCount > noVoteCount {
-      output = "yes"
-    } else if noVoteCount > yesVoteCount {
-      output = "no"
-    }
-    
-    return output
-  }
-  
   func placeVenueMarker(latitude: CLLocationDegrees,
     longitude: CLLocationDegrees,
     name: String,
@@ -284,17 +253,9 @@ extension LocationViewController: UITableViewDataSource {
     let currentQuestion = allQuestions[indexPath.row]
     
     let cell = qnaDetailsTableView.dequeueReusableCellWithIdentifier("qnaDetail") as! QnADetailTableViewCell
-    cell.questionLabel.text = currentQuestion.content
     
-    let yesVoteCount: Int = currentQuestion.yesVotes!
-    cell.yesVoteCountLabel.text = yesVoteCount.description
-    
-    let noVoteCount: Int = currentQuestion.noVotes!
-    cell.noVoteCountLabel.text = noVoteCount.description
-    
-    cell.questionSubmittedTime.text = getTimeElapsed(currentQuestion.lastUpdatedTime!)
-    
-    cell.popularAnswer.text = getPopulateVote(yesVoteCount, noVoteCount: noVoteCount)
+    cell.parentViewController = self
+    cell.configure(currentQuestion)
     
     return cell
   }

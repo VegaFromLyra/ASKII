@@ -26,8 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       // Override point for customization after application launch.
       ParseCrashReporting.enable()
       
-      Parse.setApplicationId("KGxHRY1i2W1plkO5rWORg8YQLaKjcwTvs9BIpjyj",
-          clientKey: "An2KVEeYLvxGB1IPyVWsiqaFK9rTEc6ZlaVsDc2J")
+      Parse.setApplicationId("dKuZJBCKptqtbJ4Fn3NjP0Ize2WRReIMhhtV0bbn",
+          clientKey: "XV9FgyMTOVdio5LzCEaZVbafrrvTalPnlllZTO8y")
       
       PFUser.enableAutomaticUser()
       
