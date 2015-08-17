@@ -29,11 +29,18 @@ class NewQuestionViewController: UIViewController, NewQuestion {
   @IBAction func onSubmitQuestion(sender: AnyObject) {
     
     if !questionText.text.isEmpty {
-      if let location = delegate?.location, name = delegate?.name, locId = delegate?.venueId {
+      if let location = delegate?.location {
         let locationModel = Location(latitude: location.coordinate.latitude,
-          longitude: location.coordinate.longitude,
-          name: name,
-          externalId: locId)
+          longitude: location.coordinate.longitude)
+        
+        if let name = delegate?.name {
+          locationModel.name = name
+        }
+        
+        if let externalId = delegate?.venueId {
+          locationModel.externalId = externalId
+        }
+        
         let questionModel = Question()
         questionModel.save(questionText.text, questionLocation: locationModel)
       } else {

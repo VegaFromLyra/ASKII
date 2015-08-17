@@ -118,4 +118,9 @@ extension SearchLocationViewController: UITextFieldDelegate {
     
     return true
   }
+  
+  func textFieldDidBeginEditing(textField: UITextField) {
+    searchTextField.text = ""
+  }
+  
 }
