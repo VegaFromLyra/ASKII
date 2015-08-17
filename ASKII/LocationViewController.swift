@@ -36,6 +36,8 @@ class LocationViewController: UIViewController, QuestionLocationProtocol {
   var venueId: String?
   var camera: GMSCameraPosition?
   
+  var hasCurrentLocationBeenFetched: Bool = false
+  
   var locationManager: CLLocationManager!
   var delegate: NewQuestion?
   var locationDelegate: QuestionLocationProtocol?
@@ -111,13 +113,13 @@ class LocationViewController: UIViewController, QuestionLocationProtocol {
   func fetchQuestionsForLocation(location: Location) {
     questionModel.getAllQuestions(location, completion: {
       allQuestions -> () in
-        self.allQuestions = allQuestions
+      if allQuestions.count > 0 {
+        self.allQuestions += allQuestions
         self.qnaDetailsTableView.reloadData()
-        if (self.allQuestions.count > 0) {
-          self.numberOfQuestions.hidden = false
-          self.numberOfQuestions.text = String(self.allQuestions.count) + " ASKIIS"
-        } else {
-          self.numberOfQuestions.hidden = true
+        self.numberOfQuestions.hidden = false
+        self.numberOfQuestions.text = String(self.allQuestions.count) + " ASKIIS"
+      } else {
+        self.numberOfQuestions.hidden = true
       }
     })
   }
@@ -128,14 +130,18 @@ class LocationViewController: UIViewController, QuestionLocationProtocol {
     venueId: String) {
       
     var position = CLLocationCoordinate2DMake(latitude, longitude)
+      
     var marker = GMSMarker(position: position)
     marker.title = name
     marker.appearAnimation = kGMSMarkerAnimationPop
     marker.map = mapView
     marker.icon = UIImage(named: "Venue_Icon")
+      
     var userDataMap = [String: String]()
     userDataMap["venueId"] = venueId
     marker.userData = userDataMap
+      
+    mapView.selectedMarker = marker
       
     selectedVenueMarker = marker
   }
@@ -144,10 +150,14 @@ class LocationViewController: UIViewController, QuestionLocationProtocol {
     location = CLLocation(latitude: latitude, longitude: longitude)
     if let locName = locName {
       name = locName
+    } else {
+      name?.removeAll(keepCapacity: false)
     }
     
     if let locVenueId = locVenueId {
       venueId = locVenueId
+    } else {
+      venueId?.removeAll(keepCapacity: false)
     }
   }
   
@@ -170,6 +180,7 @@ class LocationViewController: UIViewController, QuestionLocationProtocol {
 // MARK: CLLocationManagerDelegate
 extension LocationViewController: CLLocationManagerDelegate {
   func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+    hasCurrentLocationBeenFetched = true
     var currentLocation = locations.first as? CLLocation
     camera = GMSCameraPosition.cameraWithLatitude(currentLocation!.coordinate.latitude,
       longitude: currentLocation!.coordinate.longitude,
@@ -201,28 +212,14 @@ extension LocationViewController: GMSMapViewDelegate {
     marker.appearAnimation = kGMSMarkerAnimationPop
     marker.map = mapView
     selectedMarker = marker
-  }
-  
-  func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {
-    if marker.userData != nil {
-      var userDataMap = marker.userData as! [String:String]
-      venueId = userDataMap["venueId"]
-      fetchQuestionsForLocation(Location(latitude: marker.position.latitude,
-        longitude: marker.position.longitude,
-        name: marker.title,
-        externalId: userDataMap["venueId"]!))
-    } else {
-      fetchQuestionsForLocation(Location(latitude: marker.position.latitude,
-        longitude: marker.position.longitude))
-    }
 
-    return false
+    fetchQuestionsForLocation(Location(latitude: latitude, longitude: longitude))
   }
   
   func mapView(mapView: GMSMapView!, idleAtCameraPosition position: GMSCameraPosition!) {
     if inSearchMode {
       inSearchMode = false
-    } else {
+    } else if hasCurrentLocationBeenFetched {
       placeMarker(position.target.latitude, longitude: position.target.longitude)
     }
   }
