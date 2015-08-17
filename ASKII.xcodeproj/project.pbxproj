@@ -17,7 +17,7 @@
 		4E1B0A941B4B149D00DD5576 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1B0A931B4B149D00DD5576 /* libstdc++.6.dylib */; };
 		4E1B0A961B4B14AB00DD5576 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1B0A951B4B14AB00DD5576 /* AudioToolbox.framework */; };
 		4E1B0A981B4B14C200DD5576 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1B0A971B4B14C200DD5576 /* libsqlite3.dylib */; };
-		4E1B0A9E1B4B19CE00DD5576 /* '.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1B0A9D1B4B19CE00DD5576 /* '.swift */; };
+		4E1B0A9E1B4B19CE00DD5576 /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1B0A9D1B4B19CE00DD5576 /* QuestionsViewController.swift */; };
 		4E3CE5171B44826800743BCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3CE5161B44826800743BCD /* AppDelegate.swift */; };
 		4E3CE5191B44826800743BCD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3CE5181B44826800743BCD /* ViewController.swift */; };
 		4E3CE51C1B44826800743BCD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E3CE51A1B44826800743BCD /* Main.storyboard */; };
@@ -103,7 +103,7 @@
 		4E1B0A931B4B149D00DD5576 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		4E1B0A951B4B14AB00DD5576 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		4E1B0A971B4B14C200DD5576 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		4E1B0A9D1B4B19CE00DD5576 /* '.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "'.swift"; sourceTree = "<group>"; };
+		4E1B0A9D1B4B19CE00DD5576 /* QuestionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
 		4E3CE5111B44826800743BCD /* ASKII.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ASKII.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E3CE5151B44826800743BCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E3CE5161B44826800743BCD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -233,7 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				4E3CE5181B44826800743BCD /* ViewController.swift */,
-				4E1B0A9D1B4B19CE00DD5576 /* '.swift */,
+				4E1B0A9D1B4B19CE00DD5576 /* QuestionsViewController.swift */,
 				CEB2B63D1B5B129B001F83F4 /* SingleQuestionViewController.swift */,
 				CEADC43B1B59A69700A2EF3E /* NewQuestionViewController.swift */,
 				4E89F6861B5B516D002EAE7D /* LocationViewController.swift */,
@@ -589,7 +589,7 @@
 				4EACBAAD1B67F118005F6664 /* Venues.swift in Sources */,
 				4EA93DE61B7CFEC500A6392F /* QuestionDoneViewController.swift in Sources */,
 				4E89F6871B5B516D002EAE7D /* LocationViewController.swift in Sources */,
-				4E1B0A9E1B4B19CE00DD5576 /* '.swift in Sources */,
+				4E1B0A9E1B4B19CE00DD5576 /* QuestionsViewController.swift in Sources */,
 				4E868C661B6883F70077AB67 /* Location.swift in Sources */,
 				4E5270751B7A668600C1C652 /* QnADetailTableViewCell.swift in Sources */,
 				CEB2B63B1B5AF626001F83F4 /* TableViewCell.swift in Sources */,
