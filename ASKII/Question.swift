@@ -22,43 +22,71 @@ class Question {
   
   // MARK: Methods
   
-  func save(questionContent: String, questionLocation: Location) {
+  func saveQuestionWithLocExternalId(content: String, location: Location) {
     var locQuery = PFQuery(className: "Location")
+    locQuery.whereKey("externalId", equalTo:location.externalId!)
     
-    if let locExternalId = questionLocation.externalId {
-      locQuery.whereKey("externalId", equalTo:locExternalId)
-      
-      locQuery.findObjectsInBackgroundWithBlock {
-        (objects: [AnyObject]?, locError: NSError?) -> Void in
-        if locError == nil {
-          if let objects = objects as? [PFObject] {
-            if objects.count == 0 {
-              
-              var locationModel = Location(latitude: questionLocation.coordinate.latitude,
-                longitude: questionLocation.coordinate.longitude,
-                name: questionLocation.name,
-                externalId: questionLocation.externalId)
-              
-              locationModel.save {
-                (savedLocation) -> () in
-                self.saveQuestion(questionContent, yesVoteCount: 0, noVoteCount: 0, parseLocation: savedLocation)
-              }
-            } else {
-              self.saveQuestion(questionContent, yesVoteCount: 0, noVoteCount: 0, parseLocation: objects[0])
+    locQuery.findObjectsInBackgroundWithBlock {
+      (objects: [AnyObject]?, locError: NSError?) -> Void in
+      if locError == nil {
+        if let objects = objects as? [PFObject] {
+          if objects.count == 0 {
+            
+            var locationModel = Location(latitude: location.coordinate.latitude,
+              longitude: location.coordinate.longitude,
+              name: location.name!,
+              externalId: location.externalId!)
+            
+            locationModel.save {
+              (savedLocation) -> () in
+              self.saveQuestion(content, yesVoteCount: 0, noVoteCount: 0, parseLocation: savedLocation)
             }
+          } else {
+            self.saveQuestion(content, yesVoteCount: 0, noVoteCount: 0, parseLocation: objects[0])
           }
-        } else {
-          println(locError)
         }
+      } else {
+        println(locError)
+      }
+    }
+  }
+  
+  func saveQuestionWithLoc(content: String, location: Location) {
+    var locQuery = PFQuery(className: "Location")
+    locQuery.whereKey("coordinate", nearGeoPoint:location.coordinate, withinMiles:0.1)
+    
+    locQuery.findObjectsInBackgroundWithBlock {
+      (objects: [AnyObject]?, locError: NSError?) -> Void in
+      
+      if locError == nil {
+        if let locations = objects as? [PFObject] {
+          if locations.count == 0 {
+            var locationModel = Location(latitude: location.coordinate.latitude,
+              longitude: location.coordinate.longitude)
+            locationModel.save {
+              (savedLocation) -> () in
+              self.saveQuestion(content, yesVoteCount: 0, noVoteCount: 0, parseLocation: savedLocation)
+            }
+          } else {
+            self.saveQuestion(content, yesVoteCount: 0, noVoteCount: 0, parseLocation: locations[0])
+          }
+        }
+      } else {
+        println(locError)
+      }
+      
+    }
+  }
+  
+  func save(questionContent: String, questionLocation: Location) {
+    if let locExternalId = questionLocation.externalId {
+      if !locExternalId.isEmpty {
+        saveQuestionWithLocExternalId(questionContent, location: questionLocation)
+      } else {
+        saveQuestionWithLoc(questionContent, location: questionLocation)
       }
     } else {
-      var locationModel = Location(latitude: questionLocation.coordinate.latitude,
-        longitude: questionLocation.coordinate.longitude)
-      
-      locationModel.save {
-        (savedLocation) -> () in
-        self.saveQuestion(questionContent, yesVoteCount: 0, noVoteCount: 0, parseLocation: savedLocation)
-      }
+      saveQuestionWithLoc(questionContent, location: questionLocation)
     }
   }
   
@@ -72,7 +100,7 @@ class Question {
       } else if let question = question {
         question["yesVoteCount"] = 0
         question["noVoteCount"] = 0
-
+        
         question.saveInBackgroundWithBlock {
           (success: Bool, error: NSError?) -> Void in
           if (success) {
@@ -149,7 +177,7 @@ class Question {
               if qnError == nil {
                 var results: [Question] = []
                 if let questions = questions as? [PFObject] {
-
+                  
                   let locModel = self.getLocationModel(location)
                   
                   for question in questions {
@@ -184,61 +212,63 @@ class Question {
     var alreadySeenQuestions = Set<String>()
     
     var locQuery = PFQuery(className: "Location")
-    locQuery.whereKey("coordinate", nearGeoPoint:coordinate, withinKilometers: 200)
-    var locResults = locQuery.findObjects()
-    
-    var results: [Question] = []
-    
-    if let locResults = locResults {
-      if locResults.count == 0 {
-        completion(questions: [])
-      } else {
-        for locResult in locResults {
-          let coordinate = locResult["coordinate"] as! PFGeoPoint
-          let locationPointer = PFObject(withoutDataWithClassName: "Location", objectId: locResult.objectId!)
-          let questionQuery = PFQuery(className:"Question")
-          questionQuery.whereKey("location", equalTo:locationPointer)
-          questionQuery.orderByDescending("updatedAt")
-          
-          questionQuery.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]?, qnError: NSError?) -> Void in
+    locQuery.whereKey("coordinate", nearGeoPoint:coordinate, withinMiles: 0.2)
+    locQuery.findObjectsInBackgroundWithBlock {
+      (objects: [AnyObject]?, qnError: NSError?) -> Void in
+      
+      var results: [Question] = []
+      
+      if let locations = objects {
+        if locations.count == 0 {
+          completion(questions: [])
+        } else {
+          for locResult in locations {
+            let coordinate = locResult["coordinate"] as! PFGeoPoint
+            let locationPointer = PFObject(withoutDataWithClassName: "Location", objectId: locResult.objectId!)
+            let questionQuery = PFQuery(className:"Question")
+            questionQuery.whereKey("location", equalTo:locationPointer)
+            questionQuery.orderByDescending("updatedAt")
             
-            if qnError == nil {
-              if let questions = objects as? [PFObject] {
-                
-                let locationModel = self.getLocationModel(locResult as! PFObject)
-                
-                for question in questions {
+            questionQuery.findObjectsInBackgroundWithBlock {
+              (objects: [AnyObject]?, qnError: NSError?) -> Void in
+              
+              if qnError == nil {
+                if let questions = objects as? [PFObject] {
                   
-                  if !alreadySeenQuestions.contains(question.objectId!) {
-                    var result: Question =  Question()
-                    result.content = question["content"] as? String
-                    result.location = locationModel
-                    result.yesVotes = question["yesVoteCount"] as? Int
-                    result.noVotes = question["noVoteCount"] as? Int
-                    result.lastUpdatedTime = question.updatedAt
-                    result.parseId = question.objectId
+                  let locationModel = self.getLocationModel(locResult as! PFObject)
+                  
+                  for question in questions {
                     
-                    results.append(result)
-                    
-                    alreadySeenQuestions.insert(question.objectId!)
+                    if !alreadySeenQuestions.contains(question.objectId!) {
+                      var result: Question =  Question()
+                      result.content = question["content"] as? String
+                      result.location = locationModel
+                      result.yesVotes = question["yesVoteCount"] as? Int
+                      result.noVotes = question["noVoteCount"] as? Int
+                      result.lastUpdatedTime = question.updatedAt
+                      result.parseId = question.objectId
+                      
+                      results.append(result)
+                      
+                      alreadySeenQuestions.insert(question.objectId!)
+                    }
                   }
+                  
+                  completion(questions: results)
                 }
-                
-                completion(questions: results)
+              } else {
+                println("ERROR: Could not fetch questions for coordinate\(coordinate) " + qnError!.localizedDescription)
+                completion(questions: [])
               }
-            } else {
-              println("ERROR: Could not fetch questions for coordinate\(coordinate) " + qnError!.localizedDescription)
-              completion(questions: [])
             }
           }
         }
+      } else {
+        completion(questions: [])
       }
-    } else {
-      completion(questions: [])
     }
   }
-
+  
   func getAllQuestions(location: Location, completion: (questions: [Question]) -> ()) {
     if let externalId = location.externalId {
       getAllQuestionsByExternalId(externalId, completion: {

@@ -114,12 +114,12 @@ class LocationViewController: UIViewController, QuestionLocationProtocol {
     questionModel.getAllQuestions(location, completion: {
       allQuestions -> () in
       if allQuestions.count > 0 {
-        self.allQuestions += allQuestions
+        self.allQuestions = allQuestions
         self.qnaDetailsTableView.reloadData()
-        self.numberOfQuestions.hidden = false
         self.numberOfQuestions.text = String(self.allQuestions.count) + " ASKIIS"
       } else {
-        self.numberOfQuestions.hidden = true
+        self.allQuestions.removeAll(keepCapacity: false)
+        self.qnaDetailsTableView.reloadData()
       }
     })
   }
@@ -180,8 +180,10 @@ class LocationViewController: UIViewController, QuestionLocationProtocol {
 // MARK: CLLocationManagerDelegate
 extension LocationViewController: CLLocationManagerDelegate {
   func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+    
     hasCurrentLocationBeenFetched = true
     var currentLocation = locations.first as? CLLocation
+    
     camera = GMSCameraPosition.cameraWithLatitude(currentLocation!.coordinate.latitude,
       longitude: currentLocation!.coordinate.longitude,
       zoom: 17)
@@ -219,6 +221,7 @@ extension LocationViewController: GMSMapViewDelegate {
   func mapView(mapView: GMSMapView!, idleAtCameraPosition position: GMSCameraPosition!) {
     if inSearchMode {
       inSearchMode = false
+      hasCurrentLocationBeenFetched = true
     } else if hasCurrentLocationBeenFetched {
       placeMarker(position.target.latitude, longitude: position.target.longitude)
     }
