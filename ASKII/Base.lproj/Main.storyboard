@@ -93,28 +93,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jh3-fO-fZH" userLabel="Map">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jh3-fO-fZH" userLabel="MapContainer">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <subviews>
-                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="LQO-lI-gwz">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oXF-U8-FHu" userLabel="MapContent" customClass="GMSMapView">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="580"/>
-                                    </mapView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="LQO-lI-gwz" firstAttribute="leading" secondItem="jh3-fO-fZH" secondAttribute="leading" id="5Rc-MA-mkh"/>
-                                    <constraint firstAttribute="bottom" secondItem="LQO-lI-gwz" secondAttribute="bottom" id="7WM-Qq-aWZ"/>
-                                    <constraint firstAttribute="centerX" secondItem="LQO-lI-gwz" secondAttribute="centerX" constant="45" id="BHC-F6-XhS"/>
-                                    <constraint firstAttribute="trailing" secondItem="LQO-lI-gwz" secondAttribute="trailing" id="MYL-HW-Uo5"/>
-                                    <constraint firstAttribute="centerY" secondItem="LQO-lI-gwz" secondAttribute="centerY" id="VYa-zW-Xdg"/>
-                                    <constraint firstAttribute="height" constant="220" id="foR-tR-132"/>
-                                    <constraint firstItem="LQO-lI-gwz" firstAttribute="height" secondItem="jh3-fO-fZH" secondAttribute="height" id="vrg-Ye-ZBy"/>
+                                    <constraint firstAttribute="bottom" secondItem="oXF-U8-FHu" secondAttribute="bottom" id="De6-Np-u0d"/>
+                                    <constraint firstAttribute="trailing" secondItem="oXF-U8-FHu" secondAttribute="trailing" id="FRY-cn-KM8"/>
+                                    <constraint firstItem="oXF-U8-FHu" firstAttribute="leading" secondItem="jh3-fO-fZH" secondAttribute="leading" id="Hwf-J2-5AW"/>
+                                    <constraint firstItem="oXF-U8-FHu" firstAttribute="top" secondItem="jh3-fO-fZH" secondAttribute="top" id="m5t-eG-vP1"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="foR-tR-132"/>
-                                        <exclude reference="BHC-F6-XhS"/>
-                                    </mask>
-                                </variation>
                             </view>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2bh-uP-t2W">
                                 <rect key="frame" x="0.0" y="20" width="600" height="65"/>
@@ -426,7 +418,7 @@
                     </view>
                     <connections>
                         <outlet property="headerView" destination="2bh-uP-t2W" id="jk6-AR-UTq"/>
-                        <outlet property="mapView" destination="LQO-lI-gwz" id="c1l-oJ-Gpe"/>
+                        <outlet property="mapView" destination="oXF-U8-FHu" id="W4C-nQ-N73"/>
                         <outlet property="tableView" destination="i66-9e-8Zi" id="Pp2-l2-O4d"/>
                     </connections>
                 </viewController>
