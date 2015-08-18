@@ -344,6 +344,12 @@
                             <constraint firstAttribute="trailing" secondItem="tVb-KK-hqJ" secondAttribute="trailing" constant="16" id="uJE-G7-Ocy"/>
                             <constraint firstItem="B3J-Va-bcY" firstAttribute="leading" secondItem="Vf1-bk-zuH" secondAttribute="leading" constant="16" id="vMW-rc-PfP"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="77h-2V-SaS"/>
+                                <exclude reference="PSN-x1-6iX"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="mc0-Wv-ngF" id="ESC-xg-Fa1"/>

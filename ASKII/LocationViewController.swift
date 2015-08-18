@@ -53,7 +53,7 @@ class LocationViewController: UIViewController, QuestionLocationProtocol {
     
     
     // Initialize all the location stuff
-    if (mapView != nil) {
+    if mapView != nil {
       locationManager = CLLocationManager()
       locationManager.delegate = self
       locationManager.requestWhenInUseAuthorization()
