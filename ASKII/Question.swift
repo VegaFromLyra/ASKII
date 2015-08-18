@@ -91,7 +91,6 @@ class Question {
   }
   
   func clearVoteCount(completion: (success: Bool) -> ()) {
-    
     var query = PFQuery(className:"Question")
     query.getObjectInBackgroundWithId(parseId!) {
       (question: PFObject?, error: NSError?) -> Void in
@@ -100,6 +99,51 @@ class Question {
       } else if let question = question {
         question["yesVoteCount"] = 0
         question["noVoteCount"] = 0
+        
+        question.saveInBackgroundWithBlock {
+          (success: Bool, error: NSError?) -> Void in
+          if (success) {
+            completion(success: true)
+          } else {
+            println(error?.description)
+            completion(success: false)
+          }
+        }
+      }
+    }
+  }
+  
+  
+  func addYesVote(completion: (success: Bool) -> ()) {
+    var query = PFQuery(className:"Question")
+    query.getObjectInBackgroundWithId(parseId!) {
+      (question: PFObject?, error: NSError?) -> Void in
+      if error != nil {
+        println(error)
+      } else if let question = question {
+        question["yesVoteCount"] = question["yesVoteCount"] as! Int + 1
+        
+        question.saveInBackgroundWithBlock {
+          (success: Bool, error: NSError?) -> Void in
+          if (success) {
+            completion(success: true)
+          } else {
+            println(error?.description)
+            completion(success: false)
+          }
+        }
+      }
+    }
+  }
+  
+  func addNoVote(completion: (success: Bool) -> ()) {
+    var query = PFQuery(className:"Question")
+    query.getObjectInBackgroundWithId(parseId!) {
+      (question: PFObject?, error: NSError?) -> Void in
+      if error != nil {
+        println(error)
+      } else if let question = question {
+        question["noVoteCount"] = question["noVoteCount"] as! Int + 1
         
         question.saveInBackgroundWithBlock {
           (success: Bool, error: NSError?) -> Void in

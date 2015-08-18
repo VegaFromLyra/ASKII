@@ -25,18 +25,18 @@ extension UIColor {
   }
 }
 
-class QuestionsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class QuestionsViewController: UIViewController, UITableViewDataSource {
   
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var headerView: UIView!
-  
   @IBOutlet weak var mapView: GMSMapView!
   
-  
-  
-  var camera: GMSCameraPosition?
-  
+  let questionModel:Question = Question()
   let gradientLayer = CAGradientLayer()
+  var camera: GMSCameraPosition?
+  var currentLocation: CLLocation?
+  var allQuestions: [Question] = []
+  
   
   @IBAction func onAskAnywherePressed(sender: AnyObject) {
     var storyboard = UIStoryboard(name: "NewQuestion", bundle: nil)
@@ -76,13 +76,13 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
     
     self.tableView.backgroundColor = UIColor.clearColor();
     self.tableView.opaque = false;
-    self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
     // Auto row height for each cell
     self.tableView.estimatedRowHeight = 300
     self.tableView.rowHeight = UITableViewAutomaticDimension
   }
+  
   
   // gradient over map
   func setUpLayer() {
@@ -99,58 +99,6 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
-  }
-  
-  func layoutSubviews() {
-    super.viewDidLayoutSubviews()
-    self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height-40, 0, 0, 0);
-  }
-  
-  func scrollViewDidScroll(scrollView: UIScrollView) {
-    if (scrollView.contentOffset.y < self.mapView.frame.size.height * -1 ) {
-      scrollView.setContentOffset(CGPointMake(scrollView.contentOffset.x, self.mapView.frame.size.height * -1), animated: true)
-    }
-  }
-  
-  func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-    // #warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 6
-  }
-  
-  func tableView(tableView: UITableView,
-    heightForHeaderInSection section: Int) -> CGFloat {
-      return 1
-  }
-  
-  func tableView(tableView: UITableView,
-    viewForHeaderInSection section: Int) -> UIView? {
-      //UIView *headerView = [[UIView alloc] init];
-      let headerView = UIView()
-      headerView.backgroundColor = UIColor(red: 0xff, green: 0xff, blue: 0xff, alpha: 0.0)
-      
-      return headerView;
-  }
-  
-  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 1
-  }
-  
-  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    
-    let cell: TableViewCell = self.tableView.dequeueReusableCellWithIdentifier("QuestionCell", forIndexPath: indexPath) as! TableViewCell
-    
-    cell.backgroundColor =  UIColor(red: 0xff, green: 0xff, blue: 0xff, alpha: 0.9)
-    
-    cell.selectionStyle = .None
-    
-    cell.config()
-    
-    return cell
-  }
-  
-  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -180,14 +128,46 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
 // MARK - CLLocationManagerDelegate methods
 extension QuestionsViewController: CLLocationManagerDelegate {
   func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-    let location = locations.last as! CLLocation
-    camera = GMSCameraPosition.cameraWithLatitude(location.coordinate.latitude,
-      longitude: location.coordinate.longitude,
+    currentLocation = locations.last as? CLLocation
+    camera = GMSCameraPosition.cameraWithLatitude(currentLocation!.coordinate.latitude,
+      longitude: currentLocation!.coordinate.longitude,
       zoom: 17)
     mapView.camera = camera
     mapView.myLocationEnabled = true
     mapView.settings.myLocationButton = true
     locationManager.stopUpdatingLocation()
+    
+    if allQuestions.count == 0 {
+      if let currentLocation = currentLocation {
+        var locationModel = Location(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
+        questionModel.getAllQuestions(locationModel, completion: {
+          (allQuestions) -> () in
+          self.allQuestions = allQuestions
+          self.tableView.reloadData()
+        })
+      }
+    }
+  }
+}
+
+extension QuestionsViewController: UITableViewDataSource {
+  
+  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return allQuestions.count
+  }
+  
+  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    let currentQuestion = allQuestions[indexPath.row]
+    
+    let cell: TableViewCell = self.tableView.dequeueReusableCellWithIdentifier("QuestionCell", forIndexPath: indexPath) as! TableViewCell
+    
+    cell.backgroundColor =  UIColor(red: 0xff, green: 0xff, blue: 0xff, alpha: 0.9)
+    
+    cell.selectionStyle = .None
+    
+    cell.config(currentQuestion)
+    
+    return cell
   }
 }
 
