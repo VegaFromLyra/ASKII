@@ -12,14 +12,17 @@ import CoreLocation
 class SearchLocationViewController: UIViewController {
   
   let venueService = VenueService()
-  var delegate: QuestionLocationProtocol?
+  var delegate: LocationProtocol?
   @IBOutlet weak var searchTextField: UITextField!
   @IBOutlet weak var searchResultsTableView: UITableView!
   var locations: [(name: String, area: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees, venueId: String)] = []
   
-  var location: CLLocation?
-  var name: String?
-  var venueId: String?
+  // MARK: LocationProtocol
+  var selectedLocation: CLLocation?
+  var selectedLocationName: String?
+  var selectedLocationVenueId: String?
+  
+  
   var locationVC: LocationViewController!
   
   override func viewDidLoad() {
@@ -55,13 +58,13 @@ class SearchLocationViewController: UIViewController {
 
 // MARK: UITableViewDelegate
 
-extension SearchLocationViewController: UITableViewDelegate, QuestionLocationProtocol {
+extension SearchLocationViewController: UITableViewDelegate, LocationProtocol {
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    var selectedLocation = locations[indexPath.row]
-    location = CLLocation(latitude: selectedLocation.latitude, longitude: selectedLocation.longitude)
-    name = selectedLocation.name
-    venueId = selectedLocation.venueId
+    var loc = locations[indexPath.row]
+    selectedLocation = CLLocation(latitude: loc.latitude, longitude: loc.longitude)
+    selectedLocationName = loc.name
+    selectedLocationVenueId = loc.venueId
     locationVC.locationDelegate = self
     self.showViewController(locationVC as UIViewController, sender: locationVC)
   }
@@ -97,7 +100,7 @@ extension SearchLocationViewController: UITextFieldDelegate {
       searchResultsTableView.reloadData()
     }
     
-    if let location = delegate?.location {
+    if let location = delegate?.selectedLocation {
       
       var txtAfterUpdate:NSString = self.searchTextField.text as NSString
       txtAfterUpdate = txtAfterUpdate.stringByReplacingCharactersInRange(range, withString: string)

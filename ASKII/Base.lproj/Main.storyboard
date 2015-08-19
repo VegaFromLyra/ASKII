@@ -127,9 +127,9 @@
                                             </mask>
                                         </variation>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ITP" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z38-tv-JmD">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z38-tv-JmD">
                                         <rect key="frame" x="34" y="19" width="28.5" height="15.5"/>
-                                        <fontDescription key="fontDescription" name="GothamBlack" family="Gotham Black" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="GothamBlack" family="Gotham Black" pointSize="15"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -404,6 +404,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="currentLocationName" destination="z38-tv-JmD" id="uS9-WR-gJc"/>
                         <outlet property="headerView" destination="2bh-uP-t2W" id="jk6-AR-UTq"/>
                         <outlet property="mapView" destination="oXF-U8-FHu" id="W4C-nQ-N73"/>
                         <outlet property="tableView" destination="i66-9e-8Zi" id="Pp2-l2-O4d"/>
@@ -653,7 +654,7 @@
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="icon-location-s" translatesAutoresizingMaskIntoConstraints="NO" id="Ulb-7J-wc5">
                                         <rect key="frame" x="16" y="14" width="11" height="14"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="207 Broadway, NY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tox-Kq-Lzf">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tox-Kq-Lzf">
                                         <rect key="frame" x="35" y="15" width="133" height="12.5"/>
                                         <fontDescription key="fontDescription" name="GothamBlack" family="Gotham Black" pointSize="14"/>
                                         <color key="textColor" red="0.24313725490196078" green="0.25490196078431371" blue="0.25882352941176473" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -701,6 +702,7 @@
                     <navigationItem key="navigationItem" id="01a-kL-YIu"/>
                     <connections>
                         <outlet property="AnswersTableView" destination="9l3-o3-yvc" id="a5q-9k-j1k"/>
+                        <outlet property="currentLocationName" destination="Tox-Kq-Lzf" id="i8m-O7-4tG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CLr-id-AzY" userLabel="First Responder" sceneMemberID="firstResponder"/>

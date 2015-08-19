@@ -13,7 +13,7 @@ import GoogleMaps
 // TODO: Define it a common place
 typealias JSONParameters = [String: AnyObject]
 
-class LocationViewController: UIViewController, QuestionLocationProtocol {
+class LocationViewController: UIViewController, LocationProtocol {
   
   @IBOutlet weak var mapView: GMSMapView!
   @IBOutlet weak var searchButton: UIButton!
@@ -31,16 +31,18 @@ class LocationViewController: UIViewController, QuestionLocationProtocol {
   let venueService = VenueService()
   var selectedMarker: GMSMarker?
   var selectedVenueMarker: GMSMarker?
-  var location: CLLocation?
-  var name: String?
-  var venueId: String?
+  
+  // MARK: LocationProtocol
+  var selectedLocation: CLLocation?
+  var selectedLocationName: String?
+  var selectedLocationVenueId: String?
+  
+  
   var camera: GMSCameraPosition?
-  
   var hasCurrentLocationBeenFetched: Bool = false
-  
   var locationManager: CLLocationManager!
   var delegate: NewQuestion?
-  var locationDelegate: QuestionLocationProtocol?
+  var locationDelegate: LocationProtocol?
   var inSearchMode: Bool = false
   let questionModel:Question = Question()
   var allQuestions:[Question] = []
@@ -79,25 +81,25 @@ class LocationViewController: UIViewController, QuestionLocationProtocol {
     super.viewDidAppear(animated)
     
     if let locDelegate = locationDelegate {
-      if let loc = locDelegate.location, locName = locDelegate.name, locId = locDelegate.venueId {
+      if let loc = locDelegate.selectedLocation, locName = locDelegate.selectedLocationName, locId = locDelegate.selectedLocationVenueId {
         inSearchMode = true
         
         setLocationInfo(loc.coordinate.latitude, longitude: loc.coordinate.longitude, locName: locName, locVenueId: locId)
         
-        fetchQuestionsForLocation(Location(latitude: location!.coordinate.latitude,
-            longitude: location!.coordinate.longitude,
-            name: name!,
-            externalId: venueId!))
+        fetchQuestionsForLocation(Location(latitude: selectedLocation!.coordinate.latitude,
+            longitude: selectedLocation!.coordinate.longitude,
+            name: selectedLocationName!,
+            externalId: selectedLocationVenueId!))
         
-        camera = GMSCameraPosition.cameraWithLatitude(location!.coordinate.latitude,
-          longitude: location!.coordinate.longitude,
+        camera = GMSCameraPosition.cameraWithLatitude(selectedLocation!.coordinate.latitude,
+          longitude: selectedLocation!.coordinate.longitude,
           zoom: 17)
         mapView.animateToCameraPosition(camera)
         
-        placeVenueMarker(location!.coordinate.latitude,
-          longitude: location!.coordinate.longitude,
-          name: name!,
-          venueId: venueId!)
+        placeVenueMarker(selectedLocation!.coordinate.latitude,
+          longitude: selectedLocation!.coordinate.longitude,
+          name: selectedLocationName!,
+          venueId: selectedLocationVenueId!)
       }
     } else {
       locationManager.startUpdatingLocation()
@@ -147,17 +149,17 @@ class LocationViewController: UIViewController, QuestionLocationProtocol {
   }
   
   func setLocationInfo(latitude: CLLocationDegrees, longitude: CLLocationDegrees, locName: String?, locVenueId: String?) {
-    location = CLLocation(latitude: latitude, longitude: longitude)
+    selectedLocation = CLLocation(latitude: latitude, longitude: longitude)
     if let locName = locName {
-      name = locName
+      selectedLocationName = locName
     } else {
-      name?.removeAll(keepCapacity: false)
+      selectedLocationName?.removeAll(keepCapacity: false)
     }
     
     if let locVenueId = locVenueId {
-      venueId = locVenueId
+      selectedLocationVenueId = locVenueId
     } else {
-      venueId?.removeAll(keepCapacity: false)
+      selectedLocationVenueId?.removeAll(keepCapacity: false)
     }
   }
   
@@ -231,7 +233,7 @@ extension LocationViewController: GMSMapViewDelegate {
 
 // MARK: UITableViewDelegate
 
-extension LocationViewController: UITableViewDelegate, QuestionLocationProtocol {
+extension LocationViewController: UITableViewDelegate, LocationProtocol {
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 

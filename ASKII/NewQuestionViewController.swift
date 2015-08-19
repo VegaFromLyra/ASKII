@@ -17,7 +17,7 @@ class NewQuestionViewController: UIViewController, NewQuestion {
   
 
   var question: String?
-  var delegate: QuestionLocationProtocol?
+  var delegate: LocationProtocol?
   
   @IBAction func onSubmitQuestionDone(sender: AnyObject) {
     var storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -29,15 +29,15 @@ class NewQuestionViewController: UIViewController, NewQuestion {
   @IBAction func onSubmitQuestion(sender: AnyObject) {
     
     if !questionText.text.isEmpty {
-      if let location = delegate?.location {
+      if let location = delegate?.selectedLocation {
         let locationModel = Location(latitude: location.coordinate.latitude,
           longitude: location.coordinate.longitude)
         
-        if let name = delegate?.name {
+        if let name = delegate?.selectedLocationName {
           locationModel.name = name
         }
         
-        if let externalId = delegate?.venueId {
+        if let externalId = delegate?.selectedLocationVenueId {
           locationModel.externalId = externalId
         }
         

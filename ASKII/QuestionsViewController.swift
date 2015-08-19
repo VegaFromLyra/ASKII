@@ -25,11 +25,16 @@ extension UIColor {
   }
 }
 
-class QuestionsViewController: UIViewController, UITableViewDataSource {
+class QuestionsViewController: UIViewController, LocationProtocol {
   
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var headerView: UIView!
   @IBOutlet weak var mapView: GMSMapView!
+  @IBOutlet weak var currentLocationName: UILabel!
+  
+  var selectedLocation: CLLocation?
+  var selectedLocationName: String?
+  var selectedLocationVenueId: String?
   
   let questionModel:Question = Question()
   let gradientLayer = CAGradientLayer()
@@ -103,12 +108,9 @@ class QuestionsViewController: UIViewController, UITableViewDataSource {
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     
-    // this gets a reference to the screen that we're about to transition to
     let toViewController = segue.destinationViewController as! SingleQuestionViewController
-    
-    // instead of using the default transition animation, we'll ask
-    // the segue to use our custom TransitionManager object to manage the transition animation
     toViewController.transitioningDelegate = self.transitionManager
+    toViewController.locDelegate = self
     
   }
   
@@ -129,6 +131,7 @@ class QuestionsViewController: UIViewController, UITableViewDataSource {
 extension QuestionsViewController: CLLocationManagerDelegate {
   func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
     currentLocation = locations.last as? CLLocation
+    selectedLocation = currentLocation
     camera = GMSCameraPosition.cameraWithLatitude(currentLocation!.coordinate.latitude,
       longitude: currentLocation!.coordinate.longitude,
       zoom: 17)
@@ -136,6 +139,12 @@ extension QuestionsViewController: CLLocationManagerDelegate {
     mapView.myLocationEnabled = true
     mapView.settings.myLocationButton = true
     locationManager.stopUpdatingLocation()
+    
+    UtilityService.sharedInstance.getLocationName(currentLocation!) {
+      (name: String) -> () in
+        self.currentLocationName!.text = name
+        self.selectedLocationName = name
+    }
     
     if allQuestions.count == 0 {
       if let currentLocation = currentLocation {
@@ -149,6 +158,7 @@ extension QuestionsViewController: CLLocationManagerDelegate {
     }
   }
 }
+
 
 extension QuestionsViewController: UITableViewDataSource {
   
