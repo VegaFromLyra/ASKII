@@ -113,6 +113,24 @@ class Question {
     }
   }
   
+  func postComment(comment: String, completion: (success: Bool) -> ()) {
+    var query = PFQuery(className:"Question")
+    query.getObjectInBackgroundWithId(parseId!) {
+      (question: PFObject?, error: NSError?) -> Void in
+      if error != nil {
+        println(error)
+      } else if let question = question {
+        var commentQuery = PFObject(className: "Comment")
+        commentQuery["content"] = comment
+        commentQuery["question"] = PFObject(withoutDataWithClassName: "Question", objectId: self.parseId)
+        
+        commentQuery.saveInBackgroundWithBlock {
+          (success: Bool, error: NSError?) -> Void in
+          completion(success: success)
+        }
+      }
+    }
+  }
   
   func addYesVote(completion: (success: Bool) -> ()) {
     var query = PFQuery(className:"Question")
@@ -313,6 +331,7 @@ class Question {
     }
   }
   
+  // TODO - This should be in a service and not in the model
   func getAllQuestions(location: Location, completion: (questions: [Question]) -> ()) {
     if let externalId = location.externalId {
       getAllQuestionsByExternalId(externalId, completion: {

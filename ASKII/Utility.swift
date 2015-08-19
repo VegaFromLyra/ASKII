@@ -33,4 +33,35 @@ class UtilityService {
       }
     }
   }
+  
+  func getTimeElapsed(submittedTime: NSDate) -> String {
+    let elapsedTimeInterval = NSDate().timeIntervalSinceDate(submittedTime)
+    let durationInSeconds = Int(elapsedTimeInterval)
+    var output = ""
+    if durationInSeconds <= 60 {
+      output = String(durationInSeconds) + " s:"
+    } else if durationInSeconds <= 3600 {
+      output = String(durationInSeconds / 60) + " m:"
+    } else if durationInSeconds <= 86400 {
+      output = String(durationInSeconds / 3600) + " h:"
+    } else if durationInSeconds <= 604800 {
+      output = String(durationInSeconds / 86400) + " d:"
+    } else {
+      output = String(durationInSeconds / 604800) + " w:"
+    }
+    
+    return output
+  }
+  
+  func getPopularVote(yesVoteCount: Int, noVoteCount: Int) -> String {
+    var output = ""
+    if yesVoteCount > noVoteCount {
+      output = "yes"
+    } else if noVoteCount > yesVoteCount {
+      output = "no"
+    }
+    
+    return output
+  }
+  
 }

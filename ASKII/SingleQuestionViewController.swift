@@ -12,20 +12,58 @@ class SingleQuestionViewController: UIViewController, UITableViewDataSource, UIT
   
   @IBOutlet weak var AnswersTableView: UITableView!
   @IBOutlet weak var currentLocationName: UILabel!
+  @IBOutlet weak var questionLabel: UILabel!
+  @IBOutlet weak var questionSubmittedTimeLabel: UILabel!
+  @IBOutlet weak var commentTextField: UITextField!
+  @IBOutlet weak var popularVoteLabel: UILabel!
+  
+  let utilityService = UtilityService.sharedInstance
+  
+  @IBAction func onPostCommentClicked(sender: AnyObject) {
+    if commentTextField.text.isEmpty {
+      // TODO: Show alert
+      println("Missing comment")
+    } else {
+      question!.postComment(commentTextField.text, completion: {
+        (success) -> () in
+        if success {
+          println("Comment posted successfully")
+        } else {
+          println("Error in posting comment")
+        }
+      })
+    }
+  }
+  
+  @IBAction func onYesButtonClicked(sender: AnyObject) {
+    question!.addYesVote {
+      (success) -> () in
+      if success {
+        println("Added yes vote")
+      } else {
+        println("Error adding yes vote")
+      }
+    }
+  }
+  
+  @IBAction func onNoButtonClicked(sender: AnyObject) {
+    question!.addNoVote {
+      (success) -> () in
+      if success {
+        println("Added no vote")
+      } else {
+        println("Error adding no vote")
+      }
+    }
+  }
   
   var locDelegate: LocationProtocol?
-  
-  
-  //    @IBAction func onNewQuestionPressed(sender: AnyObject) {
-  //        var storyboard = UIStoryboard(name: "NewQuestion", bundle: nil)
-  //        var controller = storyboard.instantiateViewControllerWithIdentifier("InitialController") as! UIViewController
-  //
-  //        self.presentViewController(controller, animated: true, completion: nil)
-  //    }
+  var question: Question?
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    // TODO: Figure out why this is needed
     self.AnswersTableView.estimatedRowHeight = 100
     self.AnswersTableView.rowHeight = UITableViewAutomaticDimension
     
@@ -37,6 +75,12 @@ class SingleQuestionViewController: UIViewController, UITableViewDataSource, UIT
       if let locName = locDelegate.selectedLocationName {
         currentLocationName.text = locName
       }
+    }
+    
+    if let question = question {
+      questionLabel.text = question.content
+      questionSubmittedTimeLabel.text = utilityService.getTimeElapsed(question.lastUpdatedTime!)
+      popularVoteLabel.text = utilityService.getPopularVote(question.yesVotes!, noVoteCount: question.noVotes!)
     }
   }
   

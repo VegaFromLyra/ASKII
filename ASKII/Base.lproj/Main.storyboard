@@ -458,6 +458,9 @@
                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="onPostCommentClicked:" destination="PaY-TO-22z" eventType="touchUpInside" id="8bj-M2-1qq"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -542,6 +545,9 @@
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="onYesButtonClicked:" destination="PaY-TO-22z" eventType="touchUpInside" id="Zf6-Vj-CvS"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rpP-JK-2Mn">
                                                     <rect key="frame" x="150" y="13" width="75" height="75"/>
@@ -557,6 +563,9 @@
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="onNoButtonClicked:" destination="PaY-TO-22z" eventType="touchUpInside" id="0hv-S0-co8"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -654,8 +663,8 @@
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="icon-location-s" translatesAutoresizingMaskIntoConstraints="NO" id="Ulb-7J-wc5">
                                         <rect key="frame" x="16" y="14" width="11" height="14"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tox-Kq-Lzf">
-                                        <rect key="frame" x="35" y="15" width="133" height="12.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tox-Kq-Lzf">
+                                        <rect key="frame" x="35" y="21.5" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" name="GothamBlack" family="Gotham Black" pointSize="14"/>
                                         <color key="textColor" red="0.24313725490196078" green="0.25490196078431371" blue="0.25882352941176473" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -702,7 +711,11 @@
                     <navigationItem key="navigationItem" id="01a-kL-YIu"/>
                     <connections>
                         <outlet property="AnswersTableView" destination="9l3-o3-yvc" id="a5q-9k-j1k"/>
+                        <outlet property="commentTextField" destination="u35-1g-sjD" id="7XU-sr-St7"/>
                         <outlet property="currentLocationName" destination="Tox-Kq-Lzf" id="i8m-O7-4tG"/>
+                        <outlet property="popularVoteLabel" destination="Ld8-L0-mCq" id="sn6-tG-0BU"/>
+                        <outlet property="questionLabel" destination="bKz-UI-mPw" id="VJT-LI-szK"/>
+                        <outlet property="questionSubmittedTimeLabel" destination="JO4-bf-1WP" id="CMV-wT-M7b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CLr-id-AzY" userLabel="First Responder" sceneMemberID="firstResponder"/>
