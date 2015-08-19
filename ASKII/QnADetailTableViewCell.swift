@@ -49,37 +49,6 @@ class QnADetailTableViewCell: UITableViewCell {
     parentViewController?.presentViewController(alert, animated: true, completion: nil)
   }
   
-  // TODO - Move to utility service
-  func getTimeElapsed(submittedTime: NSDate) -> String {
-    let elapsedTimeInterval = NSDate().timeIntervalSinceDate(submittedTime)
-    let durationInSeconds = Int(elapsedTimeInterval)
-    var output = ""
-    if durationInSeconds <= 60 {
-      output = String(durationInSeconds) + " s:"
-    } else if durationInSeconds <= 3600 {
-      output = String(durationInSeconds / 60) + " m:"
-    } else if durationInSeconds <= 86400 {
-      output = String(durationInSeconds / 3600) + " h:"
-    } else if durationInSeconds <= 604800 {
-      output = String(durationInSeconds / 86400) + " d:"
-    } else {
-      output = String(durationInSeconds / 604800) + " w:"
-    }
-    
-    return output
-  }
-  
-  func getPopulateVote(yesVoteCount: Int, noVoteCount: Int) -> String {
-    var output = ""
-    if yesVoteCount > noVoteCount {
-      output = "yes"
-    } else if noVoteCount > yesVoteCount {
-      output = "no"
-    }
-    
-    return output
-  }
-  
   func configure(data: Question) {
     question = data
     
@@ -91,9 +60,9 @@ class QnADetailTableViewCell: UITableViewCell {
     let noVoteCount: Int = data.noVotes!
     noVoteCountLabel.text = noVoteCount.description
     
-    questionSubmittedTime.text = getTimeElapsed(data.lastUpdatedTime!)
+    questionSubmittedTime.text = UtilityService.sharedInstance.getTimeElapsed(data.lastUpdatedTime!)
     
-    popularAnswer.text = getPopulateVote(yesVoteCount, noVoteCount: noVoteCount)
+    popularAnswer.text = UtilityService.sharedInstance.getPopularVote(yesVoteCount, noVoteCount: noVoteCount)
   }
   
   

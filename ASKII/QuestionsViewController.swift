@@ -36,12 +36,14 @@ class QuestionsViewController: UIViewController, LocationProtocol {
   var selectedLocationName: String?
   var selectedLocationVenueId: String?
   
+  // TODO - Instead of questionModel, use questionService
   let questionModel:Question = Question()
+  var selectedQuestion: Question?
   let gradientLayer = CAGradientLayer()
   var camera: GMSCameraPosition?
   var currentLocation: CLLocation?
   var allQuestions: [Question] = []
-  
+  var singleQuestionViewController: SingleQuestionViewController!
   
   @IBAction func onAskAnywherePressed(sender: AnyObject) {
     var storyboard = UIStoryboard(name: "NewQuestion", bundle: nil)
@@ -69,6 +71,9 @@ class QuestionsViewController: UIViewController, LocationProtocol {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    singleQuestionViewController = self.storyboard!.instantiateViewControllerWithIdentifier("SingleQuestionViewController") as! SingleQuestionViewController
+    singleQuestionViewController.locDelegate = self
+    
     if CLLocationManager.locationServicesEnabled() && mapView != nil {
       locationManager = CLLocationManager()
       locationManager.delegate = self
@@ -79,10 +84,12 @@ class QuestionsViewController: UIViewController, LocationProtocol {
     }
     setUpLayer()
     
-    self.tableView.backgroundColor = UIColor.clearColor();
-    self.tableView.opaque = false;
-    self.tableView.dataSource = self;
+    tableView.backgroundColor = UIColor.clearColor();
+    tableView.opaque = false;
+    tableView.dataSource = self;
+    tableView.delegate = self
     
+    // TODO: Figure out why this is needed
     // Auto row height for each cell
     self.tableView.estimatedRowHeight = 300
     self.tableView.rowHeight = UITableViewAutomaticDimension
@@ -107,11 +114,6 @@ class QuestionsViewController: UIViewController, LocationProtocol {
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    
-    let toViewController = segue.destinationViewController as! SingleQuestionViewController
-    toViewController.transitioningDelegate = self.transitionManager
-    toViewController.locDelegate = self
-    
   }
   
   
@@ -159,6 +161,15 @@ extension QuestionsViewController: CLLocationManagerDelegate {
   }
 }
 
+extension QuestionsViewController: UITableViewDelegate {
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    selectedQuestion = allQuestions[indexPath.row]
+    singleQuestionViewController.transitioningDelegate = self.transitionManager
+    singleQuestionViewController.question = selectedQuestion!
+    self.showViewController(singleQuestionViewController as UIViewController,
+      sender: singleQuestionViewController)
+  }
+}
 
 extension QuestionsViewController: UITableViewDataSource {
   
