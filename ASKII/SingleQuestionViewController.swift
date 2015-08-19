@@ -64,8 +64,9 @@ class SingleQuestionViewController: UIViewController, UITableViewDataSource, UIT
     super.viewDidLoad()
     
     // TODO: Figure out why this is needed
-    self.AnswersTableView.estimatedRowHeight = 100
-    self.AnswersTableView.rowHeight = UITableViewAutomaticDimension
+    AnswersTableView.estimatedRowHeight = 100
+    AnswersTableView.rowHeight = UITableViewAutomaticDimension
+    commentTextField.delegate = self
     
     // Do any additional setup after loading the view.
   }
@@ -117,4 +118,10 @@ class SingleQuestionViewController: UIViewController, UITableViewDataSource, UIT
   }
   */
   
+}
+
+extension SingleQuestionViewController: UITextFieldDelegate {
+  func textFieldDidBeginEditing(textField: UITextField) {
+    commentTextField.text = ""
+  }
 }

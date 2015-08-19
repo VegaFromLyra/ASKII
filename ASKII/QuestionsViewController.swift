@@ -43,7 +43,7 @@ class QuestionsViewController: UIViewController, LocationProtocol {
   var camera: GMSCameraPosition?
   var currentLocation: CLLocation?
   var allQuestions: [Question] = []
-  
+  var singleQuestionViewController: SingleQuestionViewController!
   
   @IBAction func onAskAnywherePressed(sender: AnyObject) {
     var storyboard = UIStoryboard(name: "NewQuestion", bundle: nil)
@@ -70,6 +70,9 @@ class QuestionsViewController: UIViewController, LocationProtocol {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    singleQuestionViewController = self.storyboard!.instantiateViewControllerWithIdentifier("SingleQuestionViewController") as! SingleQuestionViewController
+    singleQuestionViewController.locDelegate = self
     
     if CLLocationManager.locationServicesEnabled() && mapView != nil {
       locationManager = CLLocationManager()
@@ -111,11 +114,6 @@ class QuestionsViewController: UIViewController, LocationProtocol {
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    
-    let toViewController = segue.destinationViewController as! SingleQuestionViewController
-    toViewController.transitioningDelegate = self.transitionManager
-    toViewController.locDelegate = self
-    toViewController.question = selectedQuestion!
   }
   
   
@@ -166,6 +164,10 @@ extension QuestionsViewController: CLLocationManagerDelegate {
 extension QuestionsViewController: UITableViewDelegate {
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     selectedQuestion = allQuestions[indexPath.row]
+    singleQuestionViewController.transitioningDelegate = self.transitionManager
+    singleQuestionViewController.question = selectedQuestion!
+    self.showViewController(singleQuestionViewController as UIViewController,
+      sender: singleQuestionViewController)
   }
 }
 
