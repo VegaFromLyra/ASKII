@@ -371,4 +371,21 @@ class Question {
       }
     }
   }
+  
+  func refresh(completion: (success: Bool) -> ()) {
+    var query = PFQuery(className:"Question")
+    query.getObjectInBackgroundWithId(id!) {
+      (result: PFObject?, error: NSError?) -> Void in
+      if error != nil {
+        println(error)
+        completion(success: false)
+      } else if let result = result {
+        self.content = result["content"] as? String
+        self.yesVotes = result["yesVoteCount"] as? Int
+        self.noVotes = result["noVoteCount"] as? Int
+        // TODO: Do we need to fetch location?
+        completion(success: true)
+      }
+    }
+  }
 }

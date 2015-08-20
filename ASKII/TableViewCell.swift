@@ -18,11 +18,10 @@ class TableViewCell: UITableViewCell {
   @IBOutlet weak var yesVoteButton: UIButton!
   @IBOutlet weak var noVoteButton: UIButton!
   
-  
-  
   var yesVoteCount:Int  = 0
   var noVoteCount:Int = 0
   var question: Question?
+  let utilityService = UtilityService.sharedInstance
   
   
   @IBAction func yesPressed(sender: UIButton) {
@@ -76,7 +75,18 @@ class TableViewCell: UITableViewCell {
     updateVoteCount()
 
     titleLabel.text = question?.content
-    timeLabel.text = "5 mins"
-    numOfAnswersLabel.text = "10"
+    timeLabel.text = UtilityService.sharedInstance.getTimeElapsed(question!.lastUpdatedTime!)
+    
+    question!.getComments {
+      (comments) -> () in
+        self.numOfAnswersLabel.text = String(comments.count)
+    }
+    
+    popularAnswer.text = utilityService.getPopularVote(question!.yesVotes!, noVoteCount: question!.noVotes!)
+    if popularAnswer.text == "yes" {
+      popularAnswer.textColor = UIColor.blueColor()
+    } else if popularAnswer.text == "no" {
+      popularAnswer.textColor = UIColor.redColor()
+    }
   }
 }

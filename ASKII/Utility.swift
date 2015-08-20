@@ -64,4 +64,16 @@ class UtilityService {
     return output
   }
   
+  func getPopularVoteColor(yesVoteCount: Int, noVoteCount: Int) -> UIColor {
+    var output = UIColor.whiteColor()
+    
+    if yesVoteCount > noVoteCount {
+      output = UIColor.cyanColor()
+    } else if noVoteCount > yesVoteCount {
+      output = UIColor.redColor()
+    }
+    
+    return output
+  }
+  
 }
