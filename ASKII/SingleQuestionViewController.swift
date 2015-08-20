@@ -16,8 +16,10 @@ class SingleQuestionViewController: UIViewController, UITableViewDataSource, UIT
   @IBOutlet weak var questionSubmittedTimeLabel: UILabel!
   @IBOutlet weak var commentTextField: UITextField!
   @IBOutlet weak var popularVoteLabel: UILabel!
+  @IBOutlet weak var commentCountLabel: UILabel!
   
   let utilityService = UtilityService.sharedInstance
+  var comments: [Comment] = []
   
   @IBAction func onPostCommentClicked(sender: AnyObject) {
     if commentTextField.text.isEmpty {
@@ -82,6 +84,13 @@ class SingleQuestionViewController: UIViewController, UITableViewDataSource, UIT
       questionLabel.text = question.content
       questionSubmittedTimeLabel.text = utilityService.getTimeElapsed(question.lastUpdatedTime!)
       popularVoteLabel.text = utilityService.getPopularVote(question.yesVotes!, noVoteCount: question.noVotes!)
+      
+      question.getComments({
+        (comments) -> () in
+          self.comments = comments
+          self.commentCountLabel.text = String(comments.count)
+          self.AnswersTableView.reloadData()
+      })
     }
   }
   
@@ -91,14 +100,14 @@ class SingleQuestionViewController: UIViewController, UITableViewDataSource, UIT
   }
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 6
+    return comments.count
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    var selectedComment = comments[indexPath.row]
     
     let cell: SingleTableViewCell = self.AnswersTableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! SingleTableViewCell
-    
-    cell.answerConfig()
+    cell.answerConfig(selectedComment)
     
     return cell
   }

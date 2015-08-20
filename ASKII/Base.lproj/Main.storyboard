@@ -710,6 +710,7 @@
                     <navigationItem key="navigationItem" id="01a-kL-YIu"/>
                     <connections>
                         <outlet property="AnswersTableView" destination="9l3-o3-yvc" id="a5q-9k-j1k"/>
+                        <outlet property="commentCountLabel" destination="Pdb-EU-7Ok" id="dx8-li-Kjm"/>
                         <outlet property="commentTextField" destination="u35-1g-sjD" id="7XU-sr-St7"/>
                         <outlet property="currentLocationName" destination="Tox-Kq-Lzf" id="i8m-O7-4tG"/>
                         <outlet property="popularVoteLabel" destination="Ld8-L0-mCq" id="sn6-tG-0BU"/>
