@@ -23,9 +23,9 @@ class SingleTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func answerConfig() {
-        AnswerLabel.text = "This is a sample answer."
-        AnswerTimeLabel.text = "5 mins ago"
+    func answerConfig(comment: Comment) {
+        AnswerLabel.text = comment.content
+        AnswerTimeLabel.text = UtilityService.sharedInstance.getTimeElapsed(comment.lastUpdatedTime)
     }
 
 }

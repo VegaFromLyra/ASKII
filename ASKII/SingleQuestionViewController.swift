@@ -16,8 +16,14 @@ class SingleQuestionViewController: UIViewController, UITableViewDataSource, UIT
   @IBOutlet weak var questionSubmittedTimeLabel: UILabel!
   @IBOutlet weak var commentTextField: UITextField!
   @IBOutlet weak var popularVoteLabel: UILabel!
+  @IBOutlet weak var commentCountLabel: UILabel!
+  @IBOutlet weak var backgroundView: UIView!
+  @IBOutlet weak var headerView: UIView!
   
+  var locDelegate: LocationProtocol?
+  var question: Question?
   let utilityService = UtilityService.sharedInstance
+  var comments: [Comment] = []
   
   @IBAction func onPostCommentClicked(sender: AnyObject) {
     if commentTextField.text.isEmpty {
@@ -28,6 +34,7 @@ class SingleQuestionViewController: UIViewController, UITableViewDataSource, UIT
         (success) -> () in
         if success {
           println("Comment posted successfully")
+          self.updateComments()
         } else {
           println("Error in posting comment")
         }
@@ -40,6 +47,7 @@ class SingleQuestionViewController: UIViewController, UITableViewDataSource, UIT
       (success) -> () in
       if success {
         println("Added yes vote")
+        self.refreshQuestionData()
       } else {
         println("Error adding yes vote")
       }
@@ -51,14 +59,12 @@ class SingleQuestionViewController: UIViewController, UITableViewDataSource, UIT
       (success) -> () in
       if success {
         println("Added no vote")
+        self.refreshQuestionData()
       } else {
         println("Error adding no vote")
       }
     }
   }
-  
-  var locDelegate: LocationProtocol?
-  var question: Question?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -78,11 +84,14 @@ class SingleQuestionViewController: UIViewController, UITableViewDataSource, UIT
       }
     }
     
-    if let question = question {
-      questionLabel.text = question.content
-      questionSubmittedTimeLabel.text = utilityService.getTimeElapsed(question.lastUpdatedTime!)
-      popularVoteLabel.text = utilityService.getPopularVote(question.yesVotes!, noVoteCount: question.noVotes!)
-    }
+    questionLabel.text = question!.content
+    questionSubmittedTimeLabel.text = utilityService.getTimeElapsed(question!.lastUpdatedTime!)
+    
+    popularVoteLabel.text = utilityService.getPopularVote(question!.yesVotes!, noVoteCount: question!.noVotes!)
+    
+    updateBackgroundColor()
+    
+    updateComments()
   }
   
   override func didReceiveMemoryWarning() {
@@ -91,20 +100,44 @@ class SingleQuestionViewController: UIViewController, UITableViewDataSource, UIT
   }
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 6
+    return comments.count
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    var selectedComment = comments[indexPath.row]
     
     let cell: SingleTableViewCell = self.AnswersTableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! SingleTableViewCell
-    
-    cell.answerConfig()
+    cell.answerConfig(selectedComment)
     
     return cell
   }
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     
+  }
+  
+  func updateBackgroundColor() {
+    var backgroundColor = utilityService.getPopularVoteColor(question!.yesVotes!, noVoteCount: question!.noVotes!)
+    backgroundView.backgroundColor = backgroundColor
+    headerView.backgroundColor = backgroundColor
+  }
+  
+  func refreshQuestionData() {
+    question?.refresh({
+      (success) -> () in
+      if success {
+        self.updateBackgroundColor()
+      }
+    })
+  }
+  
+  func updateComments() {
+    question!.getComments({
+      (comments) -> () in
+      self.comments = comments
+      self.commentCountLabel.text = String(comments.count)
+      self.AnswersTableView.reloadData()
+    })
   }
   
   

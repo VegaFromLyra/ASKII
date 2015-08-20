@@ -18,7 +18,7 @@ class Question {
   var yesVotes: Int?
   var noVotes: Int?
   var lastUpdatedTime: NSDate?
-  var parseId: String?
+  var id: String?
   
   // MARK: Methods
   
@@ -92,7 +92,7 @@ class Question {
   
   func clearVoteCount(completion: (success: Bool) -> ()) {
     var query = PFQuery(className:"Question")
-    query.getObjectInBackgroundWithId(parseId!) {
+    query.getObjectInBackgroundWithId(id!) {
       (question: PFObject?, error: NSError?) -> Void in
       if error != nil {
         println(error)
@@ -115,14 +115,14 @@ class Question {
   
   func postComment(comment: String, completion: (success: Bool) -> ()) {
     var query = PFQuery(className:"Question")
-    query.getObjectInBackgroundWithId(parseId!) {
+    query.getObjectInBackgroundWithId(id!) {
       (question: PFObject?, error: NSError?) -> Void in
       if error != nil {
         println(error)
       } else if let question = question {
         var commentQuery = PFObject(className: "Comment")
         commentQuery["content"] = comment
-        commentQuery["question"] = PFObject(withoutDataWithClassName: "Question", objectId: self.parseId)
+        commentQuery["question"] = PFObject(withoutDataWithClassName: "Question", objectId: self.id)
         
         commentQuery.saveInBackgroundWithBlock {
           (success: Bool, error: NSError?) -> Void in
@@ -134,7 +134,7 @@ class Question {
   
   func addYesVote(completion: (success: Bool) -> ()) {
     var query = PFQuery(className:"Question")
-    query.getObjectInBackgroundWithId(parseId!) {
+    query.getObjectInBackgroundWithId(id!) {
       (question: PFObject?, error: NSError?) -> Void in
       if error != nil {
         println(error)
@@ -156,7 +156,7 @@ class Question {
   
   func addNoVote(completion: (success: Bool) -> ()) {
     var query = PFQuery(className:"Question")
-    query.getObjectInBackgroundWithId(parseId!) {
+    query.getObjectInBackgroundWithId(id!) {
       (question: PFObject?, error: NSError?) -> Void in
       if error != nil {
         println(error)
@@ -187,7 +187,7 @@ class Question {
       (success: Bool, error: NSError?) -> Void in
       if (success) {
         // TODO: Notify view this was a success
-        self.parseId = question.objectId
+        self.id = question.objectId
       } else {
         // TODO: Notify view this was an error
         println(error?.description)
@@ -249,7 +249,7 @@ class Question {
                     result.yesVotes = question["yesVoteCount"] as? Int
                     result.noVotes = question["noVoteCount"] as? Int
                     result.lastUpdatedTime = question.updatedAt
-                    result.parseId = question.objectId
+                    result.id = question.objectId
                     
                     results.append(result)
                   }
@@ -308,7 +308,7 @@ class Question {
                       result.yesVotes = question["yesVoteCount"] as? Int
                       result.noVotes = question["noVoteCount"] as? Int
                       result.lastUpdatedTime = question.updatedAt
-                      result.parseId = question.objectId
+                      result.id = question.objectId
                       
                       results.append(result)
                       
@@ -343,6 +343,49 @@ class Question {
         (results) -> Void in
         completion(questions: results)
       })
+    }
+  }
+  
+  func getComments(completion: (comments: [Comment]) -> ()) {
+    var commentQuery = PFQuery(className: "Comment")
+    var questionPointer = PFObject(withoutDataWithClassName: "Question", objectId: self.id)
+    commentQuery.whereKey("question", equalTo: questionPointer)
+ 
+    commentQuery.findObjectsInBackgroundWithBlock {
+      (comments: [AnyObject]?, error: NSError?) -> Void in
+      
+      if error == nil {
+        if let commentObjects = comments as? [PFObject] {
+          var results: [Comment] = []
+          for commentObject in commentObjects {
+            var comment = Comment(content: commentObject["content"] as! String, lastUpdatedTime: commentObject.updatedAt!)
+            results.append(comment)
+          }
+          completion(comments: results)
+        } else {
+          completion(comments: [])
+        }
+      } else {
+        println(error)
+        completion(comments: [])
+      }
+    }
+  }
+  
+  func refresh(completion: (success: Bool) -> ()) {
+    var query = PFQuery(className:"Question")
+    query.getObjectInBackgroundWithId(id!) {
+      (result: PFObject?, error: NSError?) -> Void in
+      if error != nil {
+        println(error)
+        completion(success: false)
+      } else if let result = result {
+        self.content = result["content"] as? String
+        self.yesVotes = result["yesVoteCount"] as? Int
+        self.noVotes = result["noVoteCount"] as? Int
+        // TODO: Do we need to fetch location?
+        completion(success: true)
+      }
     }
   }
 }
