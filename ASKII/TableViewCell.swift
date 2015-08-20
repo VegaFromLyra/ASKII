@@ -82,7 +82,7 @@ class TableViewCell: UITableViewCell {
         self.numOfAnswersLabel.text = String(comments.count)
     }
     
-    popularAnswer.text = utilityService.getPopularVote(question!.yesVotes!, noVoteCount: question!.noVotes!)
-    popularAnswer.textColor = utilityService.getPopularVoteTextColor(question!.yesVotes!, noVoteCount: question!.noVotes!)
+    popularAnswer.text = utilityService.getPopularVote(question!.yesVotes, noVoteCount: question!.noVotes)
+    popularAnswer.textColor = utilityService.getPopularVoteTextColor(question!.yesVotes, noVoteCount: question!.noVotes)
   }
 }

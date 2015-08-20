@@ -38,6 +38,7 @@
 		4EACBAAD1B67F118005F6664 /* Venues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EACBAAC1B67F118005F6664 /* Venues.swift */; };
 		4EE9E8391B84EB1D00C989E8 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE9E8381B84EB1D00C989E8 /* Utility.swift */; };
 		4EE9E83C1B86279900C989E8 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE9E83B1B86279900C989E8 /* Comment.swift */; };
+		4EE9E8401B86623B00C989E8 /* QuestionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE9E83F1B86623B00C989E8 /* QuestionService.swift */; };
 		4EF64CFB1B62B34100D979EB /* NewQuestionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF64CFA1B62B34100D979EB /* NewQuestionProtocol.swift */; };
 		CE2B63AC1B70718C00B08FC0 /* QuadratTouch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EACBAA81B67EFA1005F6664 /* QuadratTouch.framework */; };
 		CE2B63AD1B70718C00B08FC0 /* QuadratTouch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4EACBAA81B67EFA1005F6664 /* QuadratTouch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -131,6 +132,7 @@
 		4EACBAAC1B67F118005F6664 /* Venues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Venues.swift; sourceTree = "<group>"; };
 		4EE9E8381B84EB1D00C989E8 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		4EE9E83B1B86279900C989E8 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		4EE9E83F1B86623B00C989E8 /* QuestionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionService.swift; sourceTree = "<group>"; };
 		4EF64CFA1B62B34100D979EB /* NewQuestionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewQuestionProtocol.swift; sourceTree = "<group>"; };
 		6AA53E53F04E31FB05347BC8 /* Pods-ASKII.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ASKII.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ASKII/Pods-ASKII.debug.xcconfig"; sourceTree = "<group>"; };
 		6ECC465071218FABC8109585 /* Pods-ASKII.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ASKII.release.xcconfig"; path = "Pods/Target Support Files/Pods-ASKII/Pods-ASKII.release.xcconfig"; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 			children = (
 				4EACBAAC1B67F118005F6664 /* Venues.swift */,
 				4EE9E8381B84EB1D00C989E8 /* Utility.swift */,
+				4EE9E83F1B86623B00C989E8 /* QuestionService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -600,6 +603,7 @@
 				4E868C661B6883F70077AB67 /* Location.swift in Sources */,
 				4E5270751B7A668600C1C652 /* QnADetailTableViewCell.swift in Sources */,
 				4EE9E83C1B86279900C989E8 /* Comment.swift in Sources */,
+				4EE9E8401B86623B00C989E8 /* QuestionService.swift in Sources */,
 				CEB2B63B1B5AF626001F83F4 /* TableViewCell.swift in Sources */,
 				4E4F053D1B73B9A6000F6FB4 /* SearchLocationViewController.swift in Sources */,
 			);

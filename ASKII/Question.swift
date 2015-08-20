@@ -13,14 +13,28 @@ class Question {
   
   // MARK: Properties
   
-  var content: String?
-  var location: Location?
-  var yesVotes: Int?
-  var noVotes: Int?
+  var content: String
+  var location: Location
+  var yesVotes: Int = 0
+  var noVotes: Int = 0
   var lastUpdatedTime: NSDate?
   var id: String?
   
   // MARK: Methods
+  
+  init(content: String, location: Location, yesVotes: Int, noVotes: Int, id: String, lastUpdatedTime: NSDate) {
+    self.content = content
+    self.location = location
+    self.yesVotes = yesVotes
+    self.noVotes = noVotes
+    self.id = id
+    self.lastUpdatedTime = lastUpdatedTime
+  }
+  
+  init(content: String, location: Location) {
+    self.content = content
+    self.location = location
+  }
   
   func saveQuestionWithLocExternalId(content: String, location: Location) {
     var locQuery = PFQuery(className: "Location")
@@ -78,15 +92,15 @@ class Question {
     }
   }
   
-  func save(questionContent: String, questionLocation: Location) {
-    if let locExternalId = questionLocation.externalId {
+  func save() {
+    if let locExternalId = location.externalId {
       if !locExternalId.isEmpty {
-        saveQuestionWithLocExternalId(questionContent, location: questionLocation)
+        saveQuestionWithLocExternalId(content, location: location)
       } else {
-        saveQuestionWithLoc(questionContent, location: questionLocation)
+        saveQuestionWithLoc(content, location: location)
       }
     } else {
-      saveQuestionWithLoc(questionContent, location: questionLocation)
+      saveQuestionWithLoc(content, location: location)
     }
   }
   
@@ -187,162 +201,11 @@ class Question {
       (success: Bool, error: NSError?) -> Void in
       if (success) {
         // TODO: Notify view this was a success
-        self.id = question.objectId
+        self.id = question.objectId!
       } else {
         // TODO: Notify view this was an error
         println(error?.description)
       }
-    }
-  }
-  
-  func getLocationModel(locationPFObject: PFObject) -> Location {
-    let coordinate = locationPFObject["coordinate"] as! PFGeoPoint
-    
-    let locationModel = Location(latitude: coordinate.latitude, longitude: coordinate.longitude)
-    
-    if let locName = locationPFObject["name"] as? String {
-      locationModel.name = locName
-    }
-    
-    if let locExternalId = locationPFObject["exrernalId"] as? String {
-      locationModel.externalId = locExternalId
-    }
-    
-    return locationModel
-  }
-  
-  func getAllQuestionsByExternalId(externalId: String, completion: (questions: [Question]) -> ()) {
-    var locQuery = PFQuery(className: "Location")
-    
-    locQuery.whereKey("externalId", equalTo:externalId)
-    
-    locQuery.findObjectsInBackgroundWithBlock {
-      (locations: [AnyObject]?, locError: NSError?) -> Void in
-      
-      if locError == nil {
-        if let locations = locations as? [PFObject] {
-          
-          if locations.count == 0 {
-            completion(questions: [])
-          } else {
-            let location = locations[0];
-            let coordinate = location["coordinate"] as! PFGeoPoint
-            let locationPointer = PFObject(withoutDataWithClassName: "Location", objectId: location.objectId!)
-            
-            var questionQuery = PFQuery(className:"Question")
-            questionQuery.whereKey("location", equalTo:locationPointer)
-            questionQuery.orderByDescending("updatedAt")
-            
-            questionQuery.findObjectsInBackgroundWithBlock {
-              (questions: [AnyObject]?, qnError: NSError?) -> Void in
-              
-              if qnError == nil {
-                var results: [Question] = []
-                if let questions = questions as? [PFObject] {
-                  
-                  let locModel = self.getLocationModel(location)
-                  
-                  for question in questions {
-                    var result: Question =  Question()
-                    result.content = question["content"] as? String
-                    result.location = locModel
-                    result.yesVotes = question["yesVoteCount"] as? Int
-                    result.noVotes = question["noVoteCount"] as? Int
-                    result.lastUpdatedTime = question.updatedAt
-                    result.id = question.objectId
-                    
-                    results.append(result)
-                  }
-                }
-                
-                completion(questions: results)
-              } else {
-                println("ERROR: Could not fetch questions for \(location) " + qnError!.localizedDescription)
-                completion(questions: [])
-              }
-            }
-          }
-        }
-      } else {
-        println("ERROR: Could not fetch location with external Id \(externalId) " + locError!.localizedDescription)
-        completion(questions: [])
-      }
-    }
-  }
-  
-  func getAllQuestionsByGeoFencing(coordinate: PFGeoPoint, completion: (questions: [Question]) -> ()) {
-    var alreadySeenQuestions = Set<String>()
-    
-    var locQuery = PFQuery(className: "Location")
-    locQuery.whereKey("coordinate", nearGeoPoint:coordinate, withinMiles: 0.2)
-    locQuery.findObjectsInBackgroundWithBlock {
-      (objects: [AnyObject]?, qnError: NSError?) -> Void in
-      
-      var results: [Question] = []
-      
-      if let locations = objects {
-        if locations.count == 0 {
-          completion(questions: [])
-        } else {
-          for locResult in locations {
-            let coordinate = locResult["coordinate"] as! PFGeoPoint
-            let locationPointer = PFObject(withoutDataWithClassName: "Location", objectId: locResult.objectId!)
-            let questionQuery = PFQuery(className:"Question")
-            questionQuery.whereKey("location", equalTo:locationPointer)
-            questionQuery.orderByDescending("updatedAt")
-            
-            questionQuery.findObjectsInBackgroundWithBlock {
-              (objects: [AnyObject]?, qnError: NSError?) -> Void in
-              
-              if qnError == nil {
-                if let questions = objects as? [PFObject] {
-                  
-                  let locationModel = self.getLocationModel(locResult as! PFObject)
-                  
-                  for question in questions {
-                    
-                    if !alreadySeenQuestions.contains(question.objectId!) {
-                      var result: Question =  Question()
-                      result.content = question["content"] as? String
-                      result.location = locationModel
-                      result.yesVotes = question["yesVoteCount"] as? Int
-                      result.noVotes = question["noVoteCount"] as? Int
-                      result.lastUpdatedTime = question.updatedAt
-                      result.id = question.objectId
-                      
-                      results.append(result)
-                      
-                      alreadySeenQuestions.insert(question.objectId!)
-                    }
-                  }
-                  
-                  completion(questions: results)
-                }
-              } else {
-                println("ERROR: Could not fetch questions for coordinate\(coordinate) " + qnError!.localizedDescription)
-                completion(questions: [])
-              }
-            }
-          }
-        }
-      } else {
-        completion(questions: [])
-      }
-    }
-  }
-  
-  // TODO - This should be in a service and not in the model
-  func getAllQuestions(location: Location, completion: (questions: [Question]) -> ()) {
-    if let externalId = location.externalId {
-      getAllQuestionsByExternalId(externalId, completion: {
-        (results) -> Void in
-        completion(questions: results)
-      })
-    } else {
-      getAllQuestionsByGeoFencing(location.coordinate, completion: {
-        (results) -> Void in
-        completion(questions: results)
-      })
     }
   }
   
@@ -380,9 +243,9 @@ class Question {
         println(error)
         completion(success: false)
       } else if let result = result {
-        self.content = result["content"] as? String
-        self.yesVotes = result["yesVoteCount"] as? Int
-        self.noVotes = result["noVoteCount"] as? Int
+        self.content = result["content"] as! String
+        self.yesVotes = result["yesVoteCount"] as! Int
+        self.noVotes = result["noVoteCount"] as! Int
         // TODO: Do we need to fetch location?
         completion(success: true)
       }

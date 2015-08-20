@@ -41,8 +41,8 @@ class NewQuestionViewController: UIViewController, NewQuestion {
           locationModel.externalId = externalId
         }
         
-        let questionModel = Question()
-        questionModel.save(questionText.text, questionLocation: locationModel)
+        let questionModel = Question(content: questionText.text, location: locationModel)
+        questionModel.save()
       } else {
         println("ERROR! Location info is nil")
       }

@@ -88,7 +88,7 @@ class SingleQuestionViewController: UIViewController, UITableViewDataSource, UIT
     questionLabel.text = question!.content
     questionSubmittedTimeLabel.text = utilityService.getTimeElapsed(question!.lastUpdatedTime!)
     
-    popularVoteLabel.text = utilityService.getPopularVote(question!.yesVotes!, noVoteCount: question!.noVotes!)
+    popularVoteLabel.text = utilityService.getPopularVote(question!.yesVotes, noVoteCount: question!.noVotes)
     
     updateColors()
     
@@ -118,10 +118,10 @@ class SingleQuestionViewController: UIViewController, UITableViewDataSource, UIT
   }
   
   func updateColors() {
-    var backgroundColor = utilityService.getPopularVoteBackgroundColor(question!.yesVotes!, noVoteCount: question!.noVotes!)
+    var backgroundColor = utilityService.getPopularVoteBackgroundColor(question!.yesVotes, noVoteCount: question!.noVotes)
     backgroundView.backgroundColor = backgroundColor
     headerView.backgroundColor = backgroundColor
-    popularVoteLabel.textColor = utilityService.getPopularVoteTextColor(question!.yesVotes!, noVoteCount: question!.noVotes!)
+    popularVoteLabel.textColor = utilityService.getPopularVoteTextColor(question!.yesVotes, noVoteCount: question!.noVotes)
   }
   
   func refreshQuestionData() {

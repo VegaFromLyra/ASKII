@@ -54,10 +54,10 @@ class QnADetailTableViewCell: UITableViewCell {
     
     questionLabel.text = data.content
     
-    let yesVoteCount: Int = data.yesVotes!
+    let yesVoteCount: Int = data.yesVotes
     yesVoteCountLabel.text = yesVoteCount.description
     
-    let noVoteCount: Int = data.noVotes!
+    let noVoteCount: Int = data.noVotes
     noVoteCountLabel.text = noVoteCount.description
     
     questionSubmittedTime.text = UtilityService.sharedInstance.getTimeElapsed(data.lastUpdatedTime!)

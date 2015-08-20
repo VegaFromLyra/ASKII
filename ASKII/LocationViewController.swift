@@ -44,7 +44,7 @@ class LocationViewController: UIViewController, LocationProtocol {
   var delegate: NewQuestion?
   var locationDelegate: LocationProtocol?
   var inSearchMode: Bool = false
-  let questionModel:Question = Question()
+  let questionService:QuestionService = QuestionService()
   var allQuestions:[Question] = []
   
   override func viewDidLoad() {
@@ -113,7 +113,7 @@ class LocationViewController: UIViewController, LocationProtocol {
   
   // TODO: Move fetchQuestions to utility and separate out the view logic
   func fetchQuestionsForLocation(location: Location) {
-    questionModel.getAllQuestions(location, completion: {
+    questionService.getAllQuestions(location, completion: {
       allQuestions -> () in
       if allQuestions.count > 0 {
         self.allQuestions = allQuestions

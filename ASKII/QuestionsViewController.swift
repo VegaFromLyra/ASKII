@@ -36,8 +36,7 @@ class QuestionsViewController: UIViewController, LocationProtocol {
   var selectedLocationName: String?
   var selectedLocationVenueId: String?
   
-  // TODO - Instead of questionModel, use questionService
-  let questionModel:Question = Question()
+  let questionService:QuestionService = QuestionService()
   var selectedQuestion: Question?
   let gradientLayer = CAGradientLayer()
   var camera: GMSCameraPosition?
@@ -150,7 +149,7 @@ extension QuestionsViewController: CLLocationManagerDelegate {
     
     if let currentLocation = currentLocation {
       var locationModel = Location(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
-      questionModel.getAllQuestions(locationModel, completion: {
+      questionService.getAllQuestions(locationModel, completion: {
         (allQuestions) -> () in
         self.allQuestions = allQuestions
         self.tableView.reloadData()
