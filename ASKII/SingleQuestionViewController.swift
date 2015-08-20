@@ -35,6 +35,7 @@ class SingleQuestionViewController: UIViewController, UITableViewDataSource, UIT
         if success {
           println("Comment posted successfully")
           self.updateComments()
+          self.commentTextField.text = ""
         } else {
           println("Error in posting comment")
         }
@@ -89,7 +90,7 @@ class SingleQuestionViewController: UIViewController, UITableViewDataSource, UIT
     
     popularVoteLabel.text = utilityService.getPopularVote(question!.yesVotes!, noVoteCount: question!.noVotes!)
     
-    updateBackgroundColor()
+    updateColors()
     
     updateComments()
   }
@@ -116,17 +117,18 @@ class SingleQuestionViewController: UIViewController, UITableViewDataSource, UIT
     
   }
   
-  func updateBackgroundColor() {
-    var backgroundColor = utilityService.getPopularVoteColor(question!.yesVotes!, noVoteCount: question!.noVotes!)
+  func updateColors() {
+    var backgroundColor = utilityService.getPopularVoteBackgroundColor(question!.yesVotes!, noVoteCount: question!.noVotes!)
     backgroundView.backgroundColor = backgroundColor
     headerView.backgroundColor = backgroundColor
+    popularVoteLabel.textColor = utilityService.getPopularVoteTextColor(question!.yesVotes!, noVoteCount: question!.noVotes!)
   }
   
   func refreshQuestionData() {
     question?.refresh({
       (success) -> () in
       if success {
-        self.updateBackgroundColor()
+        self.updateColors()
       }
     })
   }

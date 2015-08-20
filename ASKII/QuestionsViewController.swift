@@ -44,6 +44,8 @@ class QuestionsViewController: UIViewController, LocationProtocol {
   var currentLocation: CLLocation?
   var allQuestions: [Question] = []
   var singleQuestionViewController: SingleQuestionViewController!
+  var locationManager: CLLocationManager!
+  let transitionManager = TransitionManager()
   
   @IBAction func onAskAnywherePressed(sender: AnyObject) {
     var storyboard = UIStoryboard(name: "NewQuestion", bundle: nil)
@@ -56,8 +58,6 @@ class QuestionsViewController: UIViewController, LocationProtocol {
     
   }
   
-  var locationManager: CLLocationManager!
-  
   var mapLayer: CALayer {
     return mapView.layer
   }
@@ -66,14 +66,14 @@ class QuestionsViewController: UIViewController, LocationProtocol {
     return headerView.layer
   }
   
-  let transitionManager = TransitionManager()
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     
     singleQuestionViewController = self.storyboard!.instantiateViewControllerWithIdentifier("SingleQuestionViewController") as! SingleQuestionViewController
     singleQuestionViewController.locDelegate = self
-    
+  }
+  
+  override func viewWillAppear(animated: Bool) {
     if CLLocationManager.locationServicesEnabled() && mapView != nil {
       locationManager = CLLocationManager()
       locationManager.delegate = self
@@ -148,15 +148,13 @@ extension QuestionsViewController: CLLocationManagerDelegate {
         self.selectedLocationName = name
     }
     
-    if allQuestions.count == 0 {
-      if let currentLocation = currentLocation {
-        var locationModel = Location(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
-        questionModel.getAllQuestions(locationModel, completion: {
-          (allQuestions) -> () in
-          self.allQuestions = allQuestions
-          self.tableView.reloadData()
-        })
-      }
+    if let currentLocation = currentLocation {
+      var locationModel = Location(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
+      questionModel.getAllQuestions(locationModel, completion: {
+        (allQuestions) -> () in
+        self.allQuestions = allQuestions
+        self.tableView.reloadData()
+      })
     }
   }
 }

@@ -83,10 +83,6 @@ class TableViewCell: UITableViewCell {
     }
     
     popularAnswer.text = utilityService.getPopularVote(question!.yesVotes!, noVoteCount: question!.noVotes!)
-    if popularAnswer.text == "yes" {
-      popularAnswer.textColor = UIColor.blueColor()
-    } else if popularAnswer.text == "no" {
-      popularAnswer.textColor = UIColor.redColor()
-    }
+    popularAnswer.textColor = utilityService.getPopularVoteTextColor(question!.yesVotes!, noVoteCount: question!.noVotes!)
   }
 }

@@ -127,8 +127,8 @@
                                             </mask>
                                         </variation>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z38-tv-JmD">
-                                        <rect key="frame" x="34" y="19" width="28.5" height="15.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z38-tv-JmD">
+                                        <rect key="frame" x="34" y="19" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" name="GothamBlack" family="Gotham Black" pointSize="15"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -173,10 +173,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sgz-LC-7xi" userLabel="VoteButtonsContainer">
-                                                    <rect key="frame" x="120" y="72" width="120" height="54"/>
+                                                    <rect key="frame" x="234" y="65" width="120" height="51.5"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L23-IU-SIs">
-                                                            <rect key="frame" x="15" y="13" width="38" height="38"/>
+                                                            <rect key="frame" x="15" y="13" width="38" height="35.5"/>
                                                             <color key="backgroundColor" red="0.8784313725490196" green="0.88627450980392153" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="38" id="D97-DL-swm"/>
@@ -197,7 +197,7 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RIn-GJ-snJ">
-                                                            <rect key="frame" x="67" y="13" width="38" height="38"/>
+                                                            <rect key="frame" x="67" y="13" width="38" height="35.5"/>
                                                             <color key="backgroundColor" red="0.96862745098039216" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <fontDescription key="fontDescription" name="GothamBlack" family="Gotham Black" pointSize="15"/>
                                                             <state key="normal" title="3">
@@ -227,13 +227,13 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="no" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aeg-Tg-cOp">
-                                                    <rect key="frame" x="530.5" y="28" width="24.5" height="20"/>
+                                                    <rect key="frame" x="530" y="28" width="24.5" height="20"/>
                                                     <fontDescription key="fontDescription" name="Courier-Bold" family="Courier" pointSize="20"/>
                                                     <color key="textColor" red="0.96862745100000003" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 mins" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O3B-eS-lpI">
-                                                    <rect key="frame" x="530.5" y="53" width="39" height="11"/>
+                                                    <rect key="frame" x="530" y="53" width="39" height="11"/>
                                                     <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="12"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -243,7 +243,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="5Kq-Ru-cQu" secondAttribute="bottom" constant="55.5" id="1ME-rS-JZh"/>
                                                 <constraint firstItem="5Kq-Ru-cQu" firstAttribute="top" secondItem="Ggo-XQ-VLL" secondAttribute="top" constant="20" id="1gW-yx-wt8"/>
                                                 <constraint firstItem="aeg-Tg-cOp" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5Kq-Ru-cQu" secondAttribute="trailing" constant="15" id="5AL-vP-rTK"/>
-                                                <constraint firstItem="Sgz-LC-7xi" firstAttribute="leading" secondItem="Ggo-XQ-VLL" secondAttribute="leading" constant="120" id="6ZA-Kb-LXH"/>
+                                                <constraint firstItem="Sgz-LC-7xi" firstAttribute="top" secondItem="Ggo-XQ-VLL" secondAttribute="top" constant="65" id="5go-aD-Era"/>
                                                 <constraint firstItem="aMG-LB-wwb" firstAttribute="top" secondItem="5Kq-Ru-cQu" secondAttribute="bottom" constant="20" id="CER-zM-sA5"/>
                                                 <constraint firstItem="O3B-eS-lpI" firstAttribute="top" secondItem="aeg-Tg-cOp" secondAttribute="bottom" constant="5" id="CQ4-7Q-vrF"/>
                                                 <constraint firstAttribute="bottom" secondItem="2aa-kT-rjB" secondAttribute="bottom" constant="20" id="E8i-P9-puy"/>
@@ -253,12 +253,12 @@
                                                 <constraint firstItem="O3B-eS-lpI" firstAttribute="top" secondItem="5Kq-Ru-cQu" secondAttribute="bottom" constant="28" id="LAh-Vz-6Vr"/>
                                                 <constraint firstItem="2aa-kT-rjB" firstAttribute="centerY" secondItem="aMG-LB-wwb" secondAttribute="centerY" id="Mhy-2u-9XJ"/>
                                                 <constraint firstItem="5Kq-Ru-cQu" firstAttribute="leading" secondItem="Ggo-XQ-VLL" secondAttribute="leading" constant="25" id="N8Y-Fr-anH"/>
-                                                <constraint firstItem="Sgz-LC-7xi" firstAttribute="top" secondItem="Ggo-XQ-VLL" secondAttribute="top" constant="72" id="U30-oz-5z3"/>
                                                 <constraint firstItem="Sgz-LC-7xi" firstAttribute="top" secondItem="5Kq-Ru-cQu" secondAttribute="bottom" constant="15" id="Uz4-Zt-TRn"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="5Kq-Ru-cQu" secondAttribute="trailing" constant="80" id="Wvb-Qh-nbQ"/>
                                                 <constraint firstItem="5Kq-Ru-cQu" firstAttribute="leading" secondItem="aMG-LB-wwb" secondAttribute="trailing" constant="-42" id="ZzN-6u-6g6"/>
-                                                <constraint firstAttribute="bottom" secondItem="Sgz-LC-7xi" secondAttribute="bottom" constant="0.5" id="ag2-8a-ieY"/>
+                                                <constraint firstAttribute="bottom" secondItem="Sgz-LC-7xi" secondAttribute="bottom" constant="10" id="ag2-8a-ieY"/>
                                                 <constraint firstItem="aMG-LB-wwb" firstAttribute="leading" secondItem="5Kq-Ru-cQu" secondAttribute="leading" id="b6O-Zn-ccs"/>
+                                                <constraint firstAttribute="centerX" secondItem="Sgz-LC-7xi" secondAttribute="centerX" id="cIC-Wv-HLK"/>
                                                 <constraint firstItem="2aa-kT-rjB" firstAttribute="centerY" secondItem="aMG-LB-wwb" secondAttribute="centerY" constant="0.5" id="jGu-bd-wRw"/>
                                                 <constraint firstItem="aeg-Tg-cOp" firstAttribute="centerY" secondItem="5Kq-Ru-cQu" secondAttribute="centerY" id="jgS-AF-O0F"/>
                                                 <constraint firstAttribute="bottom" secondItem="O3B-eS-lpI" secondAttribute="bottom" constant="20" id="jjB-vD-mDW"/>
@@ -499,7 +499,6 @@
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="Nsy-In-l9I"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="Courier-Bold" family="Courier" pointSize="22"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 mins: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JO4-bf-1WP">
