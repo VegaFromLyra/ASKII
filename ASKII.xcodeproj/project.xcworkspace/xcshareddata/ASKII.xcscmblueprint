@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "2196F7BB694BD49739CD26BA0D465977E89C8854",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "2196F7BB694BD49739CD26BA0D465977E89C8854" : 0,
+    "C333CCA42B76DAB308C436958D3D72C5B6ACE147" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "2A9F4385-7550-4F67-A98E-5D1603B88F62",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "2196F7BB694BD49739CD26BA0D465977E89C8854" : "ASKII",
+    "C333CCA42B76DAB308C436958D3D72C5B6ACE147" : "ASKII\/das-quadrat"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "ASKII",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 203,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ASKII.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/VegaFromLyra\/ASKII.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2196F7BB694BD49739CD26BA0D465977E89C8854"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Constantine-Fry\/das-quadrat",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C333CCA42B76DAB308C436958D3D72C5B6ACE147"
+    }
+  ]
+}

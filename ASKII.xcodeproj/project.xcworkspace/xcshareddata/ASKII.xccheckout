@@ -7,22 +7,18 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>2A9F4385-7550-4F67-A98E-5D1603B88F62</string>
 	<key>IDESourceControlProjectName</key>
-	<string>ASKII</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>2196F7BB694BD49739CD26BA0D465977E89C8854</key>
 		<string>https://github.com/VegaFromLyra/ASKII.git</string>
-		<key>C333CCA42B76DAB308C436958D3D72C5B6ACE147</key>
-		<string>https://github.com/Constantine-Fry/das-quadrat</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>ASKII.xcodeproj</string>
+	<string>ASKII.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>2196F7BB694BD49739CD26BA0D465977E89C8854</key>
 		<string>../..</string>
-		<key>C333CCA42B76DAB308C436958D3D72C5B6ACE147</key>
-		<string>../../das-quadrat</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/VegaFromLyra/ASKII.git</string>
@@ -39,14 +35,6 @@
 			<string>2196F7BB694BD49739CD26BA0D465977E89C8854</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ASKII</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>C333CCA42B76DAB308C436958D3D72C5B6ACE147</string>
-			<key>IDESourceControlWCCName</key>
-			<string>das-quadrat</string>
 		</dict>
 	</array>
 </dict>
