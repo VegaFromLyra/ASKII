@@ -53,13 +53,14 @@ class VenueService {
       searchResults.removeAll(keepCapacity: false)
     }
       
-    var parameters = [Parameter.query:query, Parameter.intent:"browse", Parameter.radius:"800", Parameter.limit:"10"]
+    var parameters = [Parameter.query:query, Parameter.limit:"10"]
     parameters += location.parameters()
+      
     let searchTask = session.venues.search(parameters) {
       (result) -> Void in
       if let response = result.response {
         var results = response["venues"] as? [JSONParameters]
-   
+        
         if let venues = results {
           for venue in venues {
             var location = venue["location"] as! JSONParameters
@@ -96,14 +97,8 @@ class VenueService {
 extension CLLocation {
   func parameters() -> Parameters {
     let ll      = "\(self.coordinate.latitude),\(self.coordinate.longitude)"
-    let llAcc   = "\(self.horizontalAccuracy)"
-    let alt     = "\(self.altitude)"
-    let altAcc  = "\(self.verticalAccuracy)"
     let parameters = [
       Parameter.ll:ll,
-      Parameter.llAcc:llAcc,
-      Parameter.alt:alt,
-      Parameter.altAcc:altAcc
     ]
     return parameters
   }

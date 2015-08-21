@@ -13,34 +13,38 @@ import GoogleMaps
 // TODO: Define it a common place
 typealias JSONParameters = [String: AnyObject]
 
-class LocationViewController: UIViewController, QuestionLocationProtocol {
+class LocationViewController: UIViewController, LocationProtocol {
   
   @IBOutlet weak var mapView: GMSMapView!
   @IBOutlet weak var searchButton: UIButton!
   @IBOutlet weak var qnaDetailsTableView: UITableView!
+  @IBOutlet weak var numberOfQuestions: UILabel!
   
   @IBAction func goBack(sender: AnyObject) {
     var storyboard = UIStoryboard(name: "Main", bundle: nil)
     var controller = storyboard.instantiateViewControllerWithIdentifier("QuestionViewController") as! UIViewController
-    
     self.presentViewController(controller, animated: true, completion: nil)
-    
   }
   
   
   // TODO: Should I instantiate here or in init?
   let venueService = VenueService()
   var selectedMarker: GMSMarker?
-  var location: CLLocation?
-  var name: String?
-  var venueId: String?
-  var camera: GMSCameraPosition?
+  var selectedVenueMarker: GMSMarker?
   
+  // MARK: LocationProtocol
+  var selectedLocation: CLLocation?
+  var selectedLocationName: String?
+  var selectedLocationVenueId: String?
+  
+  
+  var camera: GMSCameraPosition?
+  var hasCurrentLocationBeenFetched: Bool = false
   var locationManager: CLLocationManager!
   var delegate: NewQuestion?
-  var locationDelegate: QuestionLocationProtocol?
+  var locationDelegate: LocationProtocol?
   var inSearchMode: Bool = false
-  let questionModel:Question = Question()
+  let questionService:QuestionService = QuestionService()
   var allQuestions:[Question] = []
   
   override func viewDidLoad() {
@@ -51,7 +55,7 @@ class LocationViewController: UIViewController, QuestionLocationProtocol {
     
     
     // Initialize all the location stuff
-    if (mapView != nil) {
+    if mapView != nil {
       locationManager = CLLocationManager()
       locationManager.delegate = self
       locationManager.requestWhenInUseAuthorization()
@@ -61,6 +65,8 @@ class LocationViewController: UIViewController, QuestionLocationProtocol {
       // So that the current location is visible and can
       // be interacted with
       mapView.bringSubviewToFront(searchButton)
+      mapView.bringSubviewToFront(numberOfQuestions)
+      self.numberOfQuestions.hidden = true
       
       if let recognizers = mapView.gestureRecognizers {
         for recognizer in recognizers {
@@ -75,26 +81,25 @@ class LocationViewController: UIViewController, QuestionLocationProtocol {
     super.viewDidAppear(animated)
     
     if let locDelegate = locationDelegate {
-      if let loc = locDelegate.location, locName = locDelegate.name, locId = locDelegate.venueId {
+      if let loc = locDelegate.selectedLocation, locName = locDelegate.selectedLocationName, locId = locDelegate.selectedLocationVenueId {
         inSearchMode = true
-        location = loc
-        name = locName
-        venueId = locId
         
-        fetchQuestionsForLocation(Location(latitude: location!.coordinate.latitude,
-            longitude: location!.coordinate.longitude,
-            name: name!,
-            externalId: venueId!))
+        setLocationInfo(loc.coordinate.latitude, longitude: loc.coordinate.longitude, locName: locName, locVenueId: locId)
         
-        camera = GMSCameraPosition.cameraWithLatitude(location!.coordinate.latitude,
-          longitude: location!.coordinate.longitude,
+        fetchQuestionsForLocation(Location(latitude: selectedLocation!.coordinate.latitude,
+            longitude: selectedLocation!.coordinate.longitude,
+            name: selectedLocationName!,
+            externalId: selectedLocationVenueId!))
+        
+        camera = GMSCameraPosition.cameraWithLatitude(selectedLocation!.coordinate.latitude,
+          longitude: selectedLocation!.coordinate.longitude,
           zoom: 17)
         mapView.animateToCameraPosition(camera)
         
-        placeVenueMarker(location!.coordinate.latitude,
-          longitude: location!.coordinate.longitude,
-          name: name!,
-          venueId: venueId!)
+        placeVenueMarker(selectedLocation!.coordinate.latitude,
+          longitude: selectedLocation!.coordinate.longitude,
+          name: selectedLocationName!,
+          venueId: selectedLocationVenueId!)
       }
     } else {
       locationManager.startUpdatingLocation()
@@ -106,28 +111,56 @@ class LocationViewController: UIViewController, QuestionLocationProtocol {
     // Dispose of any resources that can be recreated.
   }
   
+  // TODO: Move fetchQuestions to utility and separate out the view logic
   func fetchQuestionsForLocation(location: Location) {
-    questionModel.getAllQuestions(location, completion: {
+    questionService.getAllQuestions(location, completion: {
       allQuestions -> () in
+      if allQuestions.count > 0 {
         self.allQuestions = allQuestions
         self.qnaDetailsTableView.reloadData()
+        self.numberOfQuestions.text = String(self.allQuestions.count) + " ASKIIS"
+      } else {
+        self.allQuestions.removeAll(keepCapacity: false)
+        self.qnaDetailsTableView.reloadData()
+      }
     })
   }
-  
+    
   func placeVenueMarker(latitude: CLLocationDegrees,
     longitude: CLLocationDegrees,
     name: String,
     venueId: String) {
       
     var position = CLLocationCoordinate2DMake(latitude, longitude)
+      
     var marker = GMSMarker(position: position)
     marker.title = name
     marker.appearAnimation = kGMSMarkerAnimationPop
     marker.map = mapView
     marker.icon = UIImage(named: "Venue_Icon")
+      
     var userDataMap = [String: String]()
     userDataMap["venueId"] = venueId
     marker.userData = userDataMap
+      
+    mapView.selectedMarker = marker
+      
+    selectedVenueMarker = marker
+  }
+  
+  func setLocationInfo(latitude: CLLocationDegrees, longitude: CLLocationDegrees, locName: String?, locVenueId: String?) {
+    selectedLocation = CLLocation(latitude: latitude, longitude: longitude)
+    if let locName = locName {
+      selectedLocationName = locName
+    } else {
+      selectedLocationName?.removeAll(keepCapacity: false)
+    }
+    
+    if let locVenueId = locVenueId {
+      selectedLocationVenueId = locVenueId
+    } else {
+      selectedLocationVenueId?.removeAll(keepCapacity: false)
+    }
   }
   
   // MARK: - Navigation
@@ -150,11 +183,11 @@ class LocationViewController: UIViewController, QuestionLocationProtocol {
 extension LocationViewController: CLLocationManagerDelegate {
   func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
     
-    location = locations.first as? CLLocation
-    name = ""
+    hasCurrentLocationBeenFetched = true
+    var currentLocation = locations.first as? CLLocation
     
-    camera = GMSCameraPosition.cameraWithLatitude(location!.coordinate.latitude,
-      longitude: location!.coordinate.longitude,
+    camera = GMSCameraPosition.cameraWithLatitude(currentLocation!.coordinate.latitude,
+      longitude: currentLocation!.coordinate.longitude,
       zoom: 17)
     mapView.camera = camera
     mapView.myLocationEnabled = true
@@ -167,60 +200,32 @@ extension LocationViewController: CLLocationManagerDelegate {
 extension LocationViewController: GMSMapViewDelegate {
   
   func placeMarker(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
-    var position = CLLocationCoordinate2DMake(latitude, longitude)
+    setLocationInfo(latitude, longitude: longitude, locName: nil, locVenueId: nil)
     
     if selectedMarker != nil {
       selectedMarker!.map = nil
     }
     
+    if selectedVenueMarker != nil {
+      selectedVenueMarker!.map = nil
+    }
+    
+    var position = CLLocationCoordinate2DMake(latitude, longitude)
     var marker = GMSMarker(position: position)
-    marker.title = "Ask about here!"
+    marker.snippet = "Ask about here!"
     marker.appearAnimation = kGMSMarkerAnimationPop
     marker.map = mapView
     selectedMarker = marker
-  }
-  
-  func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {
-    location = CLLocation(latitude: marker.position.latitude, longitude: marker.position.longitude)
-    name = marker.title
-    var userDataMap = marker.userData as! [String:String]
-    venueId = userDataMap["venueId"]
-    
-    fetchQuestionsForLocation(Location(latitude: location!.coordinate.latitude,
-      longitude: location!.coordinate.longitude,
-      name: name!,
-      externalId: userDataMap["venueId"]!))
-    
-    placeMarker(marker.position.latitude, longitude: marker.position.longitude)
-    return false
+
+    fetchQuestionsForLocation(Location(latitude: latitude, longitude: longitude))
   }
   
   func mapView(mapView: GMSMapView!, idleAtCameraPosition position: GMSCameraPosition!) {
-    
-    if !inSearchMode {
-      NSLog("You are at at %f,%f", position.target.latitude, position.target.longitude)
-      
-      var selectedLocation = CLLocation(latitude: position.target.latitude, longitude: position.target.longitude)
-      
-      venueService.loadVenues(selectedLocation, completion: {
-        venues -> Void in
-        if let venueInfoList = venues {
-          for venueInfo in venueInfoList {
-            let venueItem = venueInfo["venue"] as! JSONParameters
-            
-            let currentVenueId = venueItem["id"] as? String
-            let venueName = venueItem["name"]! as! String
-            let venueLocation = venueItem["location"] as! JSONParameters
-            let venueLatitude = venueLocation["lat"] as! CLLocationDegrees
-            let venueLongitude = venueLocation["lng"] as! CLLocationDegrees
-            
-            self.placeVenueMarker(venueLatitude,
-              longitude: venueLongitude,
-              name: venueName,
-              venueId:currentVenueId!)
-          }
-        }
-      })
+    if inSearchMode {
+      inSearchMode = false
+      hasCurrentLocationBeenFetched = true
+    } else if hasCurrentLocationBeenFetched {
+      placeMarker(position.target.latitude, longitude: position.target.longitude)
     }
   }
 }
@@ -228,7 +233,7 @@ extension LocationViewController: GMSMapViewDelegate {
 
 // MARK: UITableViewDelegate
 
-extension LocationViewController: UITableViewDelegate, QuestionLocationProtocol {
+extension LocationViewController: UITableViewDelegate, LocationProtocol {
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
@@ -240,14 +245,12 @@ extension LocationViewController: UITableViewDelegate, QuestionLocationProtocol 
 extension LocationViewController: UITableViewDataSource {
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    let currentQuestion = allQuestions[indexPath.row]
+    
     let cell = qnaDetailsTableView.dequeueReusableCellWithIdentifier("qnaDetail") as! QnADetailTableViewCell
-    cell.questionLabel.text = allQuestions[indexPath.row].content
     
-    let yesVoteCount: Int = allQuestions[indexPath.row].yesVotes!
-    cell.yesVoteCountLabel.text = yesVoteCount.description
-    
-    let noVoteCount: Int = allQuestions[indexPath.row].noVotes!
-    cell.noVoteCountLabel.text = noVoteCount.description
+    cell.parentViewController = self
+    cell.configure(currentQuestion)
     
     return cell
   }

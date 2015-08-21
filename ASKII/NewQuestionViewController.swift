@@ -17,7 +17,7 @@ class NewQuestionViewController: UIViewController, NewQuestion {
   
 
   var question: String?
-  var delegate: QuestionLocationProtocol?
+  var delegate: LocationProtocol?
   
   @IBAction func onSubmitQuestionDone(sender: AnyObject) {
     var storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -29,13 +29,20 @@ class NewQuestionViewController: UIViewController, NewQuestion {
   @IBAction func onSubmitQuestion(sender: AnyObject) {
     
     if !questionText.text.isEmpty {
-      if let location = delegate?.location, name = delegate?.name, locId = delegate?.venueId {
+      if let location = delegate?.selectedLocation {
         let locationModel = Location(latitude: location.coordinate.latitude,
-          longitude: location.coordinate.longitude,
-          name: name,
-          externalId: locId)
-        let questionModel = Question()
-        questionModel.save(questionText.text, questionLocation: locationModel)
+          longitude: location.coordinate.longitude)
+        
+        if let name = delegate?.selectedLocationName {
+          locationModel.name = name
+        }
+        
+        if let externalId = delegate?.selectedLocationVenueId {
+          locationModel.externalId = externalId
+        }
+        
+        let questionModel = Question(content: questionText.text, location: locationModel)
+        questionModel.save()
       } else {
         println("ERROR! Location info is nil")
       }
@@ -48,7 +55,7 @@ class NewQuestionViewController: UIViewController, NewQuestion {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // self.buttonViewBottomConstraint.constant = 0
+    questionText.delegate = self
     
     NSNotificationCenter.defaultCenter().addObserver(
       self,
@@ -83,4 +90,15 @@ class NewQuestionViewController: UIViewController, NewQuestion {
     NSNotificationCenter.defaultCenter().removeObserver(self);
   }
 
+}
+
+// MARK: UITextViewDelegate
+
+extension NewQuestionViewController: UITextViewDelegate {
+  
+  // TODO: Figure out how to place question mark at the end
+  func textViewDidBeginEditing(textView: UITextView) {
+    //questionText.selectedTextRange = questionText.textRangeFromPosition(questionText.beginningOfDocument, toPosition: questionText.beginningOfDocument)
+    questionText.text = ""
+  }
 }
