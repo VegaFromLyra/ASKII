@@ -371,8 +371,6 @@
                     </view>
                     <connections>
                         <outlet property="backButton" destination="pWu-KR-IIR" id="B0C-wj-wCm"/>
-                        <outlet property="backButtonLeftConstraint" destination="8Ok-7j-Cfa" id="BVI-gX-FRV"/>
-                        <outlet property="backButtonSpacingConstraint" destination="sOZ-zQ-df6" id="b1j-i1-0NA"/>
                         <outlet property="buttonsWrapperView" destination="DGA-SM-LWz" id="QXE-oI-eyY"/>
                         <outlet property="mapView" destination="mc0-Wv-ngF" id="ESC-xg-Fa1"/>
                         <outlet property="nextButton" destination="xtZ-PH-GRo" id="Zja-ss-53D"/>
