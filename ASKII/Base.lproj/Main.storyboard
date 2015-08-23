@@ -114,33 +114,29 @@
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="icon-location-s" translatesAutoresizingMaskIntoConstraints="NO" id="mRp-j7-Eox">
                                         <rect key="frame" x="15" y="20" width="11" height="14"/>
                                     </imageView>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="icon-search-black" translatesAutoresizingMaskIntoConstraints="NO" id="6Bc-IL-692">
-                                        <rect key="frame" x="559" y="20" width="26" height="26"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="Jun-lb-WJ8"/>
-                                            <constraint firstAttribute="width" constant="20" id="f9B-GE-Zqy"/>
-                                        </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="Jun-lb-WJ8"/>
-                                                <exclude reference="f9B-GE-Zqy"/>
-                                            </mask>
-                                        </variation>
-                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z38-tv-JmD">
                                         <rect key="frame" x="34" y="19" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" name="GothamBlack" family="Gotham Black" pointSize="15"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mIJ-hn-KXd">
+                                        <rect key="frame" x="566" y="14" width="26" height="26"/>
+                                        <state key="normal" image="icon-search-black">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onExploreButtonClicked:" destination="KEK-k9-9RT" eventType="touchUpInside" id="HtO-J8-RZ7"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="mIJ-hn-KXd" secondAttribute="trailing" constant="8" id="CQb-gN-ay3"/>
                                     <constraint firstItem="mRp-j7-Eox" firstAttribute="leading" secondItem="2bh-uP-t2W" secondAttribute="leading" constant="15" id="DUs-K1-bVG"/>
                                     <constraint firstItem="z38-tv-JmD" firstAttribute="top" secondItem="2bh-uP-t2W" secondAttribute="top" constant="19" id="M9u-gD-Cg1"/>
-                                    <constraint firstAttribute="trailing" secondItem="6Bc-IL-692" secondAttribute="trailing" constant="15" id="UDC-f7-6DW"/>
                                     <constraint firstItem="mRp-j7-Eox" firstAttribute="top" secondItem="2bh-uP-t2W" secondAttribute="top" constant="20" id="eXR-M2-xFA"/>
                                     <constraint firstItem="z38-tv-JmD" firstAttribute="leading" secondItem="mRp-j7-Eox" secondAttribute="trailing" constant="8" id="jWH-eO-Ihd"/>
-                                    <constraint firstItem="6Bc-IL-692" firstAttribute="top" secondItem="2bh-uP-t2W" secondAttribute="top" constant="20" id="p38-O4-n4t"/>
+                                    <constraint firstItem="mIJ-hn-KXd" firstAttribute="top" secondItem="2bh-uP-t2W" secondAttribute="top" constant="14" id="kgZ-ya-acR"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="300" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="i66-9e-8Zi">

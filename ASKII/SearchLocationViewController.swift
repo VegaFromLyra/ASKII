@@ -22,8 +22,8 @@ class SearchLocationViewController: UIViewController {
   var selectedLocationName: String?
   var selectedLocationVenueId: String?
   
-  
   var locationVC: LocationViewController!
+  var inExploreMode: Bool = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -66,6 +66,7 @@ extension SearchLocationViewController: UITableViewDelegate, LocationProtocol {
     selectedLocationName = loc.name
     selectedLocationVenueId = loc.venueId
     locationVC.locationDelegate = self
+    locationVC.inExploreMode = inExploreMode
     self.showViewController(locationVC as UIViewController, sender: locationVC)
   }
 }

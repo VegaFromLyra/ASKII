@@ -46,15 +46,20 @@ class QuestionsViewController: UIViewController, LocationProtocol {
   var locationManager: CLLocationManager!
   let transitionManager = TransitionManager()
   
-  @IBAction func onAskAnywherePressed(sender: AnyObject) {
-    var storyboard = UIStoryboard(name: "NewQuestion", bundle: nil)
-    var controller = storyboard.instantiateViewControllerWithIdentifier("LocationViewController") as! UIViewController
-    
-    self.presentViewController(controller, animated: true, completion: nil)
+  var newQuestionStoryBoard: UIStoryboard!
+  var locationVC: LocationViewController!
+  
+  func goToLocationView(enableQuestions: Bool) {
+    locationVC.inExploreMode = !enableQuestions
+    self.presentViewController(locationVC, animated: true, completion: nil)
   }
   
-  @IBAction func unwindToViewController (sender: UIStoryboardSegue){
-    
+  @IBAction func onAskAnywherePressed(sender: AnyObject) {
+    goToLocationView(true)
+  }
+  
+  @IBAction func onExploreButtonClicked(sender: AnyObject) {
+    goToLocationView(false)
   }
   
   var mapLayer: CALayer {
@@ -70,6 +75,9 @@ class QuestionsViewController: UIViewController, LocationProtocol {
     
     singleQuestionViewController = self.storyboard!.instantiateViewControllerWithIdentifier("SingleQuestionViewController") as! SingleQuestionViewController
     singleQuestionViewController.locDelegate = self
+    
+    newQuestionStoryBoard = UIStoryboard(name: "NewQuestion", bundle: nil)
+    locationVC = newQuestionStoryBoard.instantiateViewControllerWithIdentifier("LocationViewController") as! LocationViewController
   }
   
   override func viewWillAppear(animated: Bool) {
