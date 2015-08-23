@@ -651,7 +651,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="4NR-nE-8xe" kind="unwind" unwindAction="unwindToViewController:" id="PF1-Ak-yqj"/>
+                                            <segue destination="KEK-k9-9RT" kind="show" id="eaR-4M-XXy"/>
                                         </connections>
                                     </button>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="icon-location-s" translatesAutoresizingMaskIntoConstraints="NO" id="Ulb-7J-wc5">
@@ -716,7 +716,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CLr-id-AzY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="4NR-nE-8xe" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2413" y="322"/>
         </scene>
@@ -728,4 +727,7 @@
         <image name="icon-logo" width="43" height="32"/>
         <image name="icon-search-black" width="26" height="26"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="eaR-4M-XXy"/>
+    </inferredMetricsTieBreakers>
 </document>
