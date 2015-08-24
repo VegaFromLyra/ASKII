@@ -62,6 +62,11 @@ class QuestionsViewController: UIViewController, LocationProtocol {
     goToLocationView(false)
   }
   
+  // NOTE - This is connected to the SingleQuestion exit handle
+  @IBAction func unWindFromSingleQuestionScene(unwindSegue: UIStoryboardSegue) {
+    println("Unwinded from Single question scene")
+  }
+  
   var mapLayer: CALayer {
     return mapView.layer
   }
