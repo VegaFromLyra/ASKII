@@ -66,6 +66,7 @@ class LocationViewController: UIViewController, LocationProtocol {
       locationManager.delegate = self
       locationManager.requestWhenInUseAuthorization()
       locationManager.desiredAccuracy = kCLLocationAccuracyBest
+      locationManager.distanceFilter = 20 // meters
       mapView.delegate = self
       
       // So that the current location is visible and can
@@ -206,13 +207,24 @@ extension LocationViewController: CLLocationManagerDelegate {
     hasCurrentLocationBeenFetched = true
     var currentLocation = locations.first as? CLLocation
     
-    camera = GMSCameraPosition.cameraWithLatitude(currentLocation!.coordinate.latitude,
-      longitude: currentLocation!.coordinate.longitude,
-      zoom: 17)
+    if let currentLocation = currentLocation {
+      var userLocation = UserLocation(location: currentLocation)
+      userLocation.save({ (success) -> () in
+        if success {
+          println("User location saved successfully")
+        } else {
+          println("Error saving user location")
+        }
+      })
+      
+      camera = GMSCameraPosition.cameraWithLatitude(currentLocation.coordinate.latitude,
+        longitude: currentLocation.coordinate.longitude,
+        zoom: 17)
+    }
+    
     mapView.camera = camera
     mapView.myLocationEnabled = true
     mapView.settings.myLocationButton = true
-    locationManager.stopUpdatingLocation()
   }
 }
 

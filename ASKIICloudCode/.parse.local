@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "ASKII": {
+      "applicationId": "dKuZJBCKptqtbJ4Fn3NjP0Ize2WRReIMhhtV0bbn"
+    },
+    "_default": {
+      "link": "ASKII"
+    }
+  }
+}

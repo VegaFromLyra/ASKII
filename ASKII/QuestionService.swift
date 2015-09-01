@@ -10,7 +10,7 @@ import Foundation
 import Parse
 import CoreLocation
 
-
+// TODO - Should be a singleton
 class QuestionService {
   
   func getLocationModel(locationPFObject: PFObject) -> Location {

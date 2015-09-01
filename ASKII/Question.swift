@@ -20,6 +20,8 @@ class Question {
   var lastUpdatedTime: NSDate?
   var id: String?
   
+  let locationService = LocationService.sharedInstance
+  
   // MARK: Methods
   
   init(content: String, location: Location, yesVotes: Int, noVotes: Int, id: String, lastUpdatedTime: NSDate) {
@@ -36,60 +38,38 @@ class Question {
     self.location = location
   }
   
-  func saveQuestionWithLocExternalId(content: String, location: Location) {
-    var locQuery = PFQuery(className: "Location")
-    locQuery.whereKey("externalId", equalTo:location.externalId!)
+  private func saveQuestionWithLocExternalId(content: String, location: Location) {
     
-    locQuery.findObjectsInBackgroundWithBlock {
-      (objects: [AnyObject]?, locError: NSError?) -> Void in
-      if locError == nil {
-        if let objects = objects as? [PFObject] {
-          if objects.count == 0 {
-            
-            var locationModel = Location(latitude: location.coordinate.latitude,
-              longitude: location.coordinate.longitude,
-              name: location.name!,
-              externalId: location.externalId!)
-            
-            locationModel.save {
-              (savedLocation) -> () in
-              self.saveQuestion(content, yesVoteCount: 0, noVoteCount: 0, parseLocation: savedLocation)
-            }
-          } else {
-            self.saveQuestion(content, yesVoteCount: 0, noVoteCount: 0, parseLocation: objects[0])
-          }
-        }
+    locationService.fetchLocationWithExternalId(location.externalId!, completion: { (result) -> () in
+      if let result = result {
+        self.saveQuestion(content, yesVoteCount: 0, noVoteCount: 0, locationModel: result)
       } else {
-        println(locError)
+        location.save({ (success) -> () in
+          if success {
+            self.saveQuestion(content, yesVoteCount: 0, noVoteCount: 0, locationModel: location)
+          } else {
+            println("Could not save location")
+          }
+        })
       }
-    }
+    })
   }
   
-  func saveQuestionWithLoc(content: String, location: Location) {
-    var locQuery = PFQuery(className: "Location")
-    locQuery.whereKey("coordinate", nearGeoPoint:location.coordinate, withinMiles:0.1)
+  private func saveQuestionWithLoc(content: String, location: Location) {
     
-    locQuery.findObjectsInBackgroundWithBlock {
-      (objects: [AnyObject]?, locError: NSError?) -> Void in
-      
-      if locError == nil {
-        if let locations = objects as? [PFObject] {
-          if locations.count == 0 {
-            var locationModel = Location(latitude: location.coordinate.latitude,
-              longitude: location.coordinate.longitude)
-            locationModel.save {
-              (savedLocation) -> () in
-              self.saveQuestion(content, yesVoteCount: 0, noVoteCount: 0, parseLocation: savedLocation)
-            }
-          } else {
-            self.saveQuestion(content, yesVoteCount: 0, noVoteCount: 0, parseLocation: locations[0])
-          }
-        }
+    locationService.findNearestLocationToGivenLoc(location.coordinate, completion: { (result) -> () in
+      if let result = result {
+        self.saveQuestion(content, yesVoteCount: 0, noVoteCount: 0, locationModel: result)
       } else {
-        println(locError)
+        location.save({ (success) -> () in
+          if success {
+            self.saveQuestion(content, yesVoteCount: 0, noVoteCount: 0, locationModel: location)
+          } else {
+            println("Could not save location")
+          }
+        })
       }
-      
-    }
+    })
   }
   
   func save() {
@@ -190,12 +170,12 @@ class Question {
     }
   }
   
-  func saveQuestion(content: String, yesVoteCount: Int, noVoteCount: Int, parseLocation: PFObject) {
+  func saveQuestion(content: String, yesVoteCount: Int, noVoteCount: Int, locationModel: Location) {
     var question = PFObject(className:"Question")
     question["content"] = content
     question["yesVoteCount"] = yesVoteCount
     question["noVoteCount"] = noVoteCount
-    question["location"] = PFObject(withoutDataWithClassName: "Location", objectId: parseLocation.objectId)
+    question["location"] = PFObject(withoutDataWithClassName: "Location", objectId: locationModel.parseId)
     
     question.saveInBackgroundWithBlock {
       (success: Bool, error: NSError?) -> Void in

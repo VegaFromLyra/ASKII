@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E05E4151B9559030024A5EA /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E05E4141B9559030024A5EA /* NotificationService.swift */; };
+		4E05E41E1B95FFD40024A5EA /* .parse.local in Resources */ = {isa = PBXBuildFile; fileRef = 4E05E4181B95FFD40024A5EA /* .parse.local */; };
+		4E05E41F1B95FFD40024A5EA /* .parse.project in Resources */ = {isa = PBXBuildFile; fileRef = 4E05E4191B95FFD40024A5EA /* .parse.project */; };
+		4E05E4201B95FFD40024A5EA /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = 4E05E41B1B95FFD40024A5EA /* main.js */; };
+		4E05E4211B95FFD40024A5EA /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 4E05E41D1B95FFD40024A5EA /* index.html */; };
+		4E05E4231B9602D20024A5EA /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E05E4221B9602D20024A5EA /* UserLocation.swift */; };
+		4E05E4251B96084B0024A5EA /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E05E4241B96084B0024A5EA /* LocationService.swift */; };
 		4E1B0A831B4AFFFA00DD5576 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1B0A821B4AFFFA00DD5576 /* MapKit.framework */; };
 		4E1B0A851B4B018900DD5576 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1B0A841B4B018900DD5576 /* CoreLocation.framework */; };
 		4E1B0A8C1B4B10E200DD5576 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1B0A871B4B10E200DD5576 /* Bolts.framework */; };
@@ -96,6 +103,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4E05E4141B9559030024A5EA /* NotificationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationService.swift; path = ../NotificationService.swift; sourceTree = "<group>"; };
+		4E05E4181B95FFD40024A5EA /* .parse.local */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .parse.local; sourceTree = "<group>"; };
+		4E05E4191B95FFD40024A5EA /* .parse.project */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .parse.project; sourceTree = "<group>"; };
+		4E05E41B1B95FFD40024A5EA /* main.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = main.js; sourceTree = "<group>"; };
+		4E05E41D1B95FFD40024A5EA /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		4E05E4221B9602D20024A5EA /* UserLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
+		4E05E4241B96084B0024A5EA /* LocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		4E1B0A821B4AFFFA00DD5576 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		4E1B0A841B4B018900DD5576 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4E1B0A871B4B10E200DD5576 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -205,6 +219,33 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		4E05E4171B95FFD40024A5EA /* ASKIICloudCode */ = {
+			isa = PBXGroup;
+			children = (
+				4E05E4181B95FFD40024A5EA /* .parse.local */,
+				4E05E4191B95FFD40024A5EA /* .parse.project */,
+				4E05E41A1B95FFD40024A5EA /* cloud */,
+				4E05E41C1B95FFD40024A5EA /* public */,
+			);
+			path = ASKIICloudCode;
+			sourceTree = "<group>";
+		};
+		4E05E41A1B95FFD40024A5EA /* cloud */ = {
+			isa = PBXGroup;
+			children = (
+				4E05E41B1B95FFD40024A5EA /* main.js */,
+			);
+			path = cloud;
+			sourceTree = "<group>";
+		};
+		4E05E41C1B95FFD40024A5EA /* public */ = {
+			isa = PBXGroup;
+			children = (
+				4E05E41D1B95FFD40024A5EA /* index.html */,
+			);
+			path = public;
+			sourceTree = "<group>";
+		};
 		4E1B0A861B4B10AB00DD5576 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -252,6 +293,7 @@
 		4E3CE5081B44826800743BCD = {
 			isa = PBXGroup;
 			children = (
+				4E05E4171B95FFD40024A5EA /* ASKIICloudCode */,
 				4EACBAA01B67EFA1005F6664 /* Quadrat.xcodeproj */,
 				4E1B0A861B4B10AB00DD5576 /* Frameworks */,
 				4E3CE5131B44826800743BCD /* ASKII */,
@@ -324,6 +366,7 @@
 				4EA93DDE1B7AA71200A6392F /* Question.swift */,
 				4E868C651B6883F70077AB67 /* Location.swift */,
 				4EE9E83B1B86279900C989E8 /* Comment.swift */,
+				4E05E4221B9602D20024A5EA /* UserLocation.swift */,
 			);
 			name = Models;
 			path = ..;
@@ -349,9 +392,11 @@
 		4EACBAAB1B67F103005F6664 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				4E05E4141B9559030024A5EA /* NotificationService.swift */,
 				4EACBAAC1B67F118005F6664 /* Venues.swift */,
 				4EE9E8381B84EB1D00C989E8 /* Utility.swift */,
 				4EE9E83F1B86623B00C989E8 /* QuestionService.swift */,
+				4E05E4241B96084B0024A5EA /* LocationService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -522,7 +567,11 @@
 				4E3CE5211B44826800743BCD /* LaunchScreen.xib in Resources */,
 				4E3CE51E1B44826800743BCD /* Images.xcassets in Resources */,
 				4E52706E1B79489100C1C652 /* Gotham-Book.ttf in Resources */,
+				4E05E41F1B95FFD40024A5EA /* .parse.project in Resources */,
+				4E05E4211B95FFD40024A5EA /* index.html in Resources */,
 				4E52706D1B79489100C1C652 /* Gotham-Black.ttf in Resources */,
+				4E05E4201B95FFD40024A5EA /* main.js in Resources */,
+				4E05E41E1B95FFD40024A5EA /* .parse.local in Resources */,
 				CEADC43A1B59955A00A2EF3E /* NewQuestion.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -592,6 +641,7 @@
 				4EF64CFB1B62B34100D979EB /* NewQuestionProtocol.swift in Sources */,
 				4EA93DDF1B7AA71200A6392F /* Question.swift in Sources */,
 				4EE9E8391B84EB1D00C989E8 /* Utility.swift in Sources */,
+				4E05E4251B96084B0024A5EA /* LocationService.swift in Sources */,
 				4E3CE5191B44826800743BCD /* ViewController.swift in Sources */,
 				4E4F05411B7407CC000F6FB4 /* LocationProtocol.swift in Sources */,
 				CEB2B6401B5B1F08001F83F4 /* SingleTableViewCell.swift in Sources */,
@@ -605,6 +655,8 @@
 				4E1B0A9E1B4B19CE00DD5576 /* QuestionsViewController.swift in Sources */,
 				4E868C661B6883F70077AB67 /* Location.swift in Sources */,
 				4E5270751B7A668600C1C652 /* QnADetailTableViewCell.swift in Sources */,
+				4E05E4151B9559030024A5EA /* NotificationService.swift in Sources */,
+				4E05E4231B9602D20024A5EA /* UserLocation.swift in Sources */,
 				4EE9E83C1B86279900C989E8 /* Comment.swift in Sources */,
 				4EE9E8401B86623B00C989E8 /* QuestionService.swift in Sources */,
 				CEB2B63B1B5AF626001F83F4 /* TableViewCell.swift in Sources */,

@@ -30,10 +30,11 @@ class Location {
   var coordinate: PFGeoPoint
   var name: String?
   var externalId: String?
+  var parseId: String?
   
   // MARK: Methods
   
-  func save(completion: (savedLocation: PFObject) -> ()) {
+  func save(completion: (success: Bool) -> ()) {
     
     var locationModel = PFObject(className:"Location")
     
@@ -50,9 +51,11 @@ class Location {
     locationModel.saveInBackgroundWithBlock {
       (success: Bool, error: NSError?) -> Void in
       if (success) {
-        completion(savedLocation: locationModel)
+        self.parseId = locationModel.objectId
+        completion(success: true)
       } else {
         println(error?.description)
+        completion(success: false)
       }
     }
   }
