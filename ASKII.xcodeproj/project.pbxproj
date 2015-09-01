@@ -512,6 +512,7 @@
 					};
 					4E3CE5251B44826800743BCD = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = VRYW4TD62Q;
 						TestTargetID = 4E3CE5101B44826800743BCD;
 					};
 				};
@@ -807,7 +808,7 @@
 				INFOPLIST_FILE = ASKII/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4536101e-36f4-4adc-a7e2-52f230e9ab8e";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -825,7 +826,7 @@
 				INFOPLIST_FILE = ASKII/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4536101e-36f4-4adc-a7e2-52f230e9ab8e";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -833,6 +834,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -844,6 +847,7 @@
 				INFOPLIST_FILE = ASKIITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ASKII.app/ASKII";
 			};
 			name = Debug;
@@ -852,6 +856,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -859,6 +865,7 @@
 				INFOPLIST_FILE = ASKIITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ASKII.app/ASKII";
 			};
 			name = Release;
