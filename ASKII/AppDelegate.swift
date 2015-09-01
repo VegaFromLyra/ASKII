@@ -40,6 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     registerForPushNotifications(application, launchOptions: launchOptions)
     
+    AppService.sharedInstance.initialize()
+    
     return true
   }
   
