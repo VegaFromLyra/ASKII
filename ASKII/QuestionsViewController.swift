@@ -83,16 +83,18 @@ class QuestionsViewController: UIViewController, LocationProtocol {
     
     newQuestionStoryBoard = UIStoryboard(name: "NewQuestion", bundle: nil)
     locationVC = newQuestionStoryBoard.instantiateViewControllerWithIdentifier("LocationViewController") as! LocationViewController
-  }
-  
-  override func viewWillAppear(animated: Bool) {
+    
     if CLLocationManager.locationServicesEnabled() && mapView != nil {
+      //TODO - This loc init code should be in a util method and re-used in LocationViewController
       locationManager = CLLocationManager()
       locationManager.delegate = self
       locationManager.desiredAccuracy = kCLLocationAccuracyBest
+      locationManager.distanceFilter = 10 // meters
       locationManager.requestAlwaysAuthorization()
       locationManager.startUpdatingLocation()
       mapView.delegate = self
+      mapView.myLocationEnabled = true
+      mapView.settings.myLocationButton = true
     }
     setUpLayer()
     
@@ -105,9 +107,13 @@ class QuestionsViewController: UIViewController, LocationProtocol {
     // Auto row height for each cell
     self.tableView.estimatedRowHeight = 300
     self.tableView.rowHeight = UITableViewAutomaticDimension
+    
   }
   
-  
+  override func viewWillDisappear(animated: Bool) {
+    locationManager.stopUpdatingLocation()
+  }
+
   // gradient over map
   func setUpLayer() {
     self.mapLayer.backgroundColor = UIColor.blueColor().CGColor
@@ -144,15 +150,11 @@ class QuestionsViewController: UIViewController, LocationProtocol {
 // MARK - CLLocationManagerDelegate methods
 extension QuestionsViewController: CLLocationManagerDelegate {
   func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+    
+    // locationManager.stopUpdatingLocation()
+    
     currentLocation = locations.last as? CLLocation
     selectedLocation = currentLocation
-    camera = GMSCameraPosition.cameraWithLatitude(currentLocation!.coordinate.latitude,
-      longitude: currentLocation!.coordinate.longitude,
-      zoom: 17)
-    mapView.camera = camera
-    mapView.myLocationEnabled = true
-    mapView.settings.myLocationButton = true
-    locationManager.stopUpdatingLocation()
     
     UtilityService.sharedInstance.getLocationName(currentLocation!) {
       (name: String) -> () in
@@ -161,6 +163,20 @@ extension QuestionsViewController: CLLocationManagerDelegate {
     }
     
     if let currentLocation = currentLocation {
+      camera = GMSCameraPosition.cameraWithLatitude(currentLocation.coordinate.latitude,
+        longitude: currentLocation.coordinate.longitude,
+        zoom: 17)
+      mapView.camera = camera
+      
+      var userLocation = UserLocation(location: currentLocation)
+      userLocation.save({ (success) -> () in
+        if success {
+          println("User location saved successfully")
+        } else {
+          println("Error saving user location")
+        }
+      })
+      
       var locationModel = Location(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
       questionService.getAllQuestions(locationModel, completion: {
         (allQuestions) -> () in

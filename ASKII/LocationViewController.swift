@@ -51,6 +51,8 @@ class LocationViewController: UIViewController, LocationProtocol {
   var allQuestions:[Question] = []
   var inExploreMode: Bool = false
   
+  let ZOOM_LEVEL: Float = 17
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -68,6 +70,8 @@ class LocationViewController: UIViewController, LocationProtocol {
       locationManager.desiredAccuracy = kCLLocationAccuracyBest
       locationManager.distanceFilter = 20 // meters
       mapView.delegate = self
+      mapView.myLocationEnabled = true
+      mapView.settings.myLocationButton = true
       
       // So that the current location is visible and can
       // be interacted with
@@ -86,6 +90,10 @@ class LocationViewController: UIViewController, LocationProtocol {
   
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
+  }
+  
+  override func viewWillDisappear(animated: Bool) {
+    locationManager.stopUpdatingLocation()
   }
   
   override func viewDidAppear(animated: Bool) {
@@ -113,7 +121,7 @@ class LocationViewController: UIViewController, LocationProtocol {
         
         camera = GMSCameraPosition.cameraWithLatitude(selectedLocation!.coordinate.latitude,
           longitude: selectedLocation!.coordinate.longitude,
-          zoom: 17)
+          zoom: ZOOM_LEVEL)
         mapView.animateToCameraPosition(camera)
         
         placeVenueMarker(selectedLocation!.coordinate.latitude,
@@ -208,23 +216,11 @@ extension LocationViewController: CLLocationManagerDelegate {
     var currentLocation = locations.first as? CLLocation
     
     if let currentLocation = currentLocation {
-      var userLocation = UserLocation(location: currentLocation)
-      userLocation.save({ (success) -> () in
-        if success {
-          println("User location saved successfully")
-        } else {
-          println("Error saving user location")
-        }
-      })
-      
       camera = GMSCameraPosition.cameraWithLatitude(currentLocation.coordinate.latitude,
         longitude: currentLocation.coordinate.longitude,
         zoom: 17)
+      mapView.camera = camera
     }
-    
-    mapView.camera = camera
-    mapView.myLocationEnabled = true
-    mapView.settings.myLocationButton = true
   }
 }
 
