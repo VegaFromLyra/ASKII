@@ -22,6 +22,8 @@ class QnADetailTableViewCell: UITableViewCell {
   @IBOutlet weak var questionSubmittedTime: UILabel!
   @IBOutlet weak var popularAnswer: UILabel!
   
+  let utilityService = UtilityService.sharedInstance
+  
   @IBAction func askAgain(sender: AnyObject) {
     question?.clearVoteCount({
       (success) -> () in
@@ -36,17 +38,17 @@ class QnADetailTableViewCell: UITableViewCell {
       }
       
       if success {
-        self.showAlert("Great!", message: "All set!", action: goHomeAction)
+        self.utilityService.showAlert("Great!",
+          message: "All set!",
+          action: goHomeAction,
+          controller: self.parentViewController!)
       } else {
-        self.showAlert("Oh no!", message: "Oops something went wrong", action: errorAction)
+        self.utilityService.showAlert("Oh no!",
+          message: "Oops something went wrong",
+          action: errorAction,
+          controller: self.parentViewController!)
       }
     })
-  }
-
-  func showAlert(title: String, message: String, action: UIAlertAction) {
-    var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-    alert.addAction(action)
-    parentViewController?.presentViewController(alert, animated: true, completion: nil)
   }
   
   func configure(data: Question) {
