@@ -48,6 +48,7 @@ class QuestionsViewController: UIViewController, LocationProtocol {
   
   var newQuestionStoryBoard: UIStoryboard!
   var locationVC: LocationViewController!
+  var currentLocationMarker: GMSMarker?
   
   func goToLocationView(enableQuestions: Bool) {
     locationVC.inExploreMode = !enableQuestions
@@ -151,8 +152,6 @@ class QuestionsViewController: UIViewController, LocationProtocol {
 extension QuestionsViewController: CLLocationManagerDelegate {
   func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
     
-    // locationManager.stopUpdatingLocation()
-    
     currentLocation = locations.last as? CLLocation
     selectedLocation = currentLocation
     
@@ -221,9 +220,14 @@ extension QuestionsViewController: UITableViewDataSource {
 extension QuestionsViewController: GMSMapViewDelegate {
   func placeMarker(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
     var position = CLLocationCoordinate2DMake(latitude, longitude)
-    var marker = GMSMarker(position: position)
-    marker.appearAnimation = kGMSMarkerAnimationPop
-    marker.map = mapView
+    
+    if let currentLocationMarker = currentLocationMarker {
+      currentLocationMarker.map = nil
+    }
+    
+    currentLocationMarker = GMSMarker(position: position)
+    currentLocationMarker!.appearAnimation = kGMSMarkerAnimationPop
+    currentLocationMarker!.map = mapView
   }
   
   func mapView(mapView: GMSMapView!, idleAtCameraPosition position: GMSCameraPosition!) {

@@ -22,8 +22,33 @@ class AppService {
   
   func initialize() {
     let installation = PFInstallation.currentInstallation()
-    installation["user"] = PFUser.currentUser()
-    installation.saveInBackground()
+    
+    let channels = installation.channels as? [String]
+    
+    var isChannelSet = false
+    
+    if let channels = channels {
+      for channel in channels {
+        if channel == "Questions" {
+          isChannelSet = true
+          break
+        }
+      }
+    }
+  
+    if !isChannelSet {
+      installation["user"] = PFUser.currentUser()
+      installation.addUniqueObject("Questions", forKey: "channels")
+      installation.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+        if success {
+          println("Updated installation")
+        } else {
+          println("Could not update installation")
+        }
+      }
+    }
+   
+    println(PFInstallation.currentInstallation().channels)
   }
   
 }
