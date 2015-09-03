@@ -10,7 +10,7 @@ import Foundation
 import Parse
 import CoreLocation
 
-
+// TODO - Should be a singleton
 class QuestionService {
   
   func getLocationModel(locationPFObject: PFObject) -> Location {
@@ -91,7 +91,7 @@ class QuestionService {
     var alreadySeenQuestions = Set<String>()
     
     var locQuery = PFQuery(className: "Location")
-    locQuery.whereKey("coordinate", nearGeoPoint:coordinate, withinMiles: 0.2)
+    locQuery.whereKey("coordinate", nearGeoPoint:coordinate, withinMiles: 1)
     locQuery.findObjectsInBackgroundWithBlock {
       (objects: [AnyObject]?, qnError: NSError?) -> Void in
       

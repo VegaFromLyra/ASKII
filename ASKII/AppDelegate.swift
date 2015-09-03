@@ -40,6 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     registerForPushNotifications(application, launchOptions: launchOptions)
     
+    AppService.sharedInstance.initialize()
+    
     return true
   }
   
@@ -114,11 +116,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     if application.applicationState == UIApplicationState.Inactive {
       PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
     }
+    
+    
   }
   
   func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-    if application.applicationState == UIApplicationState.Inactive {
-      PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
+    
+    PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
+  
+    if let info = userInfo["aps"] as? Dictionary<String, AnyObject> {
+      if let alert = info["alert"] as? String {
+        
+        var currentViewController = UtilityService.sharedInstance.getCurrentViewController(UIApplication.sharedApplication().keyWindow?.rootViewController!)
+        
+        if let currentViewController = currentViewController {
+          
+          let storyboard = UIStoryboard(name: "Main", bundle: nil)
+          let questionsController = storyboard.instantiateViewControllerWithIdentifier("QuestionViewController") as! UIViewController
+          
+          var viewQuestionAction: UIAlertAction = UIAlertAction(title: "View", style:  UIAlertActionStyle.Default) { action -> Void in
+            currentViewController.presentViewController(questionsController, animated: true, completion: nil)
+          }
+          
+          if let id1 = currentViewController.restorationIdentifier, id2 = questionsController.restorationIdentifier {
+            if id1 == id2 {
+              viewQuestionAction = UIAlertAction(title: "View", style:  UIAlertActionStyle.Default) { action -> Void in
+              }
+            }
+          }
+          
+          let doNothingAction: UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { action -> Void in
+          }
+          
+          var alert = UIAlertController(title: "New question!", message: "Someone asked a question about your location!", preferredStyle: UIAlertControllerStyle.Alert)
+          alert.addAction(viewQuestionAction)
+          alert.addAction(doNothingAction)
+          currentViewController.presentViewController(alert, animated: true, completion: nil)
+          
+          completionHandler(UIBackgroundFetchResult.NewData)
+          
+        } else {
+          println("ERROR: Current view controller cannot be nil when a notification is received while the app is in the foreground")
+        }
+      } else {
+        completionHandler(UIBackgroundFetchResult.NoData)
+      }
+    } else {
+      completionHandler(UIBackgroundFetchResult.NoData)
     }
   }
   

@@ -51,6 +51,8 @@ class LocationViewController: UIViewController, LocationProtocol {
   var allQuestions:[Question] = []
   var inExploreMode: Bool = false
   
+  let ZOOM_LEVEL: Float = 17
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -66,7 +68,10 @@ class LocationViewController: UIViewController, LocationProtocol {
       locationManager.delegate = self
       locationManager.requestWhenInUseAuthorization()
       locationManager.desiredAccuracy = kCLLocationAccuracyBest
+      locationManager.distanceFilter = 20 // meters
       mapView.delegate = self
+      mapView.myLocationEnabled = true
+      mapView.settings.myLocationButton = true
       
       // So that the current location is visible and can
       // be interacted with
@@ -85,6 +90,10 @@ class LocationViewController: UIViewController, LocationProtocol {
   
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
+  }
+  
+  override func viewWillDisappear(animated: Bool) {
+    locationManager.stopUpdatingLocation()
   }
   
   override func viewDidAppear(animated: Bool) {
@@ -112,7 +121,7 @@ class LocationViewController: UIViewController, LocationProtocol {
         
         camera = GMSCameraPosition.cameraWithLatitude(selectedLocation!.coordinate.latitude,
           longitude: selectedLocation!.coordinate.longitude,
-          zoom: 17)
+          zoom: ZOOM_LEVEL)
         mapView.animateToCameraPosition(camera)
         
         placeVenueMarker(selectedLocation!.coordinate.latitude,
@@ -206,13 +215,12 @@ extension LocationViewController: CLLocationManagerDelegate {
     hasCurrentLocationBeenFetched = true
     var currentLocation = locations.first as? CLLocation
     
-    camera = GMSCameraPosition.cameraWithLatitude(currentLocation!.coordinate.latitude,
-      longitude: currentLocation!.coordinate.longitude,
-      zoom: 17)
-    mapView.camera = camera
-    mapView.myLocationEnabled = true
-    mapView.settings.myLocationButton = true
-    locationManager.stopUpdatingLocation()
+    if let currentLocation = currentLocation {
+      camera = GMSCameraPosition.cameraWithLatitude(currentLocation.coordinate.latitude,
+        longitude: currentLocation.coordinate.longitude,
+        zoom: 17)
+      mapView.camera = camera
+    }
   }
 }
 
