@@ -19,13 +19,16 @@ class LocationViewController: UIViewController, LocationProtocol {
   @IBOutlet weak var searchButton: UIButton!
   @IBOutlet weak var qnaDetailsTableView: UITableView!
   @IBOutlet weak var numberOfQuestions: UILabel!
+  @IBOutlet weak var buttonsWrapperView: UIView!
+  @IBOutlet weak var nextButton: UIButton!
+  @IBOutlet weak var backButton: UIButton!
+  
+  var mainStoryboard: UIStoryboard!
+  var questionsViewController: QuestionsViewController!
   
   @IBAction func goBack(sender: AnyObject) {
-    var storyboard = UIStoryboard(name: "Main", bundle: nil)
-    var controller = storyboard.instantiateViewControllerWithIdentifier("QuestionViewController") as! UIViewController
-    self.presentViewController(controller, animated: true, completion: nil)
+    self.presentViewController(questionsViewController, animated: true, completion: nil)
   }
-  
   
   // TODO: Should I instantiate here or in init?
   let venueService = VenueService()
@@ -46,6 +49,9 @@ class LocationViewController: UIViewController, LocationProtocol {
   var inSearchMode: Bool = false
   let questionService:QuestionService = QuestionService()
   var allQuestions:[Question] = []
+  var inExploreMode: Bool = false
+  
+  let ZOOM_LEVEL: Float = 17
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -53,6 +59,8 @@ class LocationViewController: UIViewController, LocationProtocol {
     qnaDetailsTableView.delegate = self
     qnaDetailsTableView.dataSource = self
     
+    mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+    questionsViewController = mainStoryboard.instantiateViewControllerWithIdentifier("QuestionViewController") as! QuestionsViewController
     
     // Initialize all the location stuff
     if mapView != nil {
@@ -60,7 +68,10 @@ class LocationViewController: UIViewController, LocationProtocol {
       locationManager.delegate = self
       locationManager.requestWhenInUseAuthorization()
       locationManager.desiredAccuracy = kCLLocationAccuracyBest
+      locationManager.distanceFilter = 20 // meters
       mapView.delegate = self
+      mapView.myLocationEnabled = true
+      mapView.settings.myLocationButton = true
       
       // So that the current location is visible and can
       // be interacted with
@@ -77,8 +88,25 @@ class LocationViewController: UIViewController, LocationProtocol {
     }
   }
   
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+  }
+  
+  override func viewWillDisappear(animated: Bool) {
+    locationManager.stopUpdatingLocation()
+  }
+  
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
+    
+    if inExploreMode {
+      UIView.animateWithDuration(0.3) {
+        self.nextButton.hidden = true
+        var backButtonFrame = self.backButton.frame
+        backButtonFrame.origin.x = (self.buttonsWrapperView.frame.size.width / 2) - (backButtonFrame.size.width / 2)
+        self.backButton.frame = backButtonFrame
+      }
+    }
     
     if let locDelegate = locationDelegate {
       if let loc = locDelegate.selectedLocation, locName = locDelegate.selectedLocationName, locId = locDelegate.selectedLocationVenueId {
@@ -93,7 +121,7 @@ class LocationViewController: UIViewController, LocationProtocol {
         
         camera = GMSCameraPosition.cameraWithLatitude(selectedLocation!.coordinate.latitude,
           longitude: selectedLocation!.coordinate.longitude,
-          zoom: 17)
+          zoom: ZOOM_LEVEL)
         mapView.animateToCameraPosition(camera)
         
         placeVenueMarker(selectedLocation!.coordinate.latitude,
@@ -172,6 +200,7 @@ class LocationViewController: UIViewController, LocationProtocol {
     if segue.destinationViewController is SearchLocationViewController {
       var searchLocationViewController = segue.destinationViewController as! SearchLocationViewController
       searchLocationViewController.delegate = self
+      searchLocationViewController.inExploreMode = inExploreMode
     } else if segue.destinationViewController is NewQuestionViewController {
       var newQuestionViewController = segue.destinationViewController as! NewQuestionViewController
       newQuestionViewController.delegate = self
@@ -186,13 +215,12 @@ extension LocationViewController: CLLocationManagerDelegate {
     hasCurrentLocationBeenFetched = true
     var currentLocation = locations.first as? CLLocation
     
-    camera = GMSCameraPosition.cameraWithLatitude(currentLocation!.coordinate.latitude,
-      longitude: currentLocation!.coordinate.longitude,
-      zoom: 17)
-    mapView.camera = camera
-    mapView.myLocationEnabled = true
-    mapView.settings.myLocationButton = true
-    locationManager.stopUpdatingLocation()
+    if let currentLocation = currentLocation {
+      camera = GMSCameraPosition.cameraWithLatitude(currentLocation.coordinate.latitude,
+        longitude: currentLocation.coordinate.longitude,
+        zoom: 17)
+      mapView.camera = camera
+    }
   }
 }
 

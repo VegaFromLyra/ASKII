@@ -53,7 +53,7 @@ class VenueService {
       searchResults.removeAll(keepCapacity: false)
     }
       
-    var parameters = [Parameter.query:query, Parameter.limit:"10"]
+    var parameters = [Parameter.query:query, Parameter.limit:"10", Parameter.intent:"global"]
     parameters += location.parameters()
       
     let searchTask = session.venues.search(parameters) {

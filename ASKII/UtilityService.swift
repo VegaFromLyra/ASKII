@@ -88,4 +88,27 @@ class UtilityService {
     return output
   }
   
+  func showAlert(title: String, message: String, action: UIAlertAction, controller: UIViewController) {
+    var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+    alert.addAction(action)
+    controller.presentViewController(alert, animated: true, completion: nil)
+  }
+  
+  func getCurrentViewController(rootViewController: UIViewController?) -> UIViewController? {
+    if let rootController = rootViewController {
+      
+      var currentController: UIViewController! = rootController
+      
+      // Each ViewController keeps track of the view it has presented, so we
+      // can move from the head to the tail, which will always be the current view
+      while (currentController.presentedViewController != nil) {
+        currentController = currentController.presentedViewController
+      }
+      
+      return currentController
+      
+    } else {
+      return nil
+    }
+  }
 }

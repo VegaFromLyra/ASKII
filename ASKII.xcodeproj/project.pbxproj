@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E05E41E1B95FFD40024A5EA /* .parse.local in Resources */ = {isa = PBXBuildFile; fileRef = 4E05E4181B95FFD40024A5EA /* .parse.local */; };
+		4E05E41F1B95FFD40024A5EA /* .parse.project in Resources */ = {isa = PBXBuildFile; fileRef = 4E05E4191B95FFD40024A5EA /* .parse.project */; };
+		4E05E4201B95FFD40024A5EA /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = 4E05E41B1B95FFD40024A5EA /* main.js */; };
+		4E05E4211B95FFD40024A5EA /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 4E05E41D1B95FFD40024A5EA /* index.html */; };
+		4E05E4231B9602D20024A5EA /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E05E4221B9602D20024A5EA /* UserLocation.swift */; };
+		4E05E4251B96084B0024A5EA /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E05E4241B96084B0024A5EA /* LocationService.swift */; };
 		4E1B0A831B4AFFFA00DD5576 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1B0A821B4AFFFA00DD5576 /* MapKit.framework */; };
 		4E1B0A851B4B018900DD5576 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1B0A841B4B018900DD5576 /* CoreLocation.framework */; };
 		4E1B0A8C1B4B10E200DD5576 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1B0A871B4B10E200DD5576 /* Bolts.framework */; };
@@ -35,8 +41,9 @@
 		4E89F68F1B5C0081002EAE7D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E89F68E1B5C0081002EAE7D /* Social.framework */; };
 		4EA93DDF1B7AA71200A6392F /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA93DDE1B7AA71200A6392F /* Question.swift */; };
 		4EA93DE61B7CFEC500A6392F /* QuestionDoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA93DE51B7CFEC500A6392F /* QuestionDoneViewController.swift */; };
-		4EACBAAD1B67F118005F6664 /* Venues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EACBAAC1B67F118005F6664 /* Venues.swift */; };
-		4EE9E8391B84EB1D00C989E8 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE9E8381B84EB1D00C989E8 /* Utility.swift */; };
+		4EACBAAD1B67F118005F6664 /* VenueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EACBAAC1B67F118005F6664 /* VenueService.swift */; };
+		4ED527F71B9651FD0000CFC2 /* AppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED527F61B9651FD0000CFC2 /* AppService.swift */; };
+		4EE9E8391B84EB1D00C989E8 /* UtilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE9E8381B84EB1D00C989E8 /* UtilityService.swift */; };
 		4EE9E83C1B86279900C989E8 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE9E83B1B86279900C989E8 /* Comment.swift */; };
 		4EE9E8401B86623B00C989E8 /* QuestionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE9E83F1B86623B00C989E8 /* QuestionService.swift */; };
 		4EF64CFB1B62B34100D979EB /* NewQuestionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF64CFA1B62B34100D979EB /* NewQuestionProtocol.swift */; };
@@ -96,6 +103,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4E05E4181B95FFD40024A5EA /* .parse.local */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .parse.local; sourceTree = "<group>"; };
+		4E05E4191B95FFD40024A5EA /* .parse.project */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .parse.project; sourceTree = "<group>"; };
+		4E05E41B1B95FFD40024A5EA /* main.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = main.js; sourceTree = "<group>"; };
+		4E05E41D1B95FFD40024A5EA /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		4E05E4221B9602D20024A5EA /* UserLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
+		4E05E4241B96084B0024A5EA /* LocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		4E1B0A821B4AFFFA00DD5576 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		4E1B0A841B4B018900DD5576 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4E1B0A871B4B10E200DD5576 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -129,8 +142,9 @@
 		4EA93DDE1B7AA71200A6392F /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Question.swift; path = ASKII/Question.swift; sourceTree = "<group>"; };
 		4EA93DE51B7CFEC500A6392F /* QuestionDoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionDoneViewController.swift; sourceTree = "<group>"; };
 		4EACBAA01B67EFA1005F6664 /* Quadrat.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quadrat.xcodeproj; path = "das-quadrat/Source/Quadrat.xcodeproj"; sourceTree = "<group>"; };
-		4EACBAAC1B67F118005F6664 /* Venues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Venues.swift; sourceTree = "<group>"; };
-		4EE9E8381B84EB1D00C989E8 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		4EACBAAC1B67F118005F6664 /* VenueService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueService.swift; sourceTree = "<group>"; };
+		4ED527F61B9651FD0000CFC2 /* AppService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppService.swift; sourceTree = "<group>"; };
+		4EE9E8381B84EB1D00C989E8 /* UtilityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityService.swift; sourceTree = "<group>"; };
 		4EE9E83B1B86279900C989E8 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		4EE9E83F1B86623B00C989E8 /* QuestionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionService.swift; sourceTree = "<group>"; };
 		4EF64CFA1B62B34100D979EB /* NewQuestionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewQuestionProtocol.swift; sourceTree = "<group>"; };
@@ -205,6 +219,33 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		4E05E4171B95FFD40024A5EA /* ASKIICloudCode */ = {
+			isa = PBXGroup;
+			children = (
+				4E05E4181B95FFD40024A5EA /* .parse.local */,
+				4E05E4191B95FFD40024A5EA /* .parse.project */,
+				4E05E41A1B95FFD40024A5EA /* cloud */,
+				4E05E41C1B95FFD40024A5EA /* public */,
+			);
+			path = ASKIICloudCode;
+			sourceTree = "<group>";
+		};
+		4E05E41A1B95FFD40024A5EA /* cloud */ = {
+			isa = PBXGroup;
+			children = (
+				4E05E41B1B95FFD40024A5EA /* main.js */,
+			);
+			path = cloud;
+			sourceTree = "<group>";
+		};
+		4E05E41C1B95FFD40024A5EA /* public */ = {
+			isa = PBXGroup;
+			children = (
+				4E05E41D1B95FFD40024A5EA /* index.html */,
+			);
+			path = public;
+			sourceTree = "<group>";
+		};
 		4E1B0A861B4B10AB00DD5576 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -252,6 +293,7 @@
 		4E3CE5081B44826800743BCD = {
 			isa = PBXGroup;
 			children = (
+				4E05E4171B95FFD40024A5EA /* ASKIICloudCode */,
 				4EACBAA01B67EFA1005F6664 /* Quadrat.xcodeproj */,
 				4E1B0A861B4B10AB00DD5576 /* Frameworks */,
 				4E3CE5131B44826800743BCD /* ASKII */,
@@ -324,6 +366,7 @@
 				4EA93DDE1B7AA71200A6392F /* Question.swift */,
 				4E868C651B6883F70077AB67 /* Location.swift */,
 				4EE9E83B1B86279900C989E8 /* Comment.swift */,
+				4E05E4221B9602D20024A5EA /* UserLocation.swift */,
 			);
 			name = Models;
 			path = ..;
@@ -349,9 +392,11 @@
 		4EACBAAB1B67F103005F6664 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				4EACBAAC1B67F118005F6664 /* Venues.swift */,
-				4EE9E8381B84EB1D00C989E8 /* Utility.swift */,
+				4ED527F61B9651FD0000CFC2 /* AppService.swift */,
+				4EACBAAC1B67F118005F6664 /* VenueService.swift */,
+				4EE9E8381B84EB1D00C989E8 /* UtilityService.swift */,
 				4EE9E83F1B86623B00C989E8 /* QuestionService.swift */,
+				4E05E4241B96084B0024A5EA /* LocationService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -455,8 +500,11 @@
 				TargetAttributes = {
 					4E3CE5101B44826800743BCD = {
 						CreatedOnToolsVersion = 6.3.2;
-						DevelopmentTeam = RJ2UMUAV3A;
+						DevelopmentTeam = VRYW4TD62Q;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Maps.iOS = {
 								enabled = 1;
 							};
@@ -464,6 +512,7 @@
 					};
 					4E3CE5251B44826800743BCD = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = VRYW4TD62Q;
 						TestTargetID = 4E3CE5101B44826800743BCD;
 					};
 				};
@@ -519,7 +568,11 @@
 				4E3CE5211B44826800743BCD /* LaunchScreen.xib in Resources */,
 				4E3CE51E1B44826800743BCD /* Images.xcassets in Resources */,
 				4E52706E1B79489100C1C652 /* Gotham-Book.ttf in Resources */,
+				4E05E41F1B95FFD40024A5EA /* .parse.project in Resources */,
+				4E05E4211B95FFD40024A5EA /* index.html in Resources */,
 				4E52706D1B79489100C1C652 /* Gotham-Black.ttf in Resources */,
+				4E05E4201B95FFD40024A5EA /* main.js in Resources */,
+				4E05E41E1B95FFD40024A5EA /* .parse.local in Resources */,
 				CEADC43A1B59955A00A2EF3E /* NewQuestion.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -588,20 +641,23 @@
 			files = (
 				4EF64CFB1B62B34100D979EB /* NewQuestionProtocol.swift in Sources */,
 				4EA93DDF1B7AA71200A6392F /* Question.swift in Sources */,
-				4EE9E8391B84EB1D00C989E8 /* Utility.swift in Sources */,
+				4EE9E8391B84EB1D00C989E8 /* UtilityService.swift in Sources */,
+				4E05E4251B96084B0024A5EA /* LocationService.swift in Sources */,
 				4E3CE5191B44826800743BCD /* ViewController.swift in Sources */,
 				4E4F05411B7407CC000F6FB4 /* LocationProtocol.swift in Sources */,
+				4ED527F71B9651FD0000CFC2 /* AppService.swift in Sources */,
 				CEB2B6401B5B1F08001F83F4 /* SingleTableViewCell.swift in Sources */,
 				CE7CE3D31B77AC510067778B /* TransitionManager.swift in Sources */,
 				CEB2B63E1B5B129B001F83F4 /* SingleQuestionViewController.swift in Sources */,
 				4E3CE5171B44826800743BCD /* AppDelegate.swift in Sources */,
 				CEADC43C1B59A69700A2EF3E /* NewQuestionViewController.swift in Sources */,
-				4EACBAAD1B67F118005F6664 /* Venues.swift in Sources */,
+				4EACBAAD1B67F118005F6664 /* VenueService.swift in Sources */,
 				4EA93DE61B7CFEC500A6392F /* QuestionDoneViewController.swift in Sources */,
 				4E89F6871B5B516D002EAE7D /* LocationViewController.swift in Sources */,
 				4E1B0A9E1B4B19CE00DD5576 /* QuestionsViewController.swift in Sources */,
 				4E868C661B6883F70077AB67 /* Location.swift in Sources */,
 				4E5270751B7A668600C1C652 /* QnADetailTableViewCell.swift in Sources */,
+				4E05E4231B9602D20024A5EA /* UserLocation.swift in Sources */,
 				4EE9E83C1B86279900C989E8 /* Comment.swift in Sources */,
 				4EE9E8401B86623B00C989E8 /* QuestionService.swift in Sources */,
 				CEB2B63B1B5AF626001F83F4 /* TableViewCell.swift in Sources */,
@@ -669,7 +725,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development IOS Push Services: com.ja.ASKII";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -692,6 +748,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
+				PROVISIONING_PROFILE = "02494c6b-63d8-4ac5-93a7-9736572d6423";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -715,7 +772,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development IOS Push Services: com.ja.ASKII";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -730,6 +787,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "02494c6b-63d8-4ac5-93a7-9736572d6423";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -776,6 +834,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -787,6 +847,7 @@
 				INFOPLIST_FILE = ASKIITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ASKII.app/ASKII";
 			};
 			name = Debug;
@@ -795,6 +856,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -802,6 +865,7 @@
 				INFOPLIST_FILE = ASKIITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ASKII.app/ASKII";
 			};
 			name = Release;

@@ -46,15 +46,26 @@ class QuestionsViewController: UIViewController, LocationProtocol {
   var locationManager: CLLocationManager!
   let transitionManager = TransitionManager()
   
-  @IBAction func onAskAnywherePressed(sender: AnyObject) {
-    var storyboard = UIStoryboard(name: "NewQuestion", bundle: nil)
-    var controller = storyboard.instantiateViewControllerWithIdentifier("LocationViewController") as! UIViewController
-    
-    self.presentViewController(controller, animated: true, completion: nil)
+  var newQuestionStoryBoard: UIStoryboard!
+  var locationVC: LocationViewController!
+  var currentLocationMarker: GMSMarker?
+  
+  func goToLocationView(enableQuestions: Bool) {
+    locationVC.inExploreMode = !enableQuestions
+    self.presentViewController(locationVC, animated: true, completion: nil)
   }
   
-  @IBAction func unwindToViewController (sender: UIStoryboardSegue){
-    
+  @IBAction func onAskAnywherePressed(sender: AnyObject) {
+    goToLocationView(true)
+  }
+  
+  @IBAction func onExploreButtonClicked(sender: AnyObject) {
+    goToLocationView(false)
+  }
+  
+  // NOTE - This is connected to the SingleQuestion exit handle
+  @IBAction func unWindFromSingleQuestionScene(unwindSegue: UIStoryboardSegue) {
+    println("Unwinded from Single question scene")
   }
   
   var mapLayer: CALayer {
@@ -70,16 +81,21 @@ class QuestionsViewController: UIViewController, LocationProtocol {
     
     singleQuestionViewController = self.storyboard!.instantiateViewControllerWithIdentifier("SingleQuestionViewController") as! SingleQuestionViewController
     singleQuestionViewController.locDelegate = self
-  }
-  
-  override func viewWillAppear(animated: Bool) {
+    
+    newQuestionStoryBoard = UIStoryboard(name: "NewQuestion", bundle: nil)
+    locationVC = newQuestionStoryBoard.instantiateViewControllerWithIdentifier("LocationViewController") as! LocationViewController
+    
     if CLLocationManager.locationServicesEnabled() && mapView != nil {
+      //TODO - This loc init code should be in a util method and re-used in LocationViewController
       locationManager = CLLocationManager()
       locationManager.delegate = self
       locationManager.desiredAccuracy = kCLLocationAccuracyBest
+      locationManager.distanceFilter = 10 // meters
       locationManager.requestAlwaysAuthorization()
       locationManager.startUpdatingLocation()
       mapView.delegate = self
+      mapView.myLocationEnabled = true
+      mapView.settings.myLocationButton = true
     }
     setUpLayer()
     
@@ -92,9 +108,13 @@ class QuestionsViewController: UIViewController, LocationProtocol {
     // Auto row height for each cell
     self.tableView.estimatedRowHeight = 300
     self.tableView.rowHeight = UITableViewAutomaticDimension
+    
   }
   
-  
+  override func viewWillDisappear(animated: Bool) {
+    locationManager.stopUpdatingLocation()
+  }
+
   // gradient over map
   func setUpLayer() {
     self.mapLayer.backgroundColor = UIColor.blueColor().CGColor
@@ -131,15 +151,9 @@ class QuestionsViewController: UIViewController, LocationProtocol {
 // MARK - CLLocationManagerDelegate methods
 extension QuestionsViewController: CLLocationManagerDelegate {
   func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+    
     currentLocation = locations.last as? CLLocation
     selectedLocation = currentLocation
-    camera = GMSCameraPosition.cameraWithLatitude(currentLocation!.coordinate.latitude,
-      longitude: currentLocation!.coordinate.longitude,
-      zoom: 17)
-    mapView.camera = camera
-    mapView.myLocationEnabled = true
-    mapView.settings.myLocationButton = true
-    locationManager.stopUpdatingLocation()
     
     UtilityService.sharedInstance.getLocationName(currentLocation!) {
       (name: String) -> () in
@@ -148,6 +162,20 @@ extension QuestionsViewController: CLLocationManagerDelegate {
     }
     
     if let currentLocation = currentLocation {
+      camera = GMSCameraPosition.cameraWithLatitude(currentLocation.coordinate.latitude,
+        longitude: currentLocation.coordinate.longitude,
+        zoom: 17)
+      mapView.camera = camera
+      
+      var userLocation = UserLocation(location: currentLocation)
+      userLocation.save({ (success) -> () in
+        if success {
+          println("User location saved successfully")
+        } else {
+          println("Error saving user location")
+        }
+      })
+      
       var locationModel = Location(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
       questionService.getAllQuestions(locationModel, completion: {
         (allQuestions) -> () in
@@ -192,9 +220,14 @@ extension QuestionsViewController: UITableViewDataSource {
 extension QuestionsViewController: GMSMapViewDelegate {
   func placeMarker(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
     var position = CLLocationCoordinate2DMake(latitude, longitude)
-    var marker = GMSMarker(position: position)
-    marker.appearAnimation = kGMSMarkerAnimationPop
-    marker.map = mapView
+    
+    if let currentLocationMarker = currentLocationMarker {
+      currentLocationMarker.map = nil
+    }
+    
+    currentLocationMarker = GMSMarker(position: position)
+    currentLocationMarker!.appearAnimation = kGMSMarkerAnimationPop
+    currentLocationMarker!.map = mapView
   }
   
   func mapView(mapView: GMSMapView!, idleAtCameraPosition position: GMSCameraPosition!) {
