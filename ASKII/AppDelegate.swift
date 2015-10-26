@@ -62,11 +62,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
       }
     }
+    
     // NOTE: This will only work for iOS 8
     if application.respondsToSelector("registerUserNotificationSettings:") {
-      let userNotificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
-      let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
-      application.registerUserNotificationSettings(settings)
+      let userNotificationTypes =
+        UIUserNotificationSettings(forTypes: [UIUserNotificationType.Badge ,UIUserNotificationType.Sound ,UIUserNotificationType.Alert], categories: nil)
+      application.registerUserNotificationSettings(userNotificationTypes)
       application.registerForRemoteNotifications()
     }
   }
@@ -81,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Session.setupSharedSessionWithConfiguration(configuration)
   }
   
-  func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation:  AnyObject?) -> Bool {
+  func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation:  AnyObject) -> Bool {
     return Session.sharedSession().handleURL(url)
   }
   
@@ -96,18 +97,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     PFPush.subscribeToChannelInBackground("") { (succeeded: Bool, error: NSError?) in
       if succeeded {
-        println("ParseStarterProject successfully subscribed to push notifications on the broadcast channel.");
+        print("ParseStarterProject successfully subscribed to push notifications on the broadcast channel.");
       } else {
-        println("ParseStarterProject failed to subscribe to push notifications on the broadcast channel with error = %@.", error)
+        print("ParseStarterProject failed to subscribe to push notifications on the broadcast channel with error = %@.", error)
       }
     }
   }
   
   func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
     if error.code == 3010 {
-      println("Push notifications are not supported in the iOS Simulator.")
+      print("Push notifications are not supported in the iOS Simulator.")
     } else {
-      println("application:didFailToRegisterForRemoteNotificationsWithError: %@", error)
+      print("application:didFailToRegisterForRemoteNotificationsWithError: %@", error)
     }
   }
   
@@ -125,14 +126,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
   
     if let info = userInfo["aps"] as? Dictionary<String, AnyObject> {
-      if let alert = info["alert"] as? String {
+      if let _ = info["alert"] as? String {
         
-        var currentViewController = UtilityService.sharedInstance.getCurrentViewController(UIApplication.sharedApplication().keyWindow?.rootViewController!)
+        let currentViewController = UtilityService.sharedInstance.getCurrentViewController(UIApplication.sharedApplication().keyWindow?.rootViewController!)
         
         if let currentViewController = currentViewController {
           
           let storyboard = UIStoryboard(name: "Main", bundle: nil)
-          let questionsController = storyboard.instantiateViewControllerWithIdentifier("QuestionViewController") as! UIViewController
+          let questionsController = storyboard.instantiateViewControllerWithIdentifier("QuestionViewController")
           
           var viewQuestionAction: UIAlertAction = UIAlertAction(title: "View", style:  UIAlertActionStyle.Default) { action -> Void in
             currentViewController.presentViewController(questionsController, animated: true, completion: nil)
@@ -148,7 +149,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           let doNothingAction: UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { action -> Void in
           }
           
-          var alert = UIAlertController(title: "New question!", message: "Someone asked a question about your location!", preferredStyle: UIAlertControllerStyle.Alert)
+          let alert = UIAlertController(title: "New question!", message: "Someone asked a question about your location!", preferredStyle: UIAlertControllerStyle.Alert)
           alert.addAction(viewQuestionAction)
           alert.addAction(doNothingAction)
           currentViewController.presentViewController(alert, animated: true, completion: nil)
@@ -156,7 +157,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           completionHandler(UIBackgroundFetchResult.NewData)
           
         } else {
-          println("ERROR: Current view controller cannot be nil when a notification is received while the app is in the foreground")
+          print("ERROR: Current view controller cannot be nil when a notification is received while the app is in the foreground")
         }
       } else {
         completionHandler(UIBackgroundFetchResult.NoData)

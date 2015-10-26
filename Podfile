@@ -3,6 +3,7 @@ use_frameworks!
 
 target 'ASKII' do
   pod 'GoogleMaps'
+  pod 'QuadratTouch', '>= 1.0'
 end
 
 target 'ASKIITests' do

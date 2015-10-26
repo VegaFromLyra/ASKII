@@ -26,18 +26,18 @@ class SingleQuestionViewController: UIViewController, UITableViewDataSource, UIT
   var comments: [Comment] = []
   
   @IBAction func onPostCommentClicked(sender: AnyObject) {
-    if commentTextField.text.isEmpty {
+    if commentTextField.text!.isEmpty {
       // TODO: Show alert
-      println("Missing comment")
+      print("Missing comment")
     } else {
-      question!.postComment(commentTextField.text, completion: {
+      question!.postComment(commentTextField.text!, completion: {
         (success) -> () in
         if success {
-          println("Comment posted successfully")
+          print("Comment posted successfully")
           self.updateComments()
           self.commentTextField.text = ""
         } else {
-          println("Error in posting comment")
+          print("Error in posting comment")
         }
       })
     }
@@ -47,10 +47,10 @@ class SingleQuestionViewController: UIViewController, UITableViewDataSource, UIT
     question!.addYesVote {
       (success) -> () in
       if success {
-        println("Added yes vote")
+        print("Added yes vote")
         self.refreshQuestionData()
       } else {
-        println("Error adding yes vote")
+        print("Error adding yes vote")
       }
     }
   }
@@ -59,10 +59,10 @@ class SingleQuestionViewController: UIViewController, UITableViewDataSource, UIT
     question!.addNoVote {
       (success) -> () in
       if success {
-        println("Added no vote")
+        print("Added no vote")
         self.refreshQuestionData()
       } else {
-        println("Error adding no vote")
+        print("Error adding no vote")
       }
     }
   }
@@ -105,7 +105,7 @@ class SingleQuestionViewController: UIViewController, UITableViewDataSource, UIT
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    var selectedComment = comments[indexPath.row]
+    let selectedComment = comments[indexPath.row]
     
     let cell: SingleTableViewCell = self.AnswersTableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! SingleTableViewCell
     cell.answerConfig(selectedComment)
@@ -118,7 +118,7 @@ class SingleQuestionViewController: UIViewController, UITableViewDataSource, UIT
   }
   
   func updateColors() {
-    var backgroundColor = utilityService.getPopularVoteBackgroundColor(question!.yesVotes, noVoteCount: question!.noVotes)
+    let backgroundColor = utilityService.getPopularVoteBackgroundColor(question!.yesVotes, noVoteCount: question!.noVotes)
     backgroundView.backgroundColor = backgroundColor
     headerView.backgroundColor = backgroundColor
     popularVoteLabel.textColor = utilityService.getPopularVoteTextColor(question!.yesVotes, noVoteCount: question!.noVotes)

@@ -36,7 +36,7 @@ class Location {
   
   func save(completion: (success: Bool) -> ()) {
     
-    var locationModel = PFObject(className:"Location")
+    let locationModel = PFObject(className:"Location")
     
     locationModel["coordinate"] = coordinate
     
@@ -54,7 +54,7 @@ class Location {
         self.parseId = locationModel.objectId
         completion(success: true)
       } else {
-        println(error?.description)
+        print(error?.description)
         completion(success: false)
       }
     }

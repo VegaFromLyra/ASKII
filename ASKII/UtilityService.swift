@@ -29,7 +29,7 @@ class UtilityService {
     geoCoder.reverseGeocodeCoordinate(loc.coordinate) { response, error in
       if let address = response.firstResult() {
         let lines = address.lines as! [String]
-        completion(name: join(", ", lines))
+        completion(name: lines.joinWithSeparator(", "))
       }
     }
   }
@@ -89,7 +89,7 @@ class UtilityService {
   }
   
   func showAlert(title: String, message: String, action: UIAlertAction, controller: UIViewController) {
-    var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+    let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
     alert.addAction(action)
     controller.presentViewController(alert, animated: true, completion: nil)
   }

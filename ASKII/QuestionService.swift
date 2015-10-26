@@ -30,7 +30,7 @@ class QuestionService {
   }
   
   func getAllQuestionsByExternalId(externalId: String, completion: (questions: [Question]) -> ()) {
-    var locQuery = PFQuery(className: "Location")
+    let locQuery = PFQuery(className: "Location")
     
     locQuery.whereKey("externalId", equalTo:externalId)
     
@@ -44,10 +44,9 @@ class QuestionService {
             completion(questions: [])
           } else {
             let location = locations[0];
-            let coordinate = location["coordinate"] as! PFGeoPoint
             let locationPointer = PFObject(withoutDataWithClassName: "Location", objectId: location.objectId!)
             
-            var questionQuery = PFQuery(className:"Question")
+            let questionQuery = PFQuery(className:"Question")
             questionQuery.whereKey("location", equalTo:locationPointer)
             questionQuery.orderByDescending("updatedAt")
             
@@ -61,7 +60,7 @@ class QuestionService {
                   let locModel = self.getLocationModel(location)
                   
                   for question in questions {
-                    var result: Question =  Question(content: question["content"] as! String,
+                    let result: Question =  Question(content: question["content"] as! String,
                       location: locModel,
                       yesVotes: question["yesVoteCount"] as! Int,
                       noVotes: question["noVoteCount"] as! Int,
@@ -74,14 +73,14 @@ class QuestionService {
                 
                 completion(questions: results)
               } else {
-                println("ERROR: Could not fetch questions for \(location) " + qnError!.localizedDescription)
+                print("ERROR: Could not fetch questions for \(location) " + qnError!.localizedDescription)
                 completion(questions: [])
               }
             }
           }
         }
       } else {
-        println("ERROR: Could not fetch location with external Id \(externalId) " + locError!.localizedDescription)
+        print("ERROR: Could not fetch location with external Id \(externalId) " + locError!.localizedDescription)
         completion(questions: [])
       }
     }
@@ -90,7 +89,7 @@ class QuestionService {
   func getAllQuestionsByGeoFencing(coordinate: PFGeoPoint, completion: (questions: [Question]) -> ()) {
     var alreadySeenQuestions = Set<String>()
     
-    var locQuery = PFQuery(className: "Location")
+    let locQuery = PFQuery(className: "Location")
     locQuery.whereKey("coordinate", nearGeoPoint:coordinate, withinMiles: 1)
     locQuery.findObjectsInBackgroundWithBlock {
       (objects: [AnyObject]?, qnError: NSError?) -> Void in
@@ -120,7 +119,7 @@ class QuestionService {
                     
                     if !alreadySeenQuestions.contains(question.objectId!) {
                       
-                      var result: Question =  Question(content: question["content"] as! String,
+                      let result: Question =  Question(content: question["content"] as! String,
                         location: locationModel,
                         yesVotes: question["yesVoteCount"] as! Int,
                         noVotes: question["noVoteCount"] as! Int,
@@ -136,7 +135,7 @@ class QuestionService {
                   completion(questions: results)
                 }
               } else {
-                println("ERROR: Could not fetch questions for coordinate\(coordinate) " + qnError!.localizedDescription)
+                print("ERROR: Could not fetch questions for coordinate\(coordinate) " + qnError!.localizedDescription)
                 completion(questions: [])
               }
             }

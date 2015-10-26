@@ -11,8 +11,8 @@ import UIKit
 class QuestionDoneViewController: UIViewController {
 
   @IBAction func onSubmitQuestionDone(sender: AnyObject) {
-    var storyboard = UIStoryboard(name: "Main", bundle: nil)
-    var controller = storyboard.instantiateViewControllerWithIdentifier("QuestionViewController") as! UIViewController
+    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    let controller = storyboard.instantiateViewControllerWithIdentifier("QuestionViewController")
     
     self.presentViewController(controller, animated: true, completion: nil)
   }

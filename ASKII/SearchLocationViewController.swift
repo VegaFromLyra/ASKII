@@ -61,7 +61,7 @@ class SearchLocationViewController: UIViewController {
 extension SearchLocationViewController: UITableViewDelegate, LocationProtocol {
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    var loc = locations[indexPath.row]
+    let loc = locations[indexPath.row]
     selectedLocation = CLLocation(latitude: loc.latitude, longitude: loc.longitude)
     selectedLocationName = loc.name
     selectedLocationVenueId = loc.venueId
@@ -76,7 +76,7 @@ extension SearchLocationViewController: UITableViewDelegate, LocationProtocol {
 extension SearchLocationViewController: UITableViewDataSource {
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = searchResultsTableView.dequeueReusableCellWithIdentifier("SearchResult") as! UITableViewCell
+    let cell = searchResultsTableView.dequeueReusableCellWithIdentifier("SearchResult", forIndexPath: indexPath)
     
     cell.textLabel!.text = locations[indexPath.row].name
     cell.detailTextLabel!.text = locations[indexPath.row].area
@@ -103,14 +103,14 @@ extension SearchLocationViewController: UITextFieldDelegate {
     
     if let location = delegate?.selectedLocation {
       
-      var txtAfterUpdate:NSString = self.searchTextField.text as NSString
+      var txtAfterUpdate:NSString = self.searchTextField.text!
       txtAfterUpdate = txtAfterUpdate.stringByReplacingCharactersInRange(range, withString: string)
       
-      var searchQuery = txtAfterUpdate as! String
+      let searchQuery = txtAfterUpdate as String
       
-      if !(searchQuery.isEmpty) {
+      if !searchQuery.isEmpty {
         
-        println(searchQuery)
+        print(searchQuery)
         venueService.search(location, query: searchQuery, completion: {
           searchResults -> Void in
           self.locations = searchResults

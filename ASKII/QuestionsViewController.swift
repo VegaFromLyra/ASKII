@@ -65,7 +65,7 @@ class QuestionsViewController: UIViewController, LocationProtocol {
   
   // NOTE - This is connected to the SingleQuestion exit handle
   @IBAction func unWindFromSingleQuestionScene(unwindSegue: UIStoryboardSegue) {
-    println("Unwinded from Single question scene")
+    print("Unwinded from Single question scene")
   }
   
   var mapLayer: CALayer {
@@ -150,15 +150,14 @@ class QuestionsViewController: UIViewController, LocationProtocol {
 
 // MARK - CLLocationManagerDelegate methods
 extension QuestionsViewController: CLLocationManagerDelegate {
-  func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-    
-    currentLocation = locations.last as? CLLocation
+  func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    currentLocation = locations.last
     selectedLocation = currentLocation
     
     UtilityService.sharedInstance.getLocationName(currentLocation!) {
       (name: String) -> () in
-        self.currentLocationName!.text = name
-        self.selectedLocationName = name
+      self.currentLocationName!.text = name
+      self.selectedLocationName = name
     }
     
     if let currentLocation = currentLocation {
@@ -167,16 +166,16 @@ extension QuestionsViewController: CLLocationManagerDelegate {
         zoom: 17)
       mapView.camera = camera
       
-      var userLocation = UserLocation(location: currentLocation)
+      let userLocation = UserLocation(location: currentLocation)
       userLocation.save({ (success) -> () in
         if success {
-          println("User location saved successfully")
+          print("User location saved successfully")
         } else {
-          println("Error saving user location")
+          print("Error saving user location")
         }
       })
       
-      var locationModel = Location(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
+      let locationModel = Location(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
       questionService.getAllQuestions(locationModel, completion: {
         (allQuestions) -> () in
         self.allQuestions = allQuestions
@@ -219,7 +218,7 @@ extension QuestionsViewController: UITableViewDataSource {
 
 extension QuestionsViewController: GMSMapViewDelegate {
   func placeMarker(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
-    var position = CLLocationCoordinate2DMake(latitude, longitude)
+    let position = CLLocationCoordinate2DMake(latitude, longitude)
     
     if let currentLocationMarker = currentLocationMarker {
       currentLocationMarker.map = nil

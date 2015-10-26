@@ -22,7 +22,7 @@ class LocationService {
   }
   
   func fetchLocationWithExternalId(externalId: String, completion: (result: Location?) -> ()) {
-    var locQuery = PFQuery(className: "Location")
+    let locQuery = PFQuery(className: "Location")
     locQuery.whereKey("externalId", equalTo:externalId)
     
     locQuery.findObjectsInBackgroundWithBlock {
@@ -36,14 +36,14 @@ class LocationService {
           }
         }
       } else {
-        println(locError)
+        print(locError)
         completion(result: nil)
       }
     }
   }
   
   func findNearestLocationToGivenLoc(coordinate: PFGeoPoint, completion: (result: Location?) -> ()) {
-    var locQuery = PFQuery(className: "Location")
+    let locQuery = PFQuery(className: "Location")
     locQuery.whereKey("coordinate", nearGeoPoint:coordinate, withinMiles:0.1)
     
     locQuery.findObjectsInBackgroundWithBlock {
@@ -58,7 +58,7 @@ class LocationService {
           }
         }
       } else {
-        println(locError)
+        print(locError)
         completion(result: nil)
       }
     }
@@ -66,7 +66,7 @@ class LocationService {
   
   private func convertToLocationModel(locationObject: PFObject) -> Location {
     let coordinate = locationObject["coordinate"] as! PFGeoPoint
-    var location = Location(latitude: coordinate.latitude,
+    let location = Location(latitude: coordinate.latitude,
       longitude: coordinate.longitude)
     location.parseId = locationObject.objectId
     return location

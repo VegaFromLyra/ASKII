@@ -48,7 +48,7 @@ class Question {
           if success {
             self.saveQuestion(content, yesVoteCount: 0, noVoteCount: 0, locationModel: location)
           } else {
-            println("Could not save location")
+            print("Could not save location")
           }
         })
       }
@@ -65,7 +65,7 @@ class Question {
           if success {
             self.saveQuestion(content, yesVoteCount: 0, noVoteCount: 0, locationModel: location)
           } else {
-            println("Could not save location")
+            print("Could not save location")
           }
         })
       }
@@ -85,11 +85,11 @@ class Question {
   }
   
   func clearVoteCount(completion: (success: Bool) -> ()) {
-    var query = PFQuery(className:"Question")
+    let query = PFQuery(className:"Question")
     query.getObjectInBackgroundWithId(id!) {
       (question: PFObject?, error: NSError?) -> Void in
       if error != nil {
-        println(error)
+        print(error)
       } else if let question = question {
         question["yesVoteCount"] = 0
         question["noVoteCount"] = 0
@@ -99,7 +99,7 @@ class Question {
           if (success) {
             completion(success: true)
           } else {
-            println(error?.description)
+            print(error?.description)
             completion(success: false)
           }
         }
@@ -108,13 +108,13 @@ class Question {
   }
   
   func postComment(comment: String, completion: (success: Bool) -> ()) {
-    var query = PFQuery(className:"Question")
+    let query = PFQuery(className:"Question")
     query.getObjectInBackgroundWithId(id!) {
       (question: PFObject?, error: NSError?) -> Void in
       if error != nil {
-        println(error)
-      } else if let question = question {
-        var commentQuery = PFObject(className: "Comment")
+        print(error)
+      } else {
+        let commentQuery = PFObject(className: "Comment")
         commentQuery["content"] = comment
         commentQuery["question"] = PFObject(withoutDataWithClassName: "Question", objectId: self.id)
         
@@ -127,11 +127,11 @@ class Question {
   }
   
   func addYesVote(completion: (success: Bool) -> ()) {
-    var query = PFQuery(className:"Question")
+    let query = PFQuery(className:"Question")
     query.getObjectInBackgroundWithId(id!) {
       (question: PFObject?, error: NSError?) -> Void in
       if error != nil {
-        println(error)
+        print(error)
       } else if let question = question {
         question["yesVoteCount"] = question["yesVoteCount"] as! Int + 1
         
@@ -140,7 +140,7 @@ class Question {
           if (success) {
             completion(success: true)
           } else {
-            println(error?.description)
+            print(error?.description)
             completion(success: false)
           }
         }
@@ -149,11 +149,11 @@ class Question {
   }
   
   func addNoVote(completion: (success: Bool) -> ()) {
-    var query = PFQuery(className:"Question")
+    let query = PFQuery(className:"Question")
     query.getObjectInBackgroundWithId(id!) {
       (question: PFObject?, error: NSError?) -> Void in
       if error != nil {
-        println(error)
+        print(error)
       } else if let question = question {
         question["noVoteCount"] = question["noVoteCount"] as! Int + 1
         
@@ -162,7 +162,7 @@ class Question {
           if (success) {
             completion(success: true)
           } else {
-            println(error?.description)
+            print(error?.description)
             completion(success: false)
           }
         }
@@ -171,7 +171,7 @@ class Question {
   }
   
   func saveQuestion(content: String, yesVoteCount: Int, noVoteCount: Int, locationModel: Location) {
-    var question = PFObject(className:"Question")
+    let question = PFObject(className:"Question")
     question["content"] = content
     question["yesVoteCount"] = yesVoteCount
     question["noVoteCount"] = noVoteCount
@@ -184,14 +184,14 @@ class Question {
         self.id = question.objectId!
       } else {
         // TODO: Notify view this was an error
-        println(error?.description)
+        print(error?.description)
       }
     }
   }
   
   func getComments(completion: (comments: [Comment]) -> ()) {
-    var commentQuery = PFQuery(className: "Comment")
-    var questionPointer = PFObject(withoutDataWithClassName: "Question", objectId: self.id)
+    let commentQuery = PFQuery(className: "Comment")
+    let questionPointer = PFObject(withoutDataWithClassName: "Question", objectId: self.id)
     commentQuery.whereKey("question", equalTo: questionPointer)
  
     commentQuery.findObjectsInBackgroundWithBlock {
@@ -201,7 +201,7 @@ class Question {
         if let commentObjects = comments as? [PFObject] {
           var results: [Comment] = []
           for commentObject in commentObjects {
-            var comment = Comment(content: commentObject["content"] as! String, lastUpdatedTime: commentObject.updatedAt!)
+            let comment = Comment(content: commentObject["content"] as! String, lastUpdatedTime: commentObject.updatedAt!)
             results.append(comment)
           }
           completion(comments: results)
@@ -209,18 +209,18 @@ class Question {
           completion(comments: [])
         }
       } else {
-        println(error)
+        print(error)
         completion(comments: [])
       }
     }
   }
   
   func refresh(completion: (success: Bool) -> ()) {
-    var query = PFQuery(className:"Question")
+    let query = PFQuery(className:"Question")
     query.getObjectInBackgroundWithId(id!) {
       (result: PFObject?, error: NSError?) -> Void in
       if error != nil {
-        println(error)
+        print(error)
         completion(success: false)
       } else if let result = result {
         self.content = result["content"] as! String

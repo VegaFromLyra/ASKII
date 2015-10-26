@@ -81,7 +81,7 @@ class LocationViewController: UIViewController, LocationProtocol {
       
       if let recognizers = mapView.gestureRecognizers {
         for recognizer in recognizers {
-          mapView.removeGestureRecognizer(recognizer as! UIGestureRecognizer)
+          mapView.removeGestureRecognizer(recognizer)
         }
       }
       
@@ -159,9 +159,9 @@ class LocationViewController: UIViewController, LocationProtocol {
     name: String,
     venueId: String) {
       
-    var position = CLLocationCoordinate2DMake(latitude, longitude)
+    let position = CLLocationCoordinate2DMake(latitude, longitude)
       
-    var marker = GMSMarker(position: position)
+    let marker = GMSMarker(position: position)
     marker.title = name
     marker.appearAnimation = kGMSMarkerAnimationPop
     marker.map = mapView
@@ -198,11 +198,11 @@ class LocationViewController: UIViewController, LocationProtocol {
     // Get the new view controller using segue.destinationViewController.
     // Pass the selected object to the new view controller.
     if segue.destinationViewController is SearchLocationViewController {
-      var searchLocationViewController = segue.destinationViewController as! SearchLocationViewController
+      let searchLocationViewController = segue.destinationViewController as! SearchLocationViewController
       searchLocationViewController.delegate = self
       searchLocationViewController.inExploreMode = inExploreMode
     } else if segue.destinationViewController is NewQuestionViewController {
-      var newQuestionViewController = segue.destinationViewController as! NewQuestionViewController
+      let newQuestionViewController = segue.destinationViewController as! NewQuestionViewController
       newQuestionViewController.delegate = self
     }
   }
@@ -210,10 +210,10 @@ class LocationViewController: UIViewController, LocationProtocol {
 
 // MARK: CLLocationManagerDelegate
 extension LocationViewController: CLLocationManagerDelegate {
-  func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-    
+  
+  func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     hasCurrentLocationBeenFetched = true
-    var currentLocation = locations.first as? CLLocation
+    let currentLocation = locations.first
     
     if let currentLocation = currentLocation {
       camera = GMSCameraPosition.cameraWithLatitude(currentLocation.coordinate.latitude,
@@ -222,6 +222,7 @@ extension LocationViewController: CLLocationManagerDelegate {
       mapView.camera = camera
     }
   }
+
 }
 
 // MARK: GMSMapViewDelegate
@@ -238,8 +239,8 @@ extension LocationViewController: GMSMapViewDelegate {
       selectedVenueMarker!.map = nil
     }
     
-    var position = CLLocationCoordinate2DMake(latitude, longitude)
-    var marker = GMSMarker(position: position)
+    let position = CLLocationCoordinate2DMake(latitude, longitude)
+    let marker = GMSMarker(position: position)
     marker.snippet = "Ask about here!"
     marker.appearAnimation = kGMSMarkerAnimationPop
     marker.map = mapView
@@ -261,7 +262,7 @@ extension LocationViewController: GMSMapViewDelegate {
 
 // MARK: UITableViewDelegate
 
-extension LocationViewController: UITableViewDelegate, LocationProtocol {
+extension LocationViewController: UITableViewDelegate {
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 

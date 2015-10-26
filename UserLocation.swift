@@ -29,14 +29,14 @@ class UserLocation {
     locModel.save { (success) -> () in
       if success {
         
-        var query = PFQuery(className: "UserLocation")
+        let query = PFQuery(className: "UserLocation")
         query.whereKey("user", equalTo: self.user!)
         
         query.findObjectsInBackgroundWithBlock({ (results: [AnyObject]?, error: NSError?) -> Void in
           if error == nil {
             if let results = results {
               if results.count == 0 {
-                var userLocation = PFObject(className: "UserLocation")
+                let userLocation = PFObject(className: "UserLocation")
                 userLocation["user"] = self.user
                 userLocation["lastKnownLocation"] = PFObject(withoutDataWithClassName: "Location", objectId: locModel.parseId)
                 
@@ -44,7 +44,7 @@ class UserLocation {
                   completion(success: success)
                 }
               } else {
-                var currentUserLocation = results[0] as! PFObject
+                let currentUserLocation = results[0] as! PFObject
                 currentUserLocation["lastKnownLocation"] = PFObject(withoutDataWithClassName: "Location", objectId: locModel.parseId)
                 
                 currentUserLocation.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in
@@ -57,7 +57,7 @@ class UserLocation {
           }
         })
       } else {
-        println("ERROR saving location")
+        print("ERROR saving location")
         completion(success: false)
       }
     }

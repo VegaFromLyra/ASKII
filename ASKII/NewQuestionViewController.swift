@@ -20,8 +20,8 @@ class NewQuestionViewController: UIViewController, NewQuestion {
   var delegate: LocationProtocol?
   
   @IBAction func onSubmitQuestionDone(sender: AnyObject) {
-    var storyboard = UIStoryboard(name: "Main", bundle: nil)
-    var controller = storyboard.instantiateViewControllerWithIdentifier("QuestionViewController") as! UIViewController
+    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    let controller = storyboard.instantiateViewControllerWithIdentifier("QuestionViewController")
     
     self.presentViewController(controller, animated: true, completion: nil)
   }
@@ -44,10 +44,10 @@ class NewQuestionViewController: UIViewController, NewQuestion {
         let questionModel = Question(content: questionText.text, location: locationModel)
         questionModel.save()
       } else {
-        println("ERROR! Location info is nil")
+        print("ERROR! Location info is nil")
       }
     } else {
-      println("ERROR! Question is nil")
+      print("ERROR! Question is nil")
     }
     
   }
@@ -71,7 +71,7 @@ class NewQuestionViewController: UIViewController, NewQuestion {
   
   func keyboardWasShown(notification: NSNotification) {
     var info = notification.userInfo!
-    var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+    let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
 
     UIView.animateWithDuration(0.1, animations: { () -> Void in
       self.buttonViewBottomConstraint.constant = keyboardFrame.size.height + 20

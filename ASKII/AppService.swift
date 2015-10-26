@@ -41,14 +41,14 @@ class AppService {
       installation.addUniqueObject("Questions", forKey: "channels")
       installation.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
         if success {
-          println("Updated installation")
+          print("Updated installation")
         } else {
-          println("Could not update installation")
+          print("Could not update installation")
         }
       }
     }
    
-    println(PFInstallation.currentInstallation().channels)
+    print(PFInstallation.currentInstallation().channels)
   }
   
 }

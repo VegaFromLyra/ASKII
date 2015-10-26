@@ -28,11 +28,11 @@ class TableViewCell: UITableViewCell {
     question?.addYesVote({
       (success) -> () in
       if success {
-        println("Vote added successfully")
+        print("Vote added successfully")
         self.yesVoteCount++
         self.updateVoteCount()
       } else {
-        println("Error in adding vote")
+        print("Error in adding vote")
       }
     })
   }
@@ -41,11 +41,11 @@ class TableViewCell: UITableViewCell {
     question?.addNoVote({
       (success) -> () in
       if success {
-        println("Vote added successfully")
+        print("Vote added successfully")
         self.noVoteCount++
         self.updateVoteCount()
       } else {
-        println("Error in adding vote")
+        print("Error in adding vote")
       }
     })
   }

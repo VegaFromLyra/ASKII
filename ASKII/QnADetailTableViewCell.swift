@@ -29,8 +29,8 @@ class QnADetailTableViewCell: UITableViewCell {
       (success) -> () in
       
       let goHomeAction: UIAlertAction = UIAlertAction(title: "Next", style:  UIAlertActionStyle.Default) { action -> Void in
-        var storyboard = UIStoryboard(name: "Main", bundle: nil)
-        var controller = storyboard.instantiateViewControllerWithIdentifier("QuestionViewController") as! UIViewController
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewControllerWithIdentifier("QuestionViewController")
         self.parentViewController?.presentViewController(controller, animated: true, completion: nil)
       }
       

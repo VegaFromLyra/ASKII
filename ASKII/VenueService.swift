@@ -24,7 +24,7 @@ class VenueService {
   }
   
   func loadVenues(location: CLLocation, completion: ([[String: AnyObject]]?) -> ()) {
-    var parameters = location.parameters()
+    let parameters = location.parameters()
     let task = session.venues.explore(parameters) {
       (result) -> Void in
       if result.response != nil {
@@ -40,7 +40,7 @@ class VenueService {
           
         }
       } else if result.error != nil && !result.isCancelled() {
-          println(result.error!)
+          print(result.error!)
       }
     }
     task.start()
@@ -59,7 +59,7 @@ class VenueService {
     let searchTask = session.venues.search(parameters) {
       (result) -> Void in
       if let response = result.response {
-        var results = response["venues"] as? [JSONParameters]
+        let results = response["venues"] as? [JSONParameters]
         
         if let venues = results {
           for venue in venues {
@@ -82,7 +82,7 @@ class VenueService {
               }
             }
             
-            self.searchResults.append(name: name, area: String(area), latitude:latitude, longitude: longitude, venueId: venueId)
+            self.searchResults.append((name: name, area: String(area), latitude:latitude, longitude: longitude, venueId: venueId))
           }
         }
       

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		39D505F735A87BC00AD1E60F /* Pods_ASKII.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF85861258DCAB1D0FAA4688 /* Pods_ASKII.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		4E05E41E1B95FFD40024A5EA /* .parse.local in Resources */ = {isa = PBXBuildFile; fileRef = 4E05E4181B95FFD40024A5EA /* .parse.local */; };
 		4E05E41F1B95FFD40024A5EA /* .parse.project in Resources */ = {isa = PBXBuildFile; fileRef = 4E05E4191B95FFD40024A5EA /* .parse.project */; };
 		4E05E4201B95FFD40024A5EA /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = 4E05E41B1B95FFD40024A5EA /* main.js */; };
@@ -47,8 +48,6 @@
 		4EE9E83C1B86279900C989E8 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE9E83B1B86279900C989E8 /* Comment.swift */; };
 		4EE9E8401B86623B00C989E8 /* QuestionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE9E83F1B86623B00C989E8 /* QuestionService.swift */; };
 		4EF64CFB1B62B34100D979EB /* NewQuestionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF64CFA1B62B34100D979EB /* NewQuestionProtocol.swift */; };
-		CE2B63AC1B70718C00B08FC0 /* QuadratTouch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EACBAA81B67EFA1005F6664 /* QuadratTouch.framework */; };
-		CE2B63AD1B70718C00B08FC0 /* QuadratTouch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4EACBAA81B67EFA1005F6664 /* QuadratTouch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CE7CE3D31B77AC510067778B /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7CE3D21B77AC510067778B /* TransitionManager.swift */; };
 		CEADC43A1B59955A00A2EF3E /* NewQuestion.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEADC4391B59955A00A2EF3E /* NewQuestion.storyboard */; };
 		CEADC43C1B59A69700A2EF3E /* NewQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEADC43B1B59A69700A2EF3E /* NewQuestionViewController.swift */; };
@@ -65,27 +64,6 @@
 			remoteGlobalIDString = 4E3CE5101B44826800743BCD;
 			remoteInfo = ASKII;
 		};
-		4EACBAA51B67EFA1005F6664 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4EACBAA01B67EFA1005F6664 /* Quadrat.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 476B70891A0EBAE700AFAC33;
-			remoteInfo = Quadrat;
-		};
-		4EACBAA71B67EFA1005F6664 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4EACBAA01B67EFA1005F6664 /* Quadrat.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 476B70DA1A0EBBA500AFAC33;
-			remoteInfo = QuadratTouch;
-		};
-		CE2B63AE1B70718C00B08FC0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4EACBAA01B67EFA1005F6664 /* Quadrat.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 476B70D91A0EBBA500AFAC33;
-			remoteInfo = QuadratTouch;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -95,7 +73,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				CE2B63AD1B70718C00B08FC0 /* QuadratTouch.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -141,7 +118,6 @@
 		4E89F68E1B5C0081002EAE7D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		4EA93DDE1B7AA71200A6392F /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Question.swift; path = ASKII/Question.swift; sourceTree = "<group>"; };
 		4EA93DE51B7CFEC500A6392F /* QuestionDoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionDoneViewController.swift; sourceTree = "<group>"; };
-		4EACBAA01B67EFA1005F6664 /* Quadrat.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quadrat.xcodeproj; path = "das-quadrat/Source/Quadrat.xcodeproj"; sourceTree = "<group>"; };
 		4EACBAAC1B67F118005F6664 /* VenueService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueService.swift; sourceTree = "<group>"; };
 		4ED527F61B9651FD0000CFC2 /* AppService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppService.swift; sourceTree = "<group>"; };
 		4EE9E8381B84EB1D00C989E8 /* UtilityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityService.swift; sourceTree = "<group>"; };
@@ -190,13 +166,13 @@
 				4E1B0A961B4B14AB00DD5576 /* AudioToolbox.framework in Frameworks */,
 				4E1B0A941B4B149D00DD5576 /* libstdc++.6.dylib in Frameworks */,
 				4E1B0A921B4B147700DD5576 /* SystemConfiguration.framework in Frameworks */,
-				CE2B63AC1B70718C00B08FC0 /* QuadratTouch.framework in Frameworks */,
 				4E1B0A8C1B4B10E200DD5576 /* Bolts.framework in Frameworks */,
 				4E1B0A8E1B4B10E200DD5576 /* ParseCrashReporting.framework in Frameworks */,
 				4E1B0A901B4B10E200DD5576 /* ParseUI.framework in Frameworks */,
 				4E1B0A851B4B018900DD5576 /* CoreLocation.framework in Frameworks */,
 				4E1B0A8D1B4B10E200DD5576 /* Parse.framework in Frameworks */,
 				4E1B0A831B4AFFFA00DD5576 /* MapKit.framework in Frameworks */,
+				39D505F735A87BC00AD1E60F /* Pods_ASKII.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,7 +270,6 @@
 			isa = PBXGroup;
 			children = (
 				4E05E4171B95FFD40024A5EA /* ASKIICloudCode */,
-				4EACBAA01B67EFA1005F6664 /* Quadrat.xcodeproj */,
 				4E1B0A861B4B10AB00DD5576 /* Frameworks */,
 				4E3CE5131B44826800743BCD /* ASKII */,
 				4E3CE5291B44826800743BCD /* ASKIITests */,
@@ -380,15 +355,6 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		4EACBAA11B67EFA1005F6664 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4EACBAA61B67EFA1005F6664 /* Quadrat.framework */,
-				4EACBAA81B67EFA1005F6664 /* QuadratTouch.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		4EACBAAB1B67F103005F6664 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -464,7 +430,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				CE2B63AF1B70718C00B08FC0 /* PBXTargetDependency */,
 			);
 			name = ASKII;
 			productName = ASKII;
@@ -496,7 +461,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0700;
 				TargetAttributes = {
 					4E3CE5101B44826800743BCD = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -528,12 +493,6 @@
 			mainGroup = 4E3CE5081B44826800743BCD;
 			productRefGroup = 4E3CE5121B44826800743BCD /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 4EACBAA11B67EFA1005F6664 /* Products */;
-					ProjectRef = 4EACBAA01B67EFA1005F6664 /* Quadrat.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				4E3CE5101B44826800743BCD /* ASKII */,
@@ -541,23 +500,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		4EACBAA61B67EFA1005F6664 /* Quadrat.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Quadrat.framework;
-			remoteRef = 4EACBAA51B67EFA1005F6664 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4EACBAA81B67EFA1005F6664 /* QuadratTouch.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = QuadratTouch.framework;
-			remoteRef = 4EACBAA71B67EFA1005F6664 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		4E3CE50F1B44826800743BCD /* Resources */ = {
@@ -681,11 +623,6 @@
 			target = 4E3CE5101B44826800743BCD /* ASKII */;
 			targetProxy = 4E3CE5271B44826800743BCD /* PBXContainerItemProxy */;
 		};
-		CE2B63AF1B70718C00B08FC0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = QuadratTouch;
-			targetProxy = CE2B63AE1B70718C00B08FC0 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -729,6 +666,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -807,6 +745,7 @@
 				);
 				INFOPLIST_FILE = ASKII/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ja.ASKII;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -825,6 +764,7 @@
 				);
 				INFOPLIST_FILE = ASKII/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ja.ASKII;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -846,6 +786,7 @@
 				);
 				INFOPLIST_FILE = ASKIITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ja.ASKII;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ASKII.app/ASKII";
@@ -864,6 +805,7 @@
 				);
 				INFOPLIST_FILE = ASKIITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ja.ASKII;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ASKII.app/ASKII";
